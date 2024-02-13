@@ -11360,3 +11360,9 @@ smi-navbar {
     display: block;
   }
 }
+@media (min-width: 700px){
+  
+  .navbar .dropdown ul{
+    display:block
+  }
+}

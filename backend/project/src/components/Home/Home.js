@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import AOS from "aos";
 
 import "aos/dist/aos.css";
@@ -8,8 +8,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-// import '../Home/assets/css/style.css'
-import '../Home/assets/bootstrap-icons/bootstrap-icons.css';
+import './assets/css/style.css'
+import './assets/bootstrap-icons/bootstrap-icons.css';
 import LoadExternalScript from "../../LoadExternalScript";
 import { useNavigate } from "react-router-dom";
 function Home(){
@@ -21,10 +21,30 @@ function Home(){
     new PureCounter();
     
   }, []);
+
+
+  const [prevScrollpos, setPrevScrollpos] = useState(window.pageYOffset);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setVisible(prevScrollpos > currentScrollPos || currentScrollPos === 0);
+      setPrevScrollpos(currentScrollPos);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollpos]);
+
 return(
     <>
-    <link rel='stylesheet'type='text/css' href='../../../Homecss/style.css'></link>
+    {/* <link rel='stylesheet'type='text/css' href='../../../Homecss/style.css'></link> */}
       <header id="header" className="header fixed-top">
+      <div style={{ top: visible ? '0' : '-80px', position: 'fixed', width: '100%', transition: 'top 0.5s' }}>
  <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <div  className="logo d-flex align-items-center">
@@ -41,7 +61,7 @@ return(
         </ul>
         <i className="bi bi-list mobile-nav-toggle"></i>
       </nav>
-
+</div>
     </div>
   </header>
     <section id="hero" className="hero d-flex align-items-center">
