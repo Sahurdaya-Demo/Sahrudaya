@@ -31,7 +31,7 @@ return(
         <span>Sahrudaya Rajagiri</span>
       </div>
 
-      <nav id="navbar" className="navbar">
+      <nav id="navbar" className="navba">
         <ul>
           <li><a className="nav-link scrollto" href="#hero">Home</a></li>
           <li><a className="nav-link scrollto" href="#services">Services</a></li>
