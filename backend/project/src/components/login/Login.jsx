@@ -2,9 +2,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
-import './css/main.css'
-import './css/util.css'
+// import { Carousel } from 'react-responsive-carousel';
+import './logincss/main.css'
+import './logincss/util.css'
 import './fonts/font-awesome-4.7.0/css/font-awesome.min.css'
 import portr from './images/potr.png'
 import LoadExternalScript from '../../LoadExternalScript';
@@ -42,6 +42,9 @@ function Login(){
     
   }
   return (  
+	<>
+	{/* <link rel='stylesheet'type='text/css' href='../../../logincss/main.css'></link>
+    <link rel='stylesheet'type='text/css' href='../../../logincss/styles.css'></link>  */}
     <div className="limiter">
 		<div className="container-login100">
 			
@@ -109,7 +112,7 @@ function Login(){
 			</div>
 		</div>
 	</div>    
-    
+    </>
   );
   
 }

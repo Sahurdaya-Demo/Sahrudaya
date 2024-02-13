@@ -17,7 +17,7 @@ const Counsellorloading=()=>
     <>
       {loading ? (
         <div className="loading-screen">
-          <img src="loading.gif" alt="Loading" />
+          <img src="../../../loading.gif" alt="Loading" />
         </div>
       ) : (
       <Counsellor/>

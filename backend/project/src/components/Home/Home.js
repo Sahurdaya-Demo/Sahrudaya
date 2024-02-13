@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import '../Home/assets/css/style.css'
+// import '../Home/assets/css/style.css'
 import '../Home/assets/bootstrap-icons/bootstrap-icons.css';
 import LoadExternalScript from "../../LoadExternalScript";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,7 @@ function Home(){
   }, []);
 return(
     <>
+    <link rel='stylesheet'type='text/css' href='../../../Homecss/style.css'></link>
       <header id="header" className="header fixed-top">
  <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
 
@@ -31,7 +32,7 @@ return(
         <span>Sahrudaya Rajagiri</span>
       </div>
 
-      <nav id="navbar" className="navba">
+      <nav id="navbar" className="navbar">
         <ul>
           <li><a className="nav-link scrollto" href="#hero">Home</a></li>
           <li><a className="nav-link scrollto" href="#services">Services</a></li>
