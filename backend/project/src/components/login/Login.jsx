@@ -6,7 +6,7 @@ import { Carousel } from 'react-responsive-carousel';
 import './css/main.css'
 import './css/util.css'
 import './fonts/font-awesome-4.7.0/css/font-awesome.min.css'
-import portr from './images/potr.jpg'
+import portr from './images/potr.png'
 import LoadExternalScript from '../../LoadExternalScript';
 function Login(){
   let token;
@@ -44,8 +44,12 @@ function Login(){
   return (  
     <div className="limiter">
 		<div className="container-login100">
-			<div className="wrap-login100">
-				<div className="login100-pic p-2 rounded-2 position-relative">
+			
+			<div className="card wrap-login100">
+			{/* <div className="login100-form-title">
+						Member Login
+						</div> */}
+				<div className="login100-pic rounded-2 position-relative">
         {/* <Carousel autoPlay={true} infiniteLoop={true} showThumbs={false} showArrows={false}  showIndicators={false} showStatus={false} >
                 
                     <img src={portr} />
@@ -54,13 +58,14 @@ function Login(){
                     
                     <img src={portr}  />
         </Carousel> */}
+		<img  src={portr} />
 				</div>
          
         
 
 				<form className="login100-form validate-form" onSubmit={handleSubmit}>
 					<span className="login100-form-title">
-						Member Login
+						Login
 					</span>
 
 					<div className="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
@@ -94,16 +99,16 @@ function Login(){
 						</a>
 					</div>
 
-					<div className="text-center p-t-136">
+					{/* <div className="text-center p-t-136">
 						<a className="txt2" href="#">
 							Create your Account
 							<i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
-					</div>
+					</div> */}
 				</form>
 			</div>
 		</div>
-	</div>      
+	</div>    
     
   );
   
