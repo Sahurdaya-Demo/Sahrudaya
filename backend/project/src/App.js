@@ -9,6 +9,9 @@ import Counsellor from './components/counsellor/Counsellor';
 import Form from './components/ClientForm';
 import Error from './components/error';
 import Counseldash from './components/counsellor/Counseldash';
+import Adminloading from './components/loading/adminloading';
+import Counsellorloading from './components/loading/counsellorloading';
+import Loginloading from './components/loading/loginloading';
 function App() {
   
 //   const LoadingScreen = () => {
@@ -41,9 +44,9 @@ function App() {
         ) : ( */}
           <Routes>
           <Route path='/' element={<Main/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/admin' element={<Admin/>}/>
-          <Route path='counsellor' element={<Counsellor/>}>
+          <Route path='/login' element={<Loginloading/>}/>
+          <Route path='/admin' element={<Adminloading/>}/>
+          <Route path='counsellor' element={<Counsellorloading/>}>
             <Route path='form' element={<Form/>}/>
             <Route path='' element={<Counseldash/>}/>
           </Route>
