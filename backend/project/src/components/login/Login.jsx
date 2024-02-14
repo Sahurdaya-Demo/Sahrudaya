@@ -8,10 +8,16 @@ import './logincss/util.css'
 import './fonts/font-awesome-4.7.0/css/font-awesome.min.css'
 import portr from './images/potr.png'
 import LoadExternalScript from '../../LoadExternalScript';
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 function Login(){
   let token;
   const[email,setemail]=useState('')
   const[password,setpassword]=useState('')
+  const [show, setShow] = useState(false);
+	const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const navigate=useNavigate()
   useEffect(()=>{
   LoadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);
@@ -43,8 +49,9 @@ function Login(){
   }
   return (  
 	<>
-	{/* <link rel='stylesheet'type='text/css' href='../../../logincss/main.css'></link>
-    <link rel='stylesheet'type='text/css' href='../../../logincss/styles.css'></link>  */}
+	 {/* <link rel='stylesheet'type='text/css' href='../../../logincss/util.css'></link>  */}
+	{/* <link rel='stylesheet'type='text/css' href='../../../logincss/main.css'></link> */}
+   
     <div className="limiter">
 		<div className="container-login100">
 			
@@ -97,21 +104,41 @@ function Login(){
 						<span className="txt1">
 							Forgot
 						</span>
-						<a className="txt2" href="#">
-							Username / Password?
+						<a className=" ms-1 txt2" onClick={handleShow} style={{cursor:'pointer'}}>
+							Password?
 						</a>
+			
 					</div>
-
-					{/* <div className="text-center p-t-136">
-						<a className="txt2" href="#">
-							Create your Account
-							<i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
-					</div> */}
 				</form>
 			</div>
 		</div>
+		
 	</div>    
+	<Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Forgot Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='p-2'>
+			<Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+              />
+            </Form.Group>
+          </Form>
+		  </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button  onClick={handleClose} className='btn-primary' variant='primary'>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
   

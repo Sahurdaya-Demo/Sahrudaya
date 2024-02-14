@@ -480,3 +480,11 @@ iframe {
     opacity: 1;
   }
 }
+.btn-primary{
+  background-color:#57b846;
+  border-style: none;
+}
+.btn-primary:hover{
+  background-color:#4ea23f;
+  border-style: none;
+}

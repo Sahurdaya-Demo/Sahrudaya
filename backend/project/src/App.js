@@ -3,15 +3,16 @@ import './App.css';
 import {Route,Routes} from 'react-router-dom'
 import Main from './main';
 // import { useEffect,useState } from 'react';
-import Admin from './components/admin/Admin';
-import Login from './components/login/Login';
-import Counsellor from './components/counsellor/Counsellor';
-import Form from './components/ClientForm';
-import Error from './components/error';
+// import Admin from './components/admin/Admin';
+// import Login from './components/login/Login';
+// import Counsellor from './components/counsellor/Counsellor';
+import Form from './components/Utils/ClientForm';
+import Error from './components/Utils/error';
 import Counseldash from './components/counsellor/Counseldash';
 import Adminloading from './components/loading/adminloading';
 import Counsellorloading from './components/loading/counsellorloading';
 import Loginloading from './components/loading/loginloading';
+
 function App() {
   
 //   const LoadingScreen = () => {
