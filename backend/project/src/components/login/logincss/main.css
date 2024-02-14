@@ -200,7 +200,7 @@ iframe {
   width: 40%;
   height: 97%;
   text-align: center;
-  border-right: 6px solid rgb(113, 114, 113);
+  border-right: 2px solid rgb(113, 114, 113);
 
 }
 
@@ -218,7 +218,7 @@ iframe {
     height: 97%;
     align-items: center;
     padding-bottom: 50px;
-    padding: left 50px; 
+    padding-left: 50px; 
     padding-top: 5px;
     padding-right: 50px;
 }

@@ -48,7 +48,7 @@ return(
  <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <div  className="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" style={{width:"70px"}} alt=""/>
+        <img src="assets/logo.png" style={{width:"70px"}} alt=""/>
         <span>Sahrudaya Rajagiri</span>
       </div>
 
@@ -306,10 +306,10 @@ return(
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-      <SwiperSlide><img src="assets/img/clients/client-1.png" className="img-fluid" alt=""/></SwiperSlide>
-        <SwiperSlide><img src="assets/img/clients/client-2.png" className="img-fluid" alt=""/></SwiperSlide>
-        <SwiperSlide><img src="assets/img/clients/client-3.png" className="img-fluid" alt=""/></SwiperSlide>
-        <SwiperSlide><img src="assets/img/clients/client-4.png" className="img-fluid" alt=""/></SwiperSlide>
+      <SwiperSlide><img src="assets/clients/client-1.png" className="img-fluid" alt=""/></SwiperSlide>
+        <SwiperSlide><img src="assets/clients/client-2.png" className="img-fluid" alt=""/></SwiperSlide>
+        <SwiperSlide><img src="assets/clients/client-3.png" className="img-fluid" alt=""/></SwiperSlide>
+        <SwiperSlide><img src="assets/clients/client-4.png" className="img-fluid" alt=""/></SwiperSlide>
       </Swiper>
       </div>
 
