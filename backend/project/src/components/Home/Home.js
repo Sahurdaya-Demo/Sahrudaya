@@ -42,13 +42,13 @@ function Home(){
 
 return(
     <>
-    {/* <link rel='stylesheet'type='text/css' href='../../../Homecss/style.css'></link> */}
+    <link rel='stylesheet'type='text/css' href='../../../Homecss/style.css'></link>
       <header id="header" className="header fixed-top">
       <div style={{ top: visible ? '0' : '-80px', position: 'fixed', width: '100%', transition: 'top 0.5s' }}>
  <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <div  className="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" style={{width:"70px"}} alt=""/>
+        <img src="assets/logo.png" style={{width:"70px"}} alt=""/>
         <span>Sahrudaya Rajagiri</span>
       </div>
 
