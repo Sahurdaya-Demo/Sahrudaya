@@ -306,10 +306,10 @@ return(
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-      <SwiperSlide><img src="assets/img/clients/client-1.png" className="img-fluid" alt=""/></SwiperSlide>
-        <SwiperSlide><img src="assets/img/clients/client-2.png" className="img-fluid" alt=""/></SwiperSlide>
-        <SwiperSlide><img src="assets/img/clients/client-3.png" className="img-fluid" alt=""/></SwiperSlide>
-        <SwiperSlide><img src="assets/img/clients/client-4.png" className="img-fluid" alt=""/></SwiperSlide>
+      <SwiperSlide><img src="assets/clients/client-1.png" className="img-fluid" alt=""/></SwiperSlide>
+        <SwiperSlide><img src="assets/clients/client-2.png" className="img-fluid" alt=""/></SwiperSlide>
+        <SwiperSlide><img src="assets/clients/client-3.png" className="img-fluid" alt=""/></SwiperSlide>
+        <SwiperSlide><img src="assets/clients/client-4.png" className="img-fluid" alt=""/></SwiperSlide>
       </Swiper>
       </div>
 

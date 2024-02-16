@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
-    'account.apps.AccountConfig'
+    'account.apps.AccountConfig',
+    'rest_framework_simplejwt.token_blacklist'
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'logino',
+        'NAME': 'sahrudya',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -135,7 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS=[os.path.join(BASE_DIR,'project/build/static')]
+# STATICFILES_DIRS=[os.path.join(BASE_DIR,'project/build/static')]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -143,6 +144,12 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR,'project/build/static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL='account.User'
 
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'mca2247@rajagiri.edu'
+EMAIL_HOST_PASSWORD = 'Samyooj123!!'
+EMAIL_USE_TLS = True
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=20),

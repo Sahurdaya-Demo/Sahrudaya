@@ -15,16 +15,19 @@ function Login(){
   let token;
   const[email,setemail]=useState('')
   const[password,setpassword]=useState('')
+  const[emailchange,setemailchange]=useState('')
   const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const[btalert,setbtalert]=useState('')
+  const[altmsg,setaltmsg]=useState('')
   const navigate=useNavigate()
   useEffect(()=>{
   LoadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);
   },[])
   
-  const sendDataToDjango = async () => {    
-    if(email!==''){
+  const Loginuser = async () => {    
+    if(email!==''&&email.includes('@')){
       if(password!=='')
       {
     let formField = new FormData()
@@ -37,8 +40,13 @@ function Login(){
       data: formField
     }).then(response=>{
       token=response.data.token;
+      if(token){
       navigate(`/${response.data.type}`,{state:{token}})
-        
+      }
+      else{
+      if(response.data.errors)
+      alert('Login Failed !, Please Check Your Username Or Password !')
+      }
       })
     }
     } 
@@ -46,6 +54,36 @@ function Login(){
   const handleSubmit=(e)=>{
     e.preventDefault();
     
+  }
+  const passwordreset=async()=>{
+    let formField = new FormData()
+    formField.append('email',emailchange)
+    await axios({
+      method: 'post',
+      url:'http://127.0.0.1:8000/send-reset-password-email/',
+      data: formField
+    }).then(response=>{
+      if(response.data.errors)
+      {
+        setbtalert('error')
+        setaltmsg('Email not found!!')
+        setTimeout(() => {
+          handleClose();
+          setbtalert('')
+          setaltmsg('')
+        }, 2000);
+      }
+      else{
+        // alert(response.data.msg)
+        setbtalert('success')
+        setaltmsg('Password Reset link send. Please check your Email')
+        setTimeout(() => {
+          handleClose();
+          setaltmsg('')
+          setbtalert('')
+        }, 2000);
+        }
+    })
   }
   return (  
 	<>
@@ -95,7 +133,7 @@ function Login(){
 					</div>
 					
 					<div className="container-login100-form-btn">
-						<button className="login100-form-btn" onClick={()=>{sendDataToDjango()}}>
+						<button className="login100-form-btn" onClick={()=>{Loginuser()}}>
 							Login
 						</button>
 					</div>
@@ -104,7 +142,7 @@ function Login(){
 						<span className="txt1">
 							Forgot
 						</span>
-						<a className=" ms-1 txt2" onClick={handleShow} style={{cursor:'pointer'}}>
+						<a className="ms-1 txt2" onClick={handleShow} style={{cursor:'pointer'}}>
 							Password?
 						</a>
 			
@@ -119,22 +157,27 @@ function Login(){
           <Modal.Title>Forgot Password</Modal.Title>
         </Modal.Header>
         <Modal.Body className='p-2'>
-			<Form>
+			  <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="name@example.com"
                 autoFocus
+                onChange={(e) => {setemailchange(e.target.value);}}
               />
             </Form.Group>
+            <div className={`${btalert!==''?`${btalert==='success'?'alert alert-success':'alert alert-danger'}`:'visible-false'}`} role="alert">
+                 {altmsg}
+            </div>
           </Form>
 		  </Modal.Body>
         <Modal.Footer>
+            
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button  onClick={handleClose} className='btn-primary' variant='primary'>
+          <Button  onClick={()=>{passwordreset()}} className='btn-primary' variant='primary'>
             Submit
           </Button>
         </Modal.Footer>

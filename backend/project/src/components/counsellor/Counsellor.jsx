@@ -7,7 +7,7 @@ import axios from 'axios';
 function Counsellor() {
     const navigate=useNavigate();
     const location = useLocation();
-  useEffect(()=>{
+//   useEffect(()=>{
     
 //     try{
 //     if(location.state.token){}
@@ -16,7 +16,7 @@ function Counsellor() {
 //     navigate('/',{ replace: true })
 //   }
     
-  },[])
+//   },[])
   const handletoggle=()=>{
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {
@@ -31,7 +31,7 @@ function Counsellor() {
       //   'Content-Type': 'application/json',
       //   'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
       // },
-      // data:location.state.token,
+      data:location.state.token,
       url:'http://127.0.0.1:8000/logout/',
     }).then(response=>{
       // console.log(location.state)

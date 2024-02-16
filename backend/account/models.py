@@ -57,6 +57,6 @@ class User(AbstractBaseUser):
   def str(self):
       return self.email
   
-class Submission(models.Model):
-    inputValue=models.CharField(max_length=10,default='SOMESTRING')
+# class Submission(models.Model):
+#     inputValue=models.CharField(max_length=10,default='SOMESTRING')
   
