@@ -97,7 +97,7 @@ function Login(){
 			{/* <div className="login100-form-title">
 						Member Login
 						</div> */}
-				<div className="login100-pic rounded-2 position-relative">
+				<div className="login100-pic position-relative">
         {/* <Carousel autoPlay={true} infiniteLoop={true} showThumbs={false} showArrows={false}  showIndicators={false} showStatus={false} >
                 
                     <img src={portr} />
