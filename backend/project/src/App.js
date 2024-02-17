@@ -13,6 +13,7 @@ import Adminloading from './components/loading/adminloading';
 import Counsellorloading from './components/loading/counsellorloading';
 import Loginloading from './components/loading/loginloading';
 import Manage from './counsellormange';
+import Userpassreset from './Userpassreset';
 function App() {
   
 //   const LoadingScreen = () => {
@@ -54,6 +55,7 @@ function App() {
           </Route>
           <Route path='*' element={<Error/>}/>
           <Route path='cm' element={<Manage/>}/>
+          <Route path="user/reset/:id/:token" element={<Userpassreset/>} />
           </Routes>
 
         {/* )} */}

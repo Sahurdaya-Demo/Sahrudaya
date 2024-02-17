@@ -11,6 +11,10 @@ import LoadExternalScript from '../../LoadExternalScript';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import CbLogin from '../Utils/CbLogin';
+// import useLogin from '../../useLogin';
+
+
 function Login(){
   let token;
   const[email,setemail]=useState('')
@@ -26,31 +30,6 @@ function Login(){
   LoadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);
   },[])
   
-  const Loginuser = async () => {    
-    if(email!==''&&email.includes('@')){
-      if(password!=='')
-      {
-    let formField = new FormData()
-    formField.append('email',email)
-    formField.append('password',password)
-  
-    await axios({
-      method: 'post',
-      url:'http://127.0.0.1:8000/login/',
-      data: formField
-    }).then(response=>{
-      token=response.data.token;
-      if(token){
-      navigate(`/${response.data.type}`,{state:{token}})
-      }
-      else{
-      if(response.data.errors)
-      alert('Login Failed !, Please Check Your Username Or Password !')
-      }
-      })
-    }
-    } 
-  }
   const handleSubmit=(e)=>{
     e.preventDefault();
     
@@ -133,7 +112,10 @@ function Login(){
 					</div>
 					
 					<div className="container-login100-form-btn">
-						<button className="login100-form-btn" onClick={()=>{Loginuser()}}>
+						{/* <button className="login100-form-btn" onClick={()=>{}}>
+							Login
+						</button> */}
+            <button className="btn btn-primary" onClick={()=>CbLogin(navigate,email,password)}>
 							Login
 						</button>
 					</div>
