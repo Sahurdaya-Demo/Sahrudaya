@@ -45,7 +45,7 @@ function Manage() {
         <div className="container">
           <div className="row">
             {items.map(item => (
-              <div className="col-lg-3 col-md-3 col-sm-6  p-3" key={item.id}>
+              <div className="col-3 p-3" key={item.id}>
                 <div className="card align-items-center" style={{ width: "18rem", height: "29rem" }}>
                 <img src="assets/team/team-1.jpg" className="card-img-top" alt="..." />
                   <div className="card-body">
@@ -61,9 +61,14 @@ function Manage() {
                 </div>
               </div>
             ))}
-            <div className="col-lg-3 col-md-3 col-sm-6 p-3">
-              <Card className="Card" onClick={handleShow} style={{ width: "18rem", height: "29rem"}}>
-              <CardBody  className="card-body"><p style={{paddingTop:"180px"}}>+</p></CardBody>
+            <div className="col-3 p-3">
+              <div className="card align-items-center" style={{ width: "18rem", height: "29rem" }}>
+                <div className="card-body">
+                  <button className="btn btn-primary " onClick={handleShow}>++++</button>
+                </div>
+              </div>
+              <Card onClick={handleShow} style={{ cursor: "pointer",width: "18rem", height: "29rem"  }}>
+              <CardBody  className="card-body">*</CardBody>
               </Card>
             </div>
           </div>
