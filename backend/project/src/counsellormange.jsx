@@ -37,11 +37,13 @@ function Manage() {
   return (
     <>
     <link rel='stylesheet' type='text/css' href='../../../managecss/styles.css'></link>
+    
       <section id="counsellors" className="counsellors">
         <header className="section-header">
           <h2>Registration</h2>
           <p>Add new Counsellor</p>
         </header>
+
         <div className="container">
           <div className="row">
             {items.map(item => (

@@ -74,7 +74,7 @@ function Admin() {
                         <li><a className="dropdown-item" href="#!">Settings</a></li>
                         <li><a className="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" onClick={()=>{Logout()}}>Logout</a></li>
+                        <li><a className="dropdown-item" onClick={()=>{Logout()}} style={{cursor:"pointer"}}>Logout</a></li>
                     </ul>
                 </li>
             </ul>
