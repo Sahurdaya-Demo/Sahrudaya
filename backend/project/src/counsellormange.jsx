@@ -63,11 +63,18 @@ function Manage() {
                 </div>
               </div>
             ))}
-            <div className="col-lg-3 col-md-3 col-sm-6 p-3">
-              <Card className="Card" onClick={handleShow} style={{ width: "18rem", height: "29rem"}}>
-              <CardBody  className="card-body"><p style={{paddingTop:"180px"}}>+</p></CardBody>
+
+           <div className="col-lg-3 col-md-3 col-sm-6 p-3">
+              <Card className="Card" onClick={handleShow} style={{ width: "18rem", height: "29rem",}}>
+                <CardBody className="card-body">
+                  <div className="circular-menu">
+                    <ul>
+                    <li><a href="#"><i className="icon fa fa-home"></i></a></li>
+                    </ul>
+                  </div>
+                </CardBody>
               </Card>
-            </div>
+          </div>
           </div>
         </div>
       </section>
