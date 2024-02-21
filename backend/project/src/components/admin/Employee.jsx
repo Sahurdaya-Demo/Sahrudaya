@@ -72,7 +72,6 @@ function Employee() {
           </Button>
         </Modal.Footer>
       </Modal>
-      hello
        
     </>
   );
