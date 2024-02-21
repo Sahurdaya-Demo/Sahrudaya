@@ -10,17 +10,8 @@ function Counsellor() {
   useEffect(()=>{
     let token;
     token=localStorage.getItem('token')
-
-//     try{
-//     if(location.state.token){}
-//     }
-//   catch{
-//     navigate('/',{ replace: true })
-//   }
-if(token===null)
-navigate('/',{ replace: true })
-
-    
+    if(token===null)
+    navigate('/',{ replace: true })
   },[])
   const handletoggle=()=>{
     const sidebarToggle = document.body.querySelector('#sidebarToggle');

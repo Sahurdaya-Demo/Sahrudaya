@@ -7,19 +7,15 @@ import LoadExternalScript from '../../LoadExternalScript';
 function Admin() {
     const navigate=useNavigate();
     const location = useLocation();
-    // LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','adminjs/tablescript.js','https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js','adminjs/chart.js']);
-//   useEffect(()=>{
     
-//     try{
-//     if(location.state.token){
-        
-//     }
-//     }
-//   catch{
-//     navigate('/',{ replace: true })
-//   }
+  useEffect(()=>{
+   
+    let token;
+    token=localStorage.getItem('token')
+    if(token===null)
+    navigate('/',{ replace: true })
     
-//   },[])
+  },[])
   const handletoggle=()=>{
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {
@@ -28,20 +24,22 @@ function Admin() {
     }
   }
   const Logout=async()=>{
-    await axios({
-      method: 'post',
-      // headers: {
-      //   'Content-Type': 'application/json',
-      //   'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
-      // },
-      data:location.state.token,
-      url:'http://127.0.0.1:8000/logout/',
-    }).then(response=>{
-      // console.log(location.state)
-      // console.log(response.data.type);
-      navigate('/',{ replace: true })
-      // localStorage.setItem('sharedData','false')
-    })
+    // await axios({
+    //   method: 'post',
+    //   // headers: {
+    //   //   'Content-Type': 'application/json',
+    //   //   'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
+    //   // },
+    //   data:location.state.token,
+    //   url:'http://127.0.0.1:8000/logout/',
+    // }).then(response=>{
+    //   // console.log(location.state)
+    //   // console.log(response.data.type);
+    //   navigate('/',{ replace: true })
+    //   // localStorage.setItem('sharedData','false')
+    // })
+    localStorage.removeItem('token');
+    navigate('/',{replace:true})
     }
   return (
     <>
@@ -79,7 +77,7 @@ function Admin() {
                     <div className="sb-sidenav-menu">
                         <div className="nav">
                             <div className="sb-sidenav-menu-heading">Core</div>
-                            <Link className="nav-link" to="/admin">
+                            <Link className="nav-link" to="">
                                 <div className="sb-nav-link-icon"><i className="fa fa-tachometer-alt"></i></div>
                                 Dashboard
                             </Link>
