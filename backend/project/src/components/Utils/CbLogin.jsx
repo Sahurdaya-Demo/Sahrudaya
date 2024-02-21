@@ -19,6 +19,7 @@ const CbLogin=async(navigate,email,password)=>{
         }).then(response=>{
           token=response.data.token;
           if(token){
+            localStorage.setItem('token',token)
           navigate(`/${response.data.type}`,{state:{token}})
           }
           else{

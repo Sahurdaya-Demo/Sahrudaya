@@ -7,16 +7,21 @@ import axios from 'axios';
 function Counsellor() {
     const navigate=useNavigate();
     const location = useLocation();
-//   useEffect(()=>{
-    
+  useEffect(()=>{
+    let token;
+    token=localStorage.getItem('token')
+
 //     try{
 //     if(location.state.token){}
 //     }
 //   catch{
 //     navigate('/',{ replace: true })
 //   }
+if(token===null)
+navigate('/',{ replace: true })
+
     
-//   },[])
+  },[])
   const handletoggle=()=>{
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {
@@ -25,22 +30,23 @@ function Counsellor() {
     }
   }
   const Logout=async()=>{
-    await axios({
-      method: 'post',
-      // headers: {
-      //   'Content-Type': 'application/json',
-      //   'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
-      // },
-      data:location.state.token,
-      url:'http://127.0.0.1:8000/logout/',
-    }).then(response=>{
-      // console.log(location.state)
-      // console.log(response.data.type);
-      navigate('/',{ replace: true })
-      // localStorage.setItem('sharedData','false')
-    })
+    // await axios({
+    //   method: 'post',
+    //   // headers: {
+    //   //   'Content-Type': 'application/json',
+    //   //   'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
+    //   // },
+    //   data:location.state.token,
+    //   url:'http://127.0.0.1:8000/logout/',
+    // }).then(response=>{
+    //   // console.log(location.state)
+    //   // console.log(response.data.type);
+    //   navigate('/',{ replace: true })
+    //   // localStorage.setItem('sharedData','false')
+    // })
     
-
+    localStorage.removeItem('token');
+    navigate('/',{replace:true})
   }
   return (
     <>
@@ -76,7 +82,7 @@ function Counsellor() {
                     <div className="sb-sidenav-menu">
                         <div className="nav">
                             <div className="sb-sidenav-menu-heading">Core</div>
-                            <Link className="nav-link" to="/counsellor">
+                            <Link className="nav-link" to="">
                                 <div className="sb-nav-link-icon"><i className="fa fa-tachometer-alt"></i></div>
                                 Dashboard
                             </Link>
