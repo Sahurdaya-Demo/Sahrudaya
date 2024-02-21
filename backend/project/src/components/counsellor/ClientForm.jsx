@@ -1,11 +1,11 @@
 
-import React, { useState,useEffect } from "react"
-import { useNavigate } from "react-router-dom";
-import axios from "axios"
+import React, { useState } from "react"
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios"
 
 
 function Form() { 
-	const navigate=useNavigate();
+	// const navigate=useNavigate();
 	// useUnload(e => {
 	// 	e.preventDefault();
 	// 	e.returnValue = '';

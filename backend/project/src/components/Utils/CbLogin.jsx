@@ -3,27 +3,33 @@
 import axios from "axios";
 const CbLogin=async(navigate,email,password)=>{
     let token;
+    
     if(email!==''&&email.includes('@')){
-        if(password!=='')
-        {
+      if(password!==''){
+          
       let formField = new FormData()
       formField.append('email',email)
       formField.append('password',password)
-    
-      await axios({
-        method: 'post',
-        url:'http://127.0.0.1:8000/login/',
-        data: formField
-      }).then(response=>{
-        token=response.data.token;
-        if(token){
-        navigate(`/${response.data.type}`,{state:{token}})
+     
+      try{
+        await axios({
+          method: 'post',
+          url:'http://127.0.0.1:8000/login/',
+          data: formField
+        }).then(response=>{
+          token=response.data.token;
+          if(token){
+          navigate(`/${response.data.type}`,{state:{token}})
+          }
+          else{
+          if(response.data.errors)
+          alert('Login Failed !, Please Check Your Username Or Password !')
+          }
+          })
         }
-        else{
-        if(response.data.errors)
-        alert('Login Failed !, Please Check Your Username Or Password !')
-        }
-        })
+      catch{
+         alert('Server Down!! Contact Admin')
+      }
       }
       } 
     

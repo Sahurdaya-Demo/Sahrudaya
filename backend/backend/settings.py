@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'account.apps.AccountConfig',
-    'rest_framework_simplejwt.token_blacklist'
+    'Employee.apps.EmployeeConfig'
 ]
 
 MIDDLEWARE = [
@@ -135,7 +135,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+
 # STATICFILES_DIRS=[os.path.join(BASE_DIR,'project/build/static')]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -181,3 +181,6 @@ CORS_ALLOWED_ORIGINS = [
 from django.core.servers.basehttp import WSGIServer
 WSGIServer.handle_error = lambda *args, **kwargs: None
 
+STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

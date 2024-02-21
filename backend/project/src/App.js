@@ -6,14 +6,15 @@ import Main from './main';
 // import Admin from './components/admin/Admin';
 // import Login from './components/login/Login';
 // import Counsellor from './components/counsellor/Counsellor';
-import Form from './components/Utils/ClientForm';
+import Form from './components/counsellor/ClientForm';
 import Error from './components/Utils/error';
 import Counseldash from './components/counsellor/Counseldash';
 import Adminloading from './components/loading/adminloading';
 import Counsellorloading from './components/loading/counsellorloading';
 import Loginloading from './components/loading/loginloading';
-import Manage from './counsellormange';
-import Userpassreset from './Userpassreset';
+import Userpassreset from './components/Utils/Userpassreset';
+import Admindash from './components/admin/Admindash';
+import Employee from './components/admin/Employee';
 function App() {
   
 //   const LoadingScreen = () => {
@@ -47,14 +48,15 @@ function App() {
           <Routes>
           <Route path='/' element={<Main/>}/>
           <Route path='login' element={<Loginloading/>}/>
-          <Route path='/admin' element={<Adminloading/>}/>
+          <Route path='admin' element={<Adminloading/>}>
+            <Route path='' element={<Admindash/>}/>
+            <Route path='emp' element={<Employee/>}/>
+          </Route>
           <Route path='counsellor' element={<Counsellorloading/>}>
             <Route path='' element={<Counseldash/>}/>
             <Route path='form' element={<Form/>}/>
-            
           </Route>
           <Route path='*' element={<Error/>}/>
-          <Route path='cm' element={<Manage/>}/>
           <Route path="user/reset/:id/:token" element={<Userpassreset/>} />
           </Routes>
 

@@ -16,7 +16,7 @@ import CbLogin from '../Utils/CbLogin';
 
 
 function Login(){
-  let token;
+  
   const[email,setemail]=useState('')
   const[password,setpassword]=useState('')
   const[emailchange,setemailchange]=useState('')
@@ -85,7 +85,7 @@ function Login(){
                     
                     <img src={portr}  />
         </Carousel> */}
-		<img  src={portr} />
+		<img  src={portr} alt='logo'/>
 				</div>
          
         

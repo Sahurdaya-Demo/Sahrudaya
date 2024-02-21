@@ -15,10 +15,10 @@ const Adminloading=()=>
   }, []);
   return (
     <>
-    <link rel='stylesheet'type='text/css' href='admincss/styles.css'></link>
+    
       {loading ? (
         <div className="loading-screen">
-          <img src="loading.gif" alt="Loading" />
+          <img src="../../../loading.gif" alt="Loading" />
         </div>
       ) : (
         

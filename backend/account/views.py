@@ -7,9 +7,10 @@ from django.contrib.auth import authenticate,logout
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from .models import User
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework_simplejwt.token_blacklist.models import \
-OutstandingToken, BlacklistedToken
+# from rest_framework_simplejwt.authentication import JWTAuthentication
+# from rest_framework_simplejwt.token_blacklist.models import \
+# OutstandingToken, BlacklistedToken
+from Employee.serializers import EmpSerializer
 # Generate Token Manually
 def get_tokens_for_user(user):
   refresh = RefreshToken.for_user(user)
@@ -22,8 +23,11 @@ class UserRegistrationView(APIView):
   # renderer_classes = [UserRenderer]
   def post(self, request, format=None):
     serializer = UserRegistrationSerializer(data=request.data)
+    serialized = EmpSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
+    serialized.is_valid(raise_exception=True)
     user = serializer.save()
+    serialized.save()
     token = get_tokens_for_user(user)
     return Response({'token':token, 'msg':'Registration Successful'}, status=status.HTTP_201_CREATED)
 
@@ -58,8 +62,8 @@ class UserLogout(APIView):
       try:
         # print(request.data['refresh'])
         refresh_token = request.data['refresh']
-        OutstandingToken.objects.get(token=refresh_token).delete()
-        RefreshToken(refresh_token).blacklist()
+        # OutstandingToken.objects.filter(token=refresh_token).delete()
+        # RefreshToken(refresh_token).blacklist()
         return Response({'message': 'Logout successful'}, status=status.HTTP_200_OK)
       except KeyError:
         return Response({'error': 'refresh_token key not found'}, status=status.HTTP_400_BAD_REQUEST)

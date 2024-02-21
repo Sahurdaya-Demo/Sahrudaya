@@ -115,3 +115,29 @@ section {
     line-height: 26px;
     color: #5e5e5e;
   }
+  @media screen and (min-width:1280px) {
+    .card-res {
+      width: 25%; /* 33.333% width with 10px margin on each side */
+    }
+  }
+
+  @media screen and (max-width:767px) {
+    .card-res {
+      width: 90%; /* 33.333% width with 10px margin on each side */
+    }
+  }
+  @media screen and (max-width:1024px) {
+    .card-res {
+      width: 45%; /* 33.333% width with 10px margin on each side */
+    }
+  }
+  @media screen and (max-width:1280px) {
+    .card-res {
+      width: 45%; /* 33.333% width with 10px margin on each side */
+    }
+  }
+  @media screen and (max-width:480px) {
+    .card-res {
+      width: 90%; /* 33.333% width with 10px margin on each side */
+    }
+  }
