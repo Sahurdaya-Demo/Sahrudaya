@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
+import { Card, CardBody } from "reactstrap";
 function Employee() {
   // const [items, setItems] = useState([]);
   // let empdetails
@@ -29,22 +29,28 @@ function Employee() {
   return (
     <>
       <link rel='stylesheet' type='text/css' href='../../../empcss/styles.css'></link>
-          
-           <div className="col-12 p-3 d-flex flex-wrap justify-content-center flex-sm-row flex-column">
+          <div className='counsellors'>
+           <div className="col-12 p-0 d-flex flex-wrap justify-content-center flex-sm-row flex-column">
               {Records.map(record=>
-                <div className="card align-items-center m-3 m-xl-5 card-res" style={{height:'27rem'}} key={record.id}>
+                <div className="card align-items-center m-3 m-xl-5 card-res" style={{ width: "18rem", height: "29rem",}} key={record.id}>
                 <div className="card-body">
                   
                 </div>
                 </div>
               )}
-              <div className="card align-items-center m-3 m-xl-5 card-res" style={{height:'27rem'}}>
-                <div className="card-body">
-                  <button className="btn btn-primary " onClick={handleShow}>++++</button>
+              <div className=" p-3 align-items-center m-3 m-xl-5 card-res" >
+                  <Card className="Card credentialing" onClick={handleShow} style={{ width: "18rem", height: "29rem",}}>
+                  <div className='overlay'></div>
+                  <div className='circle'>
+                <CardBody className="card-body ">
+                 
+                </CardBody>
                 </div>
+                <p>Register Counsellors</p>
+              </Card>
                 </div>
            </div>
-          
+          </div>
 
           <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
