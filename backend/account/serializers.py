@@ -4,7 +4,8 @@ from django.utils.encoding import smart_str, force_bytes, DjangoUnicodeDecodeErr
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from account.utils import Util
-
+import secrets
+import string
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
   # We are writing this becoz we need confirm password field in our Registratin Request
@@ -67,7 +68,8 @@ class SendPasswordResetEmailSerializer(serializers.Serializer):
       print('Encoded UID', uid)
       token = PasswordResetTokenGenerator().make_token(user)
       print('Password Reset Token', token)
-      link = 'http://localhost:3000/user/reset/'+uid+'/'+token
+      secure_str = ''.join((secrets.choice(string.ascii_letters) for i in range(20)))
+      link = 'http://localhost:3000/user/reset/'+uid+'/'+token+'/'+secure_str
       print('Password Reset Link', link)
       # Send EMail
       body = 'Click Following Link to Reset Your Password '+link

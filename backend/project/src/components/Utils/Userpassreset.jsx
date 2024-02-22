@@ -3,15 +3,23 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useState } from 'react';
 import { useParams } from "react-router-dom";
-function Userpassreset(){
+function Userpassreset({id,token,secure}){
     const[password,setpassword]=useState('')
     const[crpassword,setcrpassword]=useState('')
-    const { id, token } = useParams()
+    // const { id, token,secure } = useParams()
     const Reset=async()=>{
     let formField = new FormData()
     formField.append('password',password)
     formField.append('password2',crpassword)
-  
+    await axios({
+      method:'post',
+      url: `http://127.0.0.1:8000/validpost`,
+      data:{'secure_str':secure},
+      headers: {
+        'Content-type': 'application/json',
+      }
+    })
+   
     await axios({
       method: 'post',
       url: `http://127.0.0.1:8000/reset-password/${id}/${token}/`,
