@@ -12,6 +12,7 @@ import './assets/css/style.css'
 import './assets/bootstrap-icons/bootstrap-icons.css';
 import LoadExternalScript from "../../LoadExternalScript";
 import { useNavigate } from "react-router-dom";
+import { UnloadExternalScript } from "../../UnloadExternalScript";
 function Home(){
   const navigate=useNavigate();
      useEffect(() => {
@@ -37,6 +38,7 @@ function Home(){
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      UnloadExternalScript(['js/main.js'])
     };
   }, [prevScrollpos]);
 

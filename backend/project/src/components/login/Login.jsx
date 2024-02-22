@@ -13,7 +13,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import CbLogin from '../Utils/CbLogin';
 // import useLogin from '../../useLogin';
-
+import { UnloadExternalScript } from '../../UnloadExternalScript';
 
 function Login(){
   
@@ -28,6 +28,7 @@ function Login(){
   const navigate=useNavigate()
   useEffect(()=>{
   LoadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);
+  return()=>{UnloadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);}
   },[])
   
   const handleSubmit=(e)=>{
