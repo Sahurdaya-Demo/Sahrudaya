@@ -174,7 +174,7 @@ iframe {
   background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
   background: linear-gradient(-135deg, #c850c0, #4158d0); */
 }
-.card{
+.login .card{
   box-shadow: 10px 10px  10px rgba(52, 52, 52, 0.1) ;
 }
 .wrap-login100 {

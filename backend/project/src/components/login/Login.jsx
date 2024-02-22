@@ -69,7 +69,7 @@ function Login(){
 	<>
 	 {/* <link rel='stylesheet'type='text/css' href='../../../logincss/util.css'></link>  */}
 	{/* <link rel='stylesheet'type='text/css' href='../../../logincss/main.css'></link> */}
-   
+   <div className='login'>
     <div className="limiter">
 		<div className="container-login100">
 			
@@ -133,7 +133,7 @@ function Login(){
 				</form>
 			</div>
 		</div>
-		
+		</div>
 	</div>    
 	<Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
