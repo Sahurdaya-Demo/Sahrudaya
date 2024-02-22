@@ -134,24 +134,25 @@ section {
 .counsellors .row .col{
   position: relative;
 }
-.counsellors .Card {
+/* .counsellors .Card {
   overflow: hidden;
   position: relative;
   align-items: center; 
   border-radius: 4px;
   background: #fff;
   box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12); */
   /* padding: 14px 80px 18px 36px; */
-  cursor: pointer;
-}
+  /* cursor: pointer;
+  right: 20px;
+} */
 
-.counsellors .Card:hover {
+/* .counsellors .Card:hover { */
   /* transform: translateY(-5px); 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-  transform: scale(1.01);
+  /* transform: scale(1.01);
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-}
+} */
 
 /* @media (max-width: 600px) {
    .container {
@@ -189,3 +190,124 @@ section {
       width: 90%; /* 33.333% width with 10px margin on each side */
     }
   }
+
+.counsellors .credentialing {
+  --bg-color: #B8F9D3;
+  --bg-color-light: #e2fced;
+  --text-color-hover: #ffffff;
+  --box-shadow-color: rgba(184, 249, 211, 0.48);
+}
+
+.Card {
+  width: 220px;
+  height: 321px;
+  background: #effff6;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 14px 26px rgba(0,0,0,0.04);
+  transition: all 0.5s ease-out;
+  text-decoration: none;
+  right: 17px;
+  bottom: 14px;
+}
+
+.Card:hover {
+  transform: translateY(-5px) scale(1.005) translateZ(0);
+  box-shadow: 0 24px 36px rgba(0,0,0,0.11),
+    0 24px 46px var(--box-shadow-color);
+}
+
+.Card:hover .overlay {
+  transform: scale(5.5) translateZ(0);
+}
+
+.Card:hover .circle {
+  border-color: var(--bg-color-light);
+  background: var(--bg-color);
+}
+
+/* .card:hover .circle:after {
+  background: var(--bg-color-light);
+} */
+
+.Card:hover p {
+  color: var(--text-color-hover);
+}
+
+.Card:active {
+  transform: scale(1) translateZ(0);
+  box-shadow: 0 15px 24px rgba(0,0,0,0.11),
+    0 15px 24px var(--box-shadow-color);
+}
+
+.Card p {
+  font-size: 17px;
+  color: #06612d;
+  margin-top: 30px;
+  z-index: 1000;
+  transition: color 0.3s ease-out;
+}
+
+.circle {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease-out;
+}
+
+.circle:after {
+  content: "";
+  width: 118px;
+  height: 118px;
+  display: block;
+  position: absolute;
+  background: var(--bg-color);
+  background-image: url('../assets/emp.PNG');
+  background-size: cover; 
+  background-position: center; 
+  border-radius: 50%;
+  top: 7px;
+  left: 7px;
+  transition: opacity 0.5s ease-out;
+}
+
+.circle svg {
+  z-index: 10000;
+  transform: translateZ(0);
+}
+
+.overlay {
+  width: 118px;
+  position: absolute; 
+  height: 118px;
+  border-radius: 50%;
+  background: var(--bg-color);
+  top: 139px;
+  left: 87px;
+  z-index: 0;
+  transition: transform 0.5s ease-out;
+}
+
+.card{
+  
+  transition: all 0.5s ease-out;
+  
+}
+.card:hover {
+  transform: translateY(-5px) scale(1.005) translateZ(0);
+  box-shadow: 0 24px 36px rgba(0,0,0,0.11),
+    0 24px 46px var(--box-shadow-color);
+}
+
