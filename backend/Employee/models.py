@@ -6,3 +6,5 @@ class employee(models.Model):
     age=models.CharField(max_length=10)
     qualification=models.CharField(max_length=255)
     phone=models.CharField(max_length=20,unique=True)
+class ValidLink(models.Model):
+    secure_str=models.CharField(max_length=50)

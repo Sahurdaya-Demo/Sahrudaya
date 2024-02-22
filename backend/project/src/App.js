@@ -15,6 +15,7 @@ import Loginloading from './components/loading/loginloading';
 import Userpassreset from './components/Utils/Userpassreset';
 import Admindash from './components/admin/Admindash';
 import Employee from './components/admin/Employee';
+import ValidLink from './components/Utils/ValidLink';
 function App() {
   
 //   const LoadingScreen = () => {
@@ -57,7 +58,7 @@ function App() {
             <Route path='form' element={<Form/>}/>
           </Route>
           <Route path='*' element={<Error/>}/>
-          <Route path="user/reset/:id/:token" element={<Userpassreset/>} />
+          <Route path="user/reset/:id/:token/:secure" element={<ValidLink/>} />
           </Routes>
 
         {/* )} */}
