@@ -11,6 +11,9 @@ from .models import User
 # from rest_framework_simplejwt.token_blacklist.models import \
 # OutstandingToken, BlacklistedToken
 from Employee.serializers import EmpSerializer
+import secrets
+import string
+from account.utils import Util
 # Generate Token Manually
 def get_tokens_for_user(user):
   refresh = RefreshToken.for_user(user)
@@ -30,6 +33,29 @@ class UserRegistrationView(APIView):
     serialized.save()
     token = get_tokens_for_user(user)
     return Response({'token':token, 'msg':'Registration Successful'}, status=status.HTTP_201_CREATED)
+
+class SendRegisterEmail(APIView):
+  # renderer_classes = [UserRenderer]
+  def post(self, request, format=None):
+    user=request.data['email']
+    secure_str = ''.join((secrets.choice(string.ascii_letters) for i in range(20)))
+    link = 'http://localhost:3000/user/registration/'+secure_str
+    body = 'Click Following Link to Reset Your Password '+link
+    data = {
+        'subject':'Registration',
+        'body':body,
+        'to_email':user
+    }
+    Util.send_email(data)
+    return Response({'msg':'Password Reset link send. Please check your Email'}, status=status.HTTP_200_OK)
+    # try:
+    #   serializer = SendPasswordResetEmailSerializer(data=request.data)
+    #   print(request.data)
+    #   serializer.is_valid(raise_exception=True)
+    #   return Response({'msg':'Password Reset link send. Please check your Email'}, status=status.HTTP_200_OK)
+    # except:
+    #   return Response({'errors': 'email not found'}, status=status.HTTP_200_OK)
+      
 
 class UserLoginView(APIView):
   # renderer_classes = [UserRenderer]
