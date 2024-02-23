@@ -1,5 +1,7 @@
 from django.db import models
+
 class employee(models.Model):
+    
     image = models.ImageField(upload_to='uploads/images', null=True, blank=True)
     email=models.CharField(max_length=100,default='xyz@gmail.com')
     name=models.CharField(max_length=100)

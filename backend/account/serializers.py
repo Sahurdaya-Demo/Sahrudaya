@@ -62,6 +62,7 @@ class SendPasswordResetEmailSerializer(serializers.Serializer):
 
   def validate(self, attrs):
     email = attrs.get('email')
+    print(email)
     if User.objects.filter(email=email).exists():
       user = User.objects.get(email = email)
       uid = urlsafe_base64_encode(force_bytes(user.id))

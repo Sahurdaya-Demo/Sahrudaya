@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from account.views import SendPasswordResetEmailView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView, UserPasswordResetView,UserLogout
+from account.views import SendPasswordResetEmailView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView, UserPasswordResetView,UserLogout,SendRegisterEmail
 from django.conf import settings
 from Employee.views import EmpView,ValidPost,ValidGet
 from django.conf.urls.static import static
@@ -12,6 +12,7 @@ route.register("",EmpView,basename='Employee')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include(route.urls)),
+     path('send-resgister-email/', SendRegisterEmail.as_view(), name='send-reset-password-email'),
     path('register/', UserRegistrationView.as_view(), name='register'),
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', UserLogout.as_view(), name='logout'),
