@@ -16,6 +16,7 @@ import Userpassreset from './components/Utils/Userpassreset';
 import Admindash from './components/admin/Admindash';
 import Employee from './components/admin/Employee';
 import ValidLink from './components/Utils/ValidLink';
+import Register from './components/Utils/register/register';
 function App() {
   
 //   const LoadingScreen = () => {
@@ -59,6 +60,7 @@ function App() {
           </Route>
           <Route path='*' element={<Error/>}/>
           <Route path="user/reset/:id/:token/:secure" element={<ValidLink/>} />
+          <Route path="reg" element={<Register/>} />
           </Routes>
 
         {/* )} */}
