@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Card, CardBody } from "reactstrap";
+import axios from 'axios';
 function Employee() {
   // const [items, setItems] = useState([]);
   // let empdetails
@@ -10,6 +11,7 @@ function Employee() {
   const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const[email,setemail]=useState('')
   useEffect(()=>{
   
   retrieve()
@@ -22,8 +24,18 @@ function Employee() {
     // console.log(Res)
    }
 
- const handleClick = () => {
-  handleClose(); 
+ const handleClick = async() => {
+  let formField = new FormData()
+  formField.append('email',email)
+  await axios({
+    method: 'post',
+    url:'http://127.0.0.1:8000/send-resgister-email/',
+    data: formField
+  }).then(response=>{
+    alert('send email')
+     handleClose(); 
+  })
+ 
   // addItem();
 }
   return (
@@ -63,6 +75,7 @@ function Employee() {
               <Form.Control
                 type="email"
                 placeholder="name@example.com"
+                onChange={(e) => setemail(e.target.value)}
                 autoFocus
               />
             </Form.Group>
