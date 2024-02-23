@@ -36,29 +36,29 @@ function Register({secure})
 			formField.append('phone',phone)
 			formField.append('password',password)
 			formField.append('password2',crpassword)
-			// await axios({
-			// 	method:'post',
-			// 	url: `http://127.0.0.1:8000/validpost`,
-			// 	data:{'secure_str':secure},
-			// 	headers: {
-			// 	  'Content-type': 'application/json',
-			// 	}
-			//   })
-			// try{
+			await axios({
+				method:'post',
+				url: `http://127.0.0.1:8000/validpost`,
+				data:{'secure_str':secure},
+				headers: {
+				  'Content-type': 'application/json',
+				}
+			  })
+			try{
 			  await axios({
 				method: 'post',
 				url:'http://127.0.0.1:8000/register/',
 				data: formField,
 				headers: {
-					'Content-type': 'application/json',
+					'Content-type': 'multipart/form-data',
 				  }
 			  }).then(response=>{
 					alert("success")
 				})
-			//   }
-			// catch{
-			//    alert('Server Down!! Contact Admin')
-			//  }
+			  }
+			catch{
+			   alert('Server Down!! Contact Admin')
+			 }
 			}
 			else{
 				console.log('password not match')
@@ -79,7 +79,7 @@ return (
 	         <div className="login100-pic position-relative">
 	        	<img  src={portr} alt='logo' style={{maxHeight:'60%',maxWidth:'60%',marginTop:'150px'}}/>
 			</div>
-            <form className="login100-form validate-form" onSubmit={handleSubmit} encType="multipart/form-data">
+            <form className="login100-form validate-form" onSubmit={handleSubmit}>
 					<span className="login100-form-title">
 						Register
 					</span>
@@ -135,14 +135,14 @@ return (
 						</span>
 					</div>
                     <hr/>
-                    {/* <div className="wrap-input100 validate-input" data-validate = "phone number is required:">
-						
+                    <div className="wrap-input100 validate-input" data-validate = "phone number is required:">
+					<input className="input100" type="file" name="image" placeholder="image" onChange={(e) => setimage(e.target.files[0])} style={{paddingTop:'10px'}}/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-picture-o" aria-hidden="true"></i>
 						</span>
-					</div> */}
-					<input className="input100" type="file" name="image" placeholder="image" onChange={(e) => setimage(e.target.files[0])} style={{paddingTop:'10px'}}/>
+					</div>
+					
 					<div className="container-login100-form-btn">
                         <button className="btn btn-primary" onClick={()=>Registration()}>
 							Register

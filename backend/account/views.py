@@ -14,6 +14,7 @@ from Employee.serializers import EmpSerializer
 import secrets
 import string
 from account.utils import Util
+
 # Generate Token Manually
 def get_tokens_for_user(user):
   refresh = RefreshToken.for_user(user)
