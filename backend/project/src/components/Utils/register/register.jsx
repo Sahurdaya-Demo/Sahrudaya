@@ -4,26 +4,71 @@ import '../../login/logincss/util.css'
 import portr from '../../login/images/potr.png'
 import { useState,useEffect } from 'react';
 import LoadExternalScript from '../../../LoadExternalScript';
-import { UnloadExternalScript } from '../../../UnloadExternalScript';
+import axios from 'axios';
 
-function Register()
+function Register({secure})
 {
-    useEffect(()=>{
-        LoadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);
-        return()=>{UnloadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);}
-        },[])
+	
     const[email,setemail]=useState('')
     const[name,setname]=useState('')
     const[password,setpassword]=useState('')
+	const[crpassword,setcrpassword]=useState('')
     const[age,setage]=useState('')
     const[phone,setphone]=useState('')
-    const [image,setimage]=useState("")
+    const[image,setimage]=useState('')
     const[qualification,setqualification]=useState('')
     const handleSubmit=(e)=>{
         e.preventDefault();
         
       }
-
+	const Registration=async()=>{
+		let type='counsellor'
+		  if(email!==''&&email.includes('@')){
+			if(password!==''){
+				
+			let formField = new FormData()
+			formField.append('image',image)
+			formField.append('name',name)
+			formField.append('email',email)
+			formField.append('type',type)
+			formField.append('age',age)
+			formField.append('qualification',qualification)
+			formField.append('phone',phone)
+			formField.append('password',password)
+			formField.append('password2',crpassword)
+			// await axios({
+			// 	method:'post',
+			// 	url: `http://127.0.0.1:8000/validpost`,
+			// 	data:{'secure_str':secure},
+			// 	headers: {
+			// 	  'Content-type': 'application/json',
+			// 	}
+			//   })
+			// try{
+			  await axios({
+				method: 'post',
+				url:'http://127.0.0.1:8000/register/',
+				data: formField,
+				headers: {
+					'Content-type': 'application/json',
+				  }
+			  }).then(response=>{
+					alert("success")
+				})
+			//   }
+			// catch{
+			//    alert('Server Down!! Contact Admin')
+			//  }
+			}
+			else{
+				console.log('password not match')
+			}
+			}
+	}
+	  useEffect(()=>{
+		LoadExternalScript(['../../../loginvendor/jquery/jquery-3.2.1.min.js','../../../loginjs/main.js']);
+		// return()=>{UnloadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);}
+		},[])
 return (  
 	
 	<>
@@ -34,7 +79,7 @@ return (
 	         <div className="login100-pic position-relative">
 	        	<img  src={portr} alt='logo' style={{maxHeight:'60%',maxWidth:'60%',marginTop:'150px'}}/>
 			</div>
-            <form className="login100-form validate-form" onSubmit={handleSubmit}>
+            <form className="login100-form validate-form" onSubmit={handleSubmit} encType="multipart/form-data">
 					<span className="login100-form-title">
 						Register
 					</span>
@@ -55,14 +100,14 @@ return (
 					</div>
 
 					<div className="wrap-input100 validate-input" data-validate = "Password is required">
-						<input className="input100" type="password" name="password" placeholder="Password"onChange={(e) => setpassword(e.target.value)}/>
+						<input className="input100" type="text" name="password" placeholder="Password"onChange={(e) => setpassword(e.target.value)}/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
 					<div className="wrap-input100 validate-input" data-validate = "Password is required">
-						<input className="input100" type="password" name="password" placeholder="confirm Password"onChange={(e) => setpassword(e.target.value)}/>
+						<input className="input100" type="text" name="crpassword" placeholder="confirm Password"onChange={(e) => setcrpassword(e.target.value)}/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-lock" aria-hidden="true"></i>
@@ -90,15 +135,16 @@ return (
 						</span>
 					</div>
                     <hr/>
-                    <div className="wrap-input100 validate-input" data-validate = "phone number is required:">
-						<input className="input100" type="file" name="image" placeholder="image" onChange={(e) => setimage(e.target.files)} style={{paddingTop:'10px'}}/>
+                    {/* <div className="wrap-input100 validate-input" data-validate = "phone number is required:">
+						
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-picture-o" aria-hidden="true"></i>
 						</span>
-					</div>
+					</div> */}
+					<input className="input100" type="file" name="image" placeholder="image" onChange={(e) => setimage(e.target.files[0])} style={{paddingTop:'10px'}}/>
 					<div className="container-login100-form-btn">
-                        <button className="btn btn-primary">
+                        <button className="btn btn-primary" onClick={()=>Registration()}>
 							Register
 						</button>
 					</div>
