@@ -26,14 +26,17 @@ def get_tokens_for_user(user):
 class UserRegistrationView(APIView):
   # renderer_classes = [UserRenderer]
   def post(self, request, format=None):
-    serializer = UserRegistrationSerializer(data=request.data)
-    serialized = EmpSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
-    serialized.is_valid(raise_exception=True)
-    user = serializer.save()
-    serialized.save()
-    token = get_tokens_for_user(user)
-    return Response({'token':token, 'msg':'Registration Successful'}, status=status.HTTP_201_CREATED)
+    try:
+      serializer = UserRegistrationSerializer(data=request.data)
+      serialized = EmpSerializer(data=request.data)
+      serializer.is_valid(raise_exception=True)
+      serialized.is_valid(raise_exception=True)
+      user = serializer.save()
+      serialized.save()
+      token = get_tokens_for_user(user)
+      return Response({'token':token, 'msg':'Registration Successful'}, status=status.HTTP_201_CREATED)
+    except:
+      return Response({'errors': 'same email'}, status=status.HTTP_200_OK)
 
 class SendRegisterEmail(APIView):
   # renderer_classes = [UserRenderer]

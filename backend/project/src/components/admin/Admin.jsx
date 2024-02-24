@@ -20,7 +20,7 @@ function Admin() {
     const [disableButton,setDisableButton] = useState(false)
 //   const[btalert,setbtalert]=useState('')
 //   const[altmsg,setaltmsg]=useState('')
-//   const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
     
 //   useEffect(()=>{
    
@@ -266,7 +266,7 @@ const handlesaveClick = () => {
             Edit
           </Button>
           <Button   className='btn btn-success' variant='primary' onClick={handlesaveClick} disabled={!disableButton} >
-          {/* {isLoading ?  <Spinner size='sm'/>:null} */}
+          {isLoading ?  <Spinner size='sm'/>:null}
           Save
           </Button>
         </Modal.Footer>
