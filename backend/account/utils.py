@@ -7,7 +7,7 @@ class Util:
     email = EmailMessage(
       subject=data['subject'],
       body=data['body'],
-      from_email='mca2247@rajagiri.edu',
+      from_email=data['from_email'],
       to=[data['to_email']]
     )
     email.send()

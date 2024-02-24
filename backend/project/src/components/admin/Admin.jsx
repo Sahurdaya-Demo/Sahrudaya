@@ -8,14 +8,14 @@ function Admin() {
     const navigate=useNavigate();
     const location = useLocation();
     
-//   useEffect(()=>{
+  useEffect(()=>{
    
-//     let token;
-//     token=localStorage.getItem('token')
-//     if(token===null)
-//     navigate('/',{ replace: true })
+    let token;
+    token=localStorage.getItem('token')
+    if(token===null)
+    navigate('/',{ replace: true })
     
-//   },[])
+  },[])
   const handletoggle=()=>{
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {

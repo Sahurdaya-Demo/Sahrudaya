@@ -1,6 +1,6 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect,useState,useRef} from "react";
 import AOS from "aos";
-
+import axios from "axios";
 import "aos/dist/aos.css";
 import PureCounter from "@srexi/purecounterjs";
 import {Player} from '@lottiefiles/react-lottie-player'
@@ -13,6 +13,7 @@ import './assets/bootstrap-icons/bootstrap-icons.css';
 import LoadExternalScript from "../../LoadExternalScript";
 import { useNavigate } from "react-router-dom";
 import { UnloadExternalScript } from "../../UnloadExternalScript";
+import emailjs from '@emailjs/browser';
 function Home(){
   const navigate=useNavigate();
      useEffect(() => {
@@ -23,7 +24,10 @@ function Home(){
     
   }, []);
 
-
+  // const[email,setemail]=useState('')
+  // const[subject,setsubject]=useState('')
+  // const[body,setbody]=useState('')
+  // const[name,setname]=useState('')
   const [prevScrollpos, setPrevScrollpos] = useState(window.pageYOffset);
   const [visible, setVisible] = useState(true);
 
@@ -42,6 +46,44 @@ function Home(){
     };
   }, [prevScrollpos]);
 
+//  const handleClick = async() => {
+//   let formField = new FormData()
+//   formField.append('email',email)
+//   formField.append('subject',subject)
+//   formField.append('body',body)
+//   formField.append('name',name)
+//   await axios({
+//     method: 'post',
+//     url:'http://127.0.0.1:8000/send-mail/',
+//     data: formField
+//   }).then(response=>{
+//     alert('send email')
+//     //  handleClose(); 
+//   })
+//  }
+
+const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm('service_231syu2', 'template_wo7d03j', form.current, {
+        publicKey: 'ewrAx0BTzngglql6A',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+          // e.target.reset();
+          alert('succesfull');
+          document.getElementById("form").reset();
+
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
+  };
 return(
     <>
     <link rel='stylesheet'type='text/css' href='../../../Homecss/style.css'></link>
@@ -424,23 +466,35 @@ return(
           </div>
 
           <div className="col-lg-6">
-            <form action="forms/contact.php" method="post" className="php-email-form">
+            <form   ref={form}  className="php-email-form" id="form">
               <div className="row gy-4">
 
                 <div className="col-md-6">
-                  <input type="text" name="name" className="form-control" placeholder="Your Name" required/>
+                  <input type="text" name="user_name" className="form-control" 
+                  placeholder="Your Name" required
+                  // onChange={(e) => setname(e.target.value)}
+                  />
                 </div>
 
                 <div className="col-md-6 ">
-                  <input type="email" className="form-control" name="email" placeholder="Your Email" required/>
+                  <input type="email" className="form-control" 
+                  name="user_email" placeholder="Your Email" required 
+                  // onChange={(e) => setemail(e.target.value)} 
+                  />
                 </div>
 
                 <div className="col-md-12">
-                  <input type="text" className="form-control" name="subject" placeholder="Subject" required/>
+                  <input type="text" className="form-control" 
+                  name="subject" placeholder="Subject" required
+                  // onChange={(e) => setsubject(e.target.value)}
+                  />
                 </div>
 
                 <div className="col-md-12">
-                  <textarea className="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                  <textarea className="form-control"
+                   name="message" rows="6" placeholder="Message" required
+                  //  onChange={(e) => setbody(e.target.value)}
+                   ></textarea>
                 </div>
 
                 <div className="col-md-12 text-center">
@@ -448,7 +502,7 @@ return(
                   <div className="error-message"></div>
                   <div className="sent-message">Your message has been sent. Thank you!</div>
 
-                  <button type="submit">Send Message</button>
+                  <button type="submit" onClick={sendEmail} >Send Message</button>
                 </div>
 
               </div>

@@ -340,3 +340,7 @@ section {
 .counsellors p{
   line-height: .7;
 }
+.counsellors .img-fit{
+  object-fit: cover;
+
+}

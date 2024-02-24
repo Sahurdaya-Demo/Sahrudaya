@@ -6,12 +6,37 @@ function Counseldash(){
 	},[])
     return(
         <>
-        <h1 className="mt-4">Dashboard</h1>
+        {/* <h1 className="mt-4">Dashboard</h1>
                         <ol className="breadcrumb mb-4">
                             <li className="breadcrumb-item active">Dashboard</li>
-                        </ol>
+                        </ol> */}
                         <div className="row">
-                            <div className="col-xl-3 col-md-6">
+
+
+                        {/* columns for messages */}
+                        
+                        <div className='card  col-lg-12 m-1 mt-4 my-3 mb-3' style={{height:"450px"}}></div>
+                            <div className="col-lg-4">
+                                <div className='card mb-3'>
+                                    <div className='card-body mb-3 card-he'></div>
+                                </div>
+                            </div>
+                            <div className="col-lg-4">
+                                <div className=" card mb-3">
+                                    <div className='card-body mb-3 card-he'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-4">
+                                <div className=" card mb-3">
+                                    <div className='card-body mb-3 card-he'>
+                                    </div>
+                                </div>
+                            </div>
+                        {/* ---end of columns */}
+
+                        {/* <div className='m-1'></div> */}
+                            {/* <div className="col-xl-3 col-md-6">
                                 <div className={`card bg-primary text-white mb-4`}>
                                     <div className="card-body">Primary Card</div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
@@ -46,7 +71,7 @@ function Counseldash(){
                                         <div className="small text-white"><i className="fa fa-angle-right"></i></div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="row">
                             <div className="col-xl-6">
@@ -68,6 +93,7 @@ function Counseldash(){
                                 </div>
                             </div>
                         </div>
+                        <div >
                         <div className="card mb-4">
                             <div className="card-header">
                                 <i className="fa fa-table me-1"></i>
@@ -211,7 +237,7 @@ function Counseldash(){
                         
                            </div>
                         </div>
-                
+                </div>
         </>
 
     )

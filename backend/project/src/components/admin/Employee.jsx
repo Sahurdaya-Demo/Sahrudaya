@@ -55,7 +55,7 @@ function Employee() {
             <div className="card mb-3 m-3 " style={{maxWidth: "580px"}}>
               <div className="row g-0">
                 <div className="col-md-4">
-                  <img src="../assets/team/team-1.JPG" className="img-fluid rounded-start" alt="..."/>
+                  <img src={record.image} className="img-fluid rounded-start img-fit" alt="..."/>
                 </div>
                 <div className="col-md-8">
                   <div className="card-body " style={{padding:"3.5px"}}>
