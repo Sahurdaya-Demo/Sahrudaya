@@ -477,7 +477,7 @@ section {
   border-radius: 4px;
   transition: 0.5s;
   color: #fff;
-  background: #4154f1;
+  background: #75E3B9;
   box-shadow: 0px 5px 30px rgba(65, 84, 241, 0.4);
 }
 
@@ -1424,6 +1424,8 @@ section {
 .team .member .member-img {
   position: relative;
   overflow: hidden;
+  height: 310px;
+  width: 310px;
 }
 
 .team .member .member-img:after {
@@ -1536,19 +1538,19 @@ section {
 --------------------------------------------------------------*/
 .contact .info-box {
   color: #444444;
-  background: #fafbff;
+  background: #effff6;
   padding: 30px;
 }
 
 .contact .info-box i {
   font-size: 38px;
   line-height: 0;
-  color: #4154f1;
+  color: #09090f;
 }
 
 .contact .info-box h3 {
   font-size: 20px;
-  color: #012970;
+  color: #030508;
   font-weight: 700;
   margin: 20px 0 10px 0;
 }
