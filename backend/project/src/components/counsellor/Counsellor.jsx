@@ -13,23 +13,26 @@ function Counsellor() {
     token=localStorage.getItem('token')
     if(token===null)
     navigate('/',{ replace: true })
-    const view=async()=>{
-        await axios({
-          method: 'get',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
-          },
-          url:'http://127.0.0.1:8000/profile/',
-        }).then(response=>{
-          // console.log(location.state)
-          console.log(response.data);
-            setprofile(response.data)
-        })
-    
-      }
-      view()
+    else{
+        view()
+    }
+      
   },[])
+  const view=async()=>{
+    await axios({
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
+      },
+      url:'http://127.0.0.1:8000/profile/',
+    }).then(response=>{
+      // console.log(location.state)
+      console.log(response.data);
+        setprofile(response.data)
+    })
+
+  }
   const handletoggle=()=>{
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {
