@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Button, Spinner } from 'react-bootstrap';
 // import { Carousel } from 'react-responsive-carousel';
 import './logincss/main.css'
 import './logincss/util.css'
@@ -9,14 +10,14 @@ import './fonts/font-awesome-4.7.0/css/font-awesome.min.css'
 import portr from './images/potr.png'
 import LoadExternalScript from '../../LoadExternalScript';
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import CbLogin from '../Utils/CbLogin';
 // import useLogin from '../../useLogin';
 import { UnloadExternalScript } from '../../UnloadExternalScript';
 
 function Login(){
-  
+  const [isLoading, setIsLoading] = useState(false);
   const[email,setemail]=useState('')
   const[password,setpassword]=useState('')
   const[emailchange,setemailchange]=useState('')
@@ -28,7 +29,7 @@ function Login(){
   const navigate=useNavigate()
   useEffect(()=>{
   LoadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);
-  return()=>{UnloadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);}
+  // return()=>{UnloadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);}
   },[])
   
   const handleSubmit=(e)=>{
@@ -36,6 +37,7 @@ function Login(){
     
   }
   const passwordreset=async()=>{
+    setIsLoading(true);
     let formField = new FormData()
     formField.append('email',emailchange)
     await axios({
@@ -43,6 +45,7 @@ function Login(){
       url:'http://127.0.0.1:8000/send-reset-password-email/',
       data: formField
     }).then(response=>{
+      setIsLoading(false)
       if(response.data.errors)
       {
         setbtalert('error')
@@ -160,7 +163,8 @@ function Login(){
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button  onClick={()=>{passwordreset()}} className='btn-primary' variant='primary'>
+          <Button  onClick={()=>{passwordreset()}} className='btn btn-primary' variant='primary' disabled={isLoading}>
+          {isLoading ?  <Spinner size='sm'/>:null}
             Submit
           </Button>
         </Modal.Footer>
