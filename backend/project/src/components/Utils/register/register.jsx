@@ -6,9 +6,9 @@ import { useState,useEffect } from 'react';
 import LoadExternalScript from '../../../LoadExternalScript';
 import axios from 'axios';
 
+
 function Register({secure})
 {
-	
     const[email,setemail]=useState('')
     const[name,setname]=useState('')
     const[password,setpassword]=useState('')
@@ -54,6 +54,7 @@ function Register({secure})
 				  }
 			  }).then(response=>{
 					alert("success")
+					window.close()
 				})
 			  }
 			catch{
@@ -144,7 +145,7 @@ return (
 					</div>
 					
 					<div className="container-login100-form-btn">
-                        <button className="btn btn-primary" onClick={()=>Registration()}>
+                        <button className="btn btn-primary" onClick={()=>Registration()} >
 							Register
 						</button>
 					</div>
