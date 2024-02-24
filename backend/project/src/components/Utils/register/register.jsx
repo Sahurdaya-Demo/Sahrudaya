@@ -6,9 +6,9 @@ import { useState,useEffect } from 'react';
 import LoadExternalScript from '../../../LoadExternalScript';
 import axios from 'axios';
 
+
 function Register({secure})
 {
-	
     const[email,setemail]=useState('')
     const[name,setname]=useState('')
     const[password,setpassword]=useState('')
@@ -77,12 +77,17 @@ function Register({secure})
 					'Content-type': 'multipart/form-data',
 				  }
 			  }).then(response=>{
+<<<<<<< HEAD
+					alert("success")
+					window.close()
+=======
 					if(response.data.errors){
 						alert('Already Registered email id!!')
 					}
 					else{
 						alert('Registration Successfull!!')
 					}
+>>>>>>> 7f3877c4cf540898b7507100af12a9771b653ab9
 				})
 			  }
 			catch{
@@ -174,7 +179,7 @@ return (
 					</div>
 					
 					<div className="container-login100-form-btn">
-                        <button className="btn btn-primary" onClick={()=>Registration()}>
+                        <button className="btn btn-primary" onClick={()=>Registration()} >
 							Register
 						</button>
 						

@@ -4,13 +4,17 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Card, CardBody } from "reactstrap";
 import axios from 'axios';
+import {Spinner } from 'react-bootstrap';
 function Employee() {
   // const [items, setItems] = useState([]);
   // let empdetails
+  const [isLoading, setIsLoading] = useState(false);
   const [Records,setRecords]=useState([])
   const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const[btalert,setbtalert]=useState('')
+  const[altmsg,setaltmsg]=useState('')
   const[email,setemail]=useState('')
   useEffect(()=>{
   
@@ -25,6 +29,7 @@ function Employee() {
    }
 
  const handleClick = async() => {
+  setIsLoading(true);
   let formField = new FormData()
   formField.append('email',email)
   await axios({
@@ -32,7 +37,7 @@ function Employee() {
     url:'http://127.0.0.1:8000/send-resgister-email/',
     data: formField
   }).then(response=>{
-    alert('Email Sent Successfully!!')
+    alert('send email')
      handleClose(); 
   })
  
@@ -111,14 +116,17 @@ function Employee() {
                 autoFocus
               />
             </Form.Group>
-           
+            <div className={`${btalert!==''?`${btalert==='success'?'alert alert-success':'alert alert-danger'}`:'visible-false'}`} role="alert">
+                 {altmsg}
+            </div>
           </Form>
 		  </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button  onClick={handleClick} className='btn-primary ' variant='primary'>
+          <Button  onClick={handleClick} className='btn-primary ' variant='primary'disabled={isLoading}>
+						{isLoading ?  <Spinner size='sm'/>:null}
             Submit
           </Button>
         </Modal.Footer>
