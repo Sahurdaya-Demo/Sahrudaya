@@ -52,22 +52,23 @@ function Employee() {
            <div className="row-12 p-0 d-flex flex-wrap justify-content-center flex-sm-row flex-column">
 
             {Records.map(record=>
-            <div className="card mb-3 m-3 " style={{maxWidth: "580px"}}>
+            <div className="card mb-3 m-3 " style={{maxWidth: "580px"}} key={record.id}>
               <div className="row g-0">
                 <div className="col-md-4">
-                  <img src="../assets/team/team-1.JPG" className="img-fluid rounded-start" alt="..."/>
+                  <img src={record.image} className="rounded-start object-fit-cover" alt="..." style={{height:'100%',width:'100%'}}/>
                 </div>
                 <div className="col-md-8">
                   <div className="card-body " style={{padding:"3.5px"}}>
-                    <h5 className="card-title text-uppercase text-success">{record.name}</h5>
+                    <h5 className="card-title text-uppercase text-success mt-3 ms-1">{record.name}</h5>
                     <hr></hr>
-                    <p className="card-text text-success">Age : <small className="text-body-secondary text-dark">{record.age}</small></p>
-                    <p className="card-text text-success">Email : <small className="text-body-secondary text-dark">{record.email}</small></p>
-                    <p className="card-text text-success">Phone No. : <small className="text-body-secondary text-dark">{record.phone}</small></p>
-                    <p className="card-text text-success">Qualification : <small className="text-body-secondary text-dark">{record.qualification}</small></p>
-                  <button type="button" className=" dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Submissions
-              </button>
+                    <p className="card-text text-success ms-1">Age : <small className="text-body-secondary text-dark">{record.age}</small></p>
+                    <p className="card-text text-success ms-1">Email : <small className="text-body-secondary text-dark">{record.email}</small></p>
+                    <p className="card-text text-success ms-1">Phone No. : <small className="text-body-secondary text-dark">{record.phone}</small></p>
+                    <p className="card-text text-success ms-1">Qualification : <small className="text-body-secondary text-dark">{record.qualification}</small></p>
+                  <button type="button" className=" dropdown-toggle ms-1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Submissions
+                  </button>
+              <button className="btn btn-danger float-end mb-1 me-2" onClick={()=>console.log(record.id)}>Delete</button>
               <ul className="dropdown-menu">
                 <li><p className="dropdown-item">Today : {record.age}</p></li>
                 <li><p className="dropdown-item">Yesterday : {record.age}</p></li>

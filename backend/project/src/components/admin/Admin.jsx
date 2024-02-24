@@ -17,14 +17,14 @@ function Admin() {
     const [password,setpassword]=useState('')
     const [crpassword,setcrpassword]=useState('')
     
-  useEffect(()=>{
+//   useEffect(()=>{
    
-    let token;
-    token=localStorage.getItem('token')
-    if(token===null)
-    navigate('/',{ replace: true })
+//     let token;
+//     token=localStorage.getItem('token')
+//     if(token===null)
+//     navigate('/',{ replace: true })
     
-  },[])
+//   },[])
   const changepassword=async()=>{
     if(password===crpassword){
     let formField = new FormData()
