@@ -199,8 +199,8 @@ section {
 }
 
 .Card {
-  width: 220px;
-  height: 321px;
+  /* width: 220px;
+  height: 321px; */
   background: #effff6;
   border-top-right-radius: 10px;
   overflow: hidden;
@@ -212,8 +212,8 @@ section {
   box-shadow: 0 14px 26px rgba(0,0,0,0.04);
   transition: all 0.5s ease-out;
   text-decoration: none;
-  right: 17px;
-  bottom: 14px;
+   right: -26px;
+  bottom: -15px; 
 }
 
 .Card:hover {
@@ -265,6 +265,7 @@ section {
   position: relative;
   z-index: 1;
   transition: all 0.3s ease-out;
+  top:10px;
 }
 
 .circle:after {
@@ -294,8 +295,8 @@ section {
   height: 118px;
   border-radius: 50%;
   background: var(--bg-color);
-  top: 139px;
-  left: 87px;
+  top: 26px;
+  left: 42px;
   z-index: 0;
   transition: transform 0.5s ease-out;
 }
@@ -303,7 +304,7 @@ section {
 .card{
   box-shadow: 10px 10px  10px rgba(52, 52, 52, 0.1) ;
   transition: all 0.5s ease-out;
-  
+  overflow: hidden;
 }
 .card:hover {
   transform: translateY(-5px) scale(1.005) translateZ(0);
@@ -311,3 +312,31 @@ section {
     0 24px 46px var(--box-shadow-color);
 }
 
+/* .counsellors .member {
+  overflow: hidden;
+  text-align: center;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);
+  transition: 0.3s;
+}
+
+.counsellors .member .member-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.counsellors .member .member-img:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  /* background: url(../img/team-shape.svg) no-repeat center bottom; */
+  /* background-size: contain;
+  z-index: 1; */
+/* } */ 
+.counsellors p{
+  line-height: .7;
+}
