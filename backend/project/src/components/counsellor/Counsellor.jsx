@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, Outlet, useNavigate,useLocation } from 'react-router-dom';
-import { useEffect,useState} from 'react';
-import { Button, Spinner,Image,Form} from 'react-bootstrap';
+import { useEffect} from 'react';
+import { Button,Image,Form} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal'
 import LoadExternalScript from '../../LoadExternalScript';
 import axios from 'axios';
