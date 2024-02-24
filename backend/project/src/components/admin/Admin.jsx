@@ -1,21 +1,52 @@
 import React from 'react'
-import { useEffect} from 'react';
+import { useEffect,useState} from 'react';
 import {  useNavigate,useLocation, Outlet } from 'react-router-dom';
 import axios from 'axios';
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { Card, CardBody } from "reactstrap";
 import { Link } from 'react-router-dom';
 import LoadExternalScript from '../../LoadExternalScript';
 function Admin() {
     const navigate=useNavigate();
     const location = useLocation();
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [password,setpassword]=useState('')
+    const [crpassword,setcrpassword]=useState('')
     
-//   useEffect(()=>{
+  useEffect(()=>{
    
-//     let token;
-//     token=localStorage.getItem('token')
-//     if(token===null)
-//     navigate('/',{ replace: true })
+    let token;
+    token=localStorage.getItem('token')
+    if(token===null)
+    navigate('/',{ replace: true })
     
-//   },[])
+  },[])
+  const changepassword=async()=>{
+    if(password===crpassword){
+    let formField = new FormData()
+    formField.append('password',password)
+    formField.append('password2',crpassword)
+    await axios({
+    method: 'post',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
+       },
+    url:'http://127.0.0.1:8000/changepassword/',
+    data: formField,   
+    }).then(response=>{
+        alert(response.data.msg)
+        handleClose()
+    })
+    }
+    else{
+        alert('Password and Confirm Password Are Not Same!!')
+    }
+  }
   const handletoggle=()=>{
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {
@@ -64,7 +95,7 @@ function Admin() {
                     <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true"><i className="fa fa-user fa-fw"></i></a>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style={{left:'auto',right:0}}>
                         <li><a className="dropdown-item" href="#!">Settings</a></li>
-                        <li><a className="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><a className="dropdown-item" onClick={handleShow} style={{cursor:'pointer'}}>Change Password</a></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><a className="dropdown-item" onClick={()=>{Logout()}} style={{cursor:"pointer"}}>Logout</a></li>
                     </ul>
@@ -166,6 +197,42 @@ function Admin() {
             </div>
         </div>
       </div>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Register Counsellor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='p-2'>
+			<Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Enter New Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="********"
+                className='mb-2'
+                onChange={(e) => setpassword(e.target.value)}
+                autoFocus
+              />
+              <Form.Label>Confirm New Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="********"
+                onChange={(e) => setcrpassword(e.target.value)}
+                autoFocus
+              />
+            </Form.Group>
+            
+           
+          </Form>
+		  </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button  className='btn-primary' onClick={changepassword} variant='primary'>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
       </>
   )
 }
