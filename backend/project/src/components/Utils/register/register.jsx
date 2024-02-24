@@ -77,17 +77,14 @@ function Register({secure})
 					'Content-type': 'multipart/form-data',
 				  }
 			  }).then(response=>{
-<<<<<<< HEAD
 					alert("success")
 					window.close()
-=======
 					if(response.data.errors){
 						alert('Already Registered email id!!')
 					}
 					else{
 						alert('Registration Successfull!!')
 					}
->>>>>>> 7f3877c4cf540898b7507100af12a9771b653ab9
 				})
 			  }
 			catch{
