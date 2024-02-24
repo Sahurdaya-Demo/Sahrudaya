@@ -1,18 +1,45 @@
 import React from 'react'
-import { useState,Link, Outlet, useNavigate,useLocation } from 'react-router-dom';
-import { useEffect} from 'react';
+import { Link, Outlet, useNavigate,useLocation } from 'react-router-dom';
+import { useEffect,useState} from 'react';
+import { Button,Image,Form} from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal'
 import LoadExternalScript from '../../LoadExternalScript';
 import axios from 'axios';
 
 function Counsellor() {
     const navigate=useNavigate();
     const location = useLocation();
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [disableButton,setDisableButton] = useState(false)
+    // const [isLoading, setIsLoading] = useState(false);
+    const[profile,setprofile]=useState([])
   useEffect(()=>{
     let token;
     token=localStorage.getItem('token')
     if(token===null)
     navigate('/',{ replace: true })
+    else{
+        view()
+    }
+      
   },[])
+  const view=async()=>{
+    await axios({
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
+      },
+      url:'http://127.0.0.1:8000/profile/',
+    }).then(response=>{
+      // console.log(location.state)
+      console.log(response.data);
+        setprofile(response.data)
+    })
+
+  }
   const handletoggle=()=>{
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {
@@ -20,6 +47,12 @@ function Counsellor() {
             localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
     }
   }
+  const handleeditClick = () => {
+    setDisableButton(!disableButton)
+};
+const handlesaveClick = () => {
+    setDisableButton(!disableButton)
+};
   const Logout=async()=>{
     // await axios({
     //   method: 'post',
@@ -59,7 +92,7 @@ function Counsellor() {
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true"><i className="fa fa-user fa-fw"></i></a>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style={{left:'auto',right:0}}>
-                        <li><a className="dropdown-item" href="#!">Settings</a></li>
+                        <li><a className="dropdown-item" onClick={handleShow}>Profile</a></li>
                         <li><a className="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><a className="dropdown-item" onClick={()=>{Logout()}}>Logout</a></li>
@@ -136,8 +169,8 @@ function Counsellor() {
                         </div>
                     </div>
                     <div className="sb-sidenav-footer">
-                        <div className="small">Logged in as:</div>
-                        Start Bootstrap
+                        <div className="small">Logged in as: <h1>{profile.name}</h1></div>
+                        {/* Start Bootstrap */}
                     </div>
                 </nav>
             </div>
@@ -165,6 +198,91 @@ function Counsellor() {
             </div>
         </div>
       </div>
+      <Modal show={show} onHide={handleClose} centered>
+        {/* <Modal.Header closeButton>
+          <Modal.Title>Profile Page</Modal.Title>
+        </Modal.Header> */}
+        <Modal.Body className='p-2'>
+			  <Form>
+            
+            <Image className="rounded-circle mx-auto d-block"
+               
+                src="../assets/team/team-1.JPG"
+                style={{width: 125, height: 125, borderRadius: 125/ 2 }}
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+              <Form.Group className="mb-3">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="name"
+                readOnly
+                disabled
+                autoFocus
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+              </Form.Group>
+               <Form.Group className="mb-3">
+               <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+                disabled
+                readOnly
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+               </Form.Group>
+               <Form.Group className="mb-3">
+               <Form.Label>Age</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="age"
+                autoFocus
+                disabled={!disableButton}
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+              </Form.Group>
+              <Form.Group className="mb-3">
+            <Form.Label>Qualification</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="qualification"
+                autoFocus
+                disabled={!disableButton}
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+              </Form.Group>
+              <Form.Group className="mb-3">
+              <Form.Label>Phone number</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="phone number"
+                autoFocus
+                disabled={!disableButton}
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+            
+            </Form.Group>
+            {/* <div className={`${btalert!==''?`${btalert==='success'?'alert alert-success':'alert alert-danger'}`:'visible-false'}`} role="alert">
+                 {altmsg}
+            </div> */}
+          </Form>
+		  </Modal.Body>
+        <Modal.Footer>
+            
+          <Button variant="secondary" onClick={handleClose} >
+            Close
+          </Button>
+          <Button variant="btn btn-primary"  onClick={handleeditClick} disabled={disableButton} >
+            Edit
+          </Button>
+          <Button   className='btn btn-success' variant='primary' onClick={handlesaveClick} disabled={!disableButton} >
+          {/* {isLoading ?  <Spinner size='sm'/>:null} */}
+          Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
       </>
   )
 }

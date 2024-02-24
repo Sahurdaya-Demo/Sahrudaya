@@ -6,9 +6,9 @@ import { useState,useEffect } from 'react';
 import LoadExternalScript from '../../../LoadExternalScript';
 import axios from 'axios';
 
+
 function Register({secure})
 {
-	
     const[email,setemail]=useState('')
     const[name,setname]=useState('')
     const[password,setpassword]=useState('')
@@ -21,10 +21,34 @@ function Register({secure})
         e.preventDefault();
         
       }
+	const check=()=>{
+		const fileInput = document.getElementById('check');
+		console.log("check")
+		if (fileInput.files.length > 0) {
+			const img = document.createElement('img');
+
+				const selectedImage = fileInput.files[0];
+
+				const objectURL = URL.createObjectURL(selectedImage);
+
+				img.onload = function handleLoad() {
+				console.log(`Width: ${img.width}, Height: ${img.height}`);
+
+				if (img.width < 100 || img.height < 100) {
+					console.log(
+					"The image's width or height is less than 100px",
+					);
+				}
+
+				URL.revokeObjectURL(objectURL);
+				};
+				img.src = objectURL;
+		}
+	}
 	const Registration=async()=>{
 		let type='counsellor'
 		  if(email!==''&&email.includes('@')){
-			if(password!==''){
+			if(password!==''&&password===crpassword){
 				
 			let formField = new FormData()
 			formField.append('image',image)
@@ -54,6 +78,13 @@ function Register({secure})
 				  }
 			  }).then(response=>{
 					alert("success")
+					window.close()
+					if(response.data.errors){
+						alert('Already Registered email id!!')
+					}
+					else{
+						alert('Registration Successfull!!')
+					}
 				})
 			  }
 			catch{
@@ -61,7 +92,7 @@ function Register({secure})
 			 }
 			}
 			else{
-				console.log('password not match')
+				alert('Password and Confirm Password Not Matching')
 			}
 			}
 	}
@@ -69,6 +100,7 @@ function Register({secure})
 		LoadExternalScript(['../../../loginvendor/jquery/jquery-3.2.1.min.js','../../../loginjs/main.js']);
 		// return()=>{UnloadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);}
 		},[])
+		
 return (  
 	
 	<>
@@ -100,14 +132,14 @@ return (
 					</div>
 
 					<div className="wrap-input100 validate-input" data-validate = "Password is required">
-						<input className="input100" type="text" name="password" placeholder="Password"onChange={(e) => setpassword(e.target.value)}/>
+						<input className="input100" type="password" name="password" placeholder="Password"onChange={(e) => setpassword(e.target.value)}/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
 					<div className="wrap-input100 validate-input" data-validate = "Password is required">
-						<input className="input100" type="text" name="crpassword" placeholder="confirm Password"onChange={(e) => setcrpassword(e.target.value)}/>
+						<input className="input100" type="password" name="crpassword" placeholder="confirm Password"onChange={(e) => setcrpassword(e.target.value)}/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-lock" aria-hidden="true"></i>
@@ -136,7 +168,7 @@ return (
 					</div>
                     <hr/>
                     <div className="wrap-input100 validate-input" data-validate = "phone number is required:">
-					<input className="input100" type="file" name="image" placeholder="image" onChange={(e) => setimage(e.target.files[0])} style={{paddingTop:'10px'}}/>
+					<input className="input100" type="file" name="image" placeholder="image" id='check' onChange={(e) => setimage(e.target.files[0])} style={{paddingTop:'10px'}}/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-picture-o" aria-hidden="true"></i>
@@ -144,13 +176,17 @@ return (
 					</div>
 					
 					<div className="container-login100-form-btn">
-                        <button className="btn btn-primary" onClick={()=>Registration()}>
+                        <button className="btn btn-primary" onClick={()=>Registration()} >
 							Register
 						</button>
+						
 					</div>
-
+					
 					
 				</form>
+				<button className="btn btn-primary" onClick={()=>check()}>
+							chel
+						</button>
 			</div>
 		</div>
 		</div>

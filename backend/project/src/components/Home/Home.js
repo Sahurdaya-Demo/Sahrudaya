@@ -242,32 +242,13 @@ return(
       <div className="container" data-aos="fade-up">
 
         <header className="section-header">
-          <h2>Administrators</h2>
-          <p>Our helping Administrators</p>
+          <h2>Counsellors</h2>
+          <p>Our helping Counsellors</p>
         </header>
 
         <div className="row gy-4">
 
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div className="member">
-              <div className="member-img">
-                <img src="assets/team/team-1.jpg" className="img-fluid" alt=""/>
-                <div className="social">
-                  <a href=""><i className="bi bi-twitter"></i></a>
-                  <a href=""><i className="bi bi-facebook"></i></a>
-                  <a href=""><i className="bi bi-instagram"></i></a>
-                  <a href=""><i className="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div className="member-info">
-                <h4>FR. BENNY NALKARA CMI</h4>
-                <span>PATRON</span>
-                <p>Fr Benny Nalkara, CMI Provincial of the CMI Sacred Heart Province and Manager Fr Benny Nalkara, CMI has been serving as a faculty for New Testament and Biblical Greek in the Faculty of Theology at Dharmaram Vidya Kshetram, Bangalore, Pontifical Athenaeum of Philosophy, Theology and Canon Law since 2008.</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div className="member">
               <div className="member-img">
                 <img src="assets/team/team-2.jpg" className="img-fluid" alt=""/>
@@ -286,6 +267,26 @@ return(
             </div>
           </div>
 
+          <div className="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div className="member">
+              <div className="member-img">
+                <img src="assets/team/team-1.jpg" className="img-fluid" alt=""/>
+                <div className="social">
+                  <a href=""><i className="bi bi-twitter"></i></a>
+                  <a href=""><i className="bi bi-facebook"></i></a>
+                  <a href=""><i className="bi bi-instagram"></i></a>
+                  <a href=""><i className="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div className="member-info">
+                <h4>DR. MANJU P EMMANUEL</h4>
+                <span>COUNSELLOR</span>
+                <p>MA, MPhil & PhD in Psychology</p>
+              </div>
+
+            </div>
+          </div>
+
           <div className="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
             <div className="member">
               <div className="member-img">
@@ -298,9 +299,9 @@ return(
                 </div>
               </div>
               <div className="member-info">
-                <h4>REV. FR. DIBIN MANGALATH</h4>
-                <span>CMI SECRETARY</span>
-                <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
+                <h4>AKHILA MOHANAN</h4>
+                <span>COUNSELLOR</span>
+                <p>Msc Psychology</p>
               </div>
             </div>
           </div>
@@ -317,9 +318,9 @@ return(
                 </div>
               </div>
               <div className="member-info">
-                <h4>FR. PAUL NEDUMCHALIL CMI</h4>
-                <span>TREASURER</span>
-                <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid doloremque ut possimus ipsum officia.</p>
+                <h4>ROSELIN MARY BENNY</h4>
+                <span>COUNSELLOR</span>
+                <p>MSW (M&P)</p>
               </div>
             </div>
           </div>
@@ -437,21 +438,28 @@ return(
                 <div className="info-box">
                   <i className="bi bi-geo-alt"></i>
                   <h3>Address</h3>
-                  <p>A108 Adam Street,<br/>New York, NY 535022</p>
+                  <p>The Chairman<br/>                    
+                    Sahrudaya Services and Charities<br/>
+                    S.H. Provincial House <br/>
+                    Rajagiri P.O., Kalamassery<br/>
+                    Ernakulam, Kerala<br/>India - 683 104</p>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="info-box">
                   <i className="bi bi-telephone"></i>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55<br/>+1 6678 254445 41</p>
+                  <h5>Office</h5>
+                  <p>	0484-2555702 , 0484-2911170</p>
+                  <h5>Mobile</h5>
+                  <p> 09495352786  ,09496829098</p><br/><br/>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="info-box">
                   <i className="bi bi-envelope"></i>
                   <h3>Email Us</h3>
-                  <p>info@example.com<br/>contact@example.com</p>
+                  <p>sahrudaya_shp@yahoo.com</p><br/><p> </p>
                 </div>
               </div>
               <div className="col-md-6">

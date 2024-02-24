@@ -1,21 +1,57 @@
 import React from 'react'
-import { useEffect} from 'react';
+import { useEffect,useState} from 'react';
 import {  useNavigate,useLocation, Outlet } from 'react-router-dom';
 import axios from 'axios';
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { Image } from 'react-bootstrap';
+import { Card, CardBody } from "reactstrap";
 import { Link } from 'react-router-dom';
 import LoadExternalScript from '../../LoadExternalScript';
 function Admin() {
     const navigate=useNavigate();
     const location = useLocation();
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [view, setview] = useState(false);
+    const handleviewClose = () => setview(false);
+    const handleviewShow = () => setview(true);
+    const [password,setpassword]=useState('')
+    const [crpassword,setcrpassword]=useState('')
+    const [disableButton,setDisableButton] = useState(false)
     
-  useEffect(()=>{
+//   useEffect(()=>{
    
-    let token;
-    token=localStorage.getItem('token')
-    if(token===null)
-    navigate('/',{ replace: true })
+//     let token;
+//     token=localStorage.getItem('token')
+//     if(token===null)
+//     navigate('/',{ replace: true })
     
-  },[])
+//   },[])
+  const changepassword=async()=>{
+    if(password===crpassword){
+    let formField = new FormData()
+    formField.append('password',password)
+    formField.append('password2',crpassword)
+    await axios({
+    method: 'post',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
+       },
+    url:'http://127.0.0.1:8000/changepassword/',
+    data: formField,   
+    }).then(response=>{
+        alert(response.data.msg)
+        handleClose()
+    })
+    }
+    else{
+        alert('Password and Confirm Password Are Not Same!!')
+    }
+  }
   const handletoggle=()=>{
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {
@@ -23,6 +59,15 @@ function Admin() {
             localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
     }
   }
+
+  const handleeditClick = () => {
+    setDisableButton(!disableButton)
+    };
+  const handlesaveClick = () => {
+    setDisableButton(!disableButton)
+    };
+
+
   const Logout=async()=>{
     // await axios({
     //   method: 'post',
@@ -63,8 +108,8 @@ function Admin() {
                 <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true"><i className="fa fa-user fa-fw"></i></a>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style={{left:'auto',right:0}}>
-                        <li><a className="dropdown-item" href="#!">Settings</a></li>
-                        <li><a className="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><a className="dropdown-item" onClick={handleviewShow}>Profile</a></li>
+                        <li><a className="dropdown-item" onClick={handleShow} style={{cursor:'pointer'}}>Change Password</a></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><a className="dropdown-item" onClick={()=>{Logout()}} style={{cursor:"pointer"}}>Logout</a></li>
                     </ul>
@@ -166,6 +211,126 @@ function Admin() {
             </div>
         </div>
       </div>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Register Counsellor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='p-2'>
+			<Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Enter New Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="********"
+                className='mb-2'
+                onChange={(e) => setpassword(e.target.value)}
+                autoFocus
+              />
+              <Form.Label>Confirm New Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="********"
+                onChange={(e) => setcrpassword(e.target.value)}
+                autoFocus
+              />
+            </Form.Group>
+            
+           
+          </Form>
+		  </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button  className='btn-primary' onClick={changepassword} variant='primary'>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={view} onHide={handleviewClose} centered>
+        {/* <Modal.Header closeButton>
+          <Modal.Title>Profile Page</Modal.Title>
+        </Modal.Header> */}
+        <Modal.Body className='p-2'>
+			  <Form>
+            
+            <Image className="rounded-circle mx-auto d-block"
+               
+                src="../assets/team/team-1.JPG"
+                style={{width: 125, height: 125, borderRadius: 125/ 2 }}
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+              <Form.Group className="mb-3">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="name"
+                readOnly
+                disabled
+                autoFocus
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+              </Form.Group>
+               <Form.Group className="mb-3">
+               <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+                disabled
+                readOnly
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+               </Form.Group>
+               <Form.Group className="mb-3">
+               <Form.Label>Age</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="age"
+                autoFocus
+                disabled={!disableButton}
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+              </Form.Group>
+              <Form.Group className="mb-3">
+            <Form.Label>Qualification</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="qualification"
+                autoFocus
+                disabled={!disableButton}
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+              </Form.Group>
+              <Form.Group className="mb-3">
+              <Form.Label>Phone number</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="phone number"
+                autoFocus
+                disabled={!disableButton}
+                // onChange={(e) => {setemailchange(e.target.value);}}
+              />
+            
+            </Form.Group>
+        
+          </Form>
+		  </Modal.Body>
+        <Modal.Footer>
+            
+          <Button variant="secondary" onClick={handleviewClose} >
+            Close
+          </Button>
+          <Button variant="btn btn-primary"  onClick={handleeditClick} disabled={disableButton} >
+            Edit
+          </Button>
+          <Button   className='btn btn-success' variant='primary' onClick={handlesaveClick} disabled={!disableButton} >
+          {/* {isLoading ?  <Spinner size='sm'/>:null} */}
+          Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
       </>
   )
 }
