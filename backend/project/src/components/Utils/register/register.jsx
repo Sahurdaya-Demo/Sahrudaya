@@ -24,7 +24,7 @@ function Register({secure})
 	const Registration=async()=>{
 		let type='counsellor'
 		  if(email!==''&&email.includes('@')){
-			if(password!==''){
+			if(password!==''&&password===crpassword){
 				
 			let formField = new FormData()
 			formField.append('image',image)
@@ -53,7 +53,12 @@ function Register({secure})
 					'Content-type': 'multipart/form-data',
 				  }
 			  }).then(response=>{
-					alert("success")
+					if(response.data.errors){
+						alert('Already Registered email id!!')
+					}
+					else{
+						alert('Registration Successfull!!')
+					}
 				})
 			  }
 			catch{
@@ -61,7 +66,7 @@ function Register({secure})
 			 }
 			}
 			else{
-				console.log('password not match')
+				alert('Password and Confirm Password Not Matching')
 			}
 			}
 	}
@@ -100,14 +105,14 @@ return (
 					</div>
 
 					<div className="wrap-input100 validate-input" data-validate = "Password is required">
-						<input className="input100" type="text" name="password" placeholder="Password"onChange={(e) => setpassword(e.target.value)}/>
+						<input className="input100" type="password" name="password" placeholder="Password"onChange={(e) => setpassword(e.target.value)}/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
 					<div className="wrap-input100 validate-input" data-validate = "Password is required">
-						<input className="input100" type="text" name="crpassword" placeholder="confirm Password"onChange={(e) => setcrpassword(e.target.value)}/>
+						<input className="input100" type="password" name="crpassword" placeholder="confirm Password"onChange={(e) => setcrpassword(e.target.value)}/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-lock" aria-hidden="true"></i>

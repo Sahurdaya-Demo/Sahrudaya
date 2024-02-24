@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, Outlet, useNavigate,useLocation } from 'react-router-dom';
 import { useEffect} from 'react';
 import LoadExternalScript from '../../LoadExternalScript';
@@ -7,11 +7,28 @@ import axios from 'axios';
 function Counsellor() {
     const navigate=useNavigate();
     const location = useLocation();
+    const[profile,setprofile]=useState([])
   useEffect(()=>{
     let token;
     token=localStorage.getItem('token')
     if(token===null)
     navigate('/',{ replace: true })
+    const view=async()=>{
+        await axios({
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
+          },
+          url:'http://127.0.0.1:8000/profile/',
+        }).then(response=>{
+          // console.log(location.state)
+          console.log(response.data);
+            setprofile(response.data)
+        })
+    
+      }
+      view()
   },[])
   const handletoggle=()=>{
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
@@ -136,8 +153,8 @@ function Counsellor() {
                         </div>
                     </div>
                     <div className="sb-sidenav-footer">
-                        <div className="small">Logged in as:</div>
-                        Start Bootstrap
+                        <div className="small">Logged in as: <h1>{profile.name}</h1></div>
+                        {/* Start Bootstrap */}
                     </div>
                 </nav>
             </div>

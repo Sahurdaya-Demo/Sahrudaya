@@ -32,7 +32,7 @@ function Employee() {
     url:'http://127.0.0.1:8000/send-resgister-email/',
     data: formField
   }).then(response=>{
-    alert('send email')
+    alert('Email Sent Successfully!!')
      handleClose(); 
   })
  
