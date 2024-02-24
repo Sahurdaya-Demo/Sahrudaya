@@ -1563,7 +1563,7 @@ section {
 }
 
 .contact .php-email-form {
-  background: #fafbff;
+  background: #effff6;
   padding: 30px;
   height: 100%;
 }
@@ -1631,10 +1631,10 @@ section {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #4154f1;
+  background: #75E3B9;
   border: 0;
   padding: 10px 30px;
-  color: #fff;
+  color: #ffffff;
   transition: 0.4s;
   border-radius: 4px;
 }
