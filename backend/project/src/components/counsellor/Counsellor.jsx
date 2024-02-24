@@ -9,15 +9,12 @@ import axios from 'axios';
 function Counsellor() {
     const navigate=useNavigate();
     const location = useLocation();
-<<<<<<< HEAD
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [disableButton,setDisableButton] = useState(false)
     // const [isLoading, setIsLoading] = useState(false);
-=======
     const[profile,setprofile]=useState([])
->>>>>>> 7f3877c4cf540898b7507100af12a9771b653ab9
   useEffect(()=>{
     let token;
     token=localStorage.getItem('token')
