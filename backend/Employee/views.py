@@ -3,11 +3,24 @@ from rest_framework.response import Response
 from rest_framework import status,permissions
 from rest_framework import viewsets
 from .models import employee,ValidLink
+from account.models import User
 from rest_framework.views import APIView
 from .serializers import EmpSerializer,ValidSerializer
 class EmpView(viewsets.ModelViewSet):
     queryset = employee.objects.all()
     serializer_class = EmpSerializer
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+          #   print(instance.id)
+            emp=employee.objects.get(id=instance.id)
+          #   print(emp.email)
+            self.perform_destroy(instance)
+            User.objects.filter(email=emp.email).delete()
+            return Response({"message": "Record deleted successfully"},status=status.HTTP_200_OK)
+        except employee.DoesNotExist:
+            return Response({"error": "Record not found"}, status=status.HTTP_404_NOT_FOUND)
+    
 class ValidPost(APIView):
      def post(self, request, format=None):
           serialized = ValidSerializer(data=request.data)

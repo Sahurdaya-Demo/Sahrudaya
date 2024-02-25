@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from account.views import SendPasswordResetEmailView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView, UserPasswordResetView,UserLogout,SendRegisterEmail,ContactMail
+from account.views import SendPasswordResetEmailView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView, UserPasswordResetView,UserLogout,SendRegisterEmail
 from django.conf import settings
 from Employee.views import EmpView,ValidPost,ValidGet
 from django.conf.urls.static import static
