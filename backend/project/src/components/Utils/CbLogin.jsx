@@ -17,9 +17,9 @@ const CbLogin=async(navigate,email,password)=>{
           url:'http://127.0.0.1:8000/login/',
           data: formField
         }).then(response=>{
-          token=response.data.token;
+          token=response.data.token.access;
           if(token){
-            localStorage.setItem('token',token)
+            localStorage.setItem('token',JSON.stringify(token))
           navigate(`/${response.data.type}`,{state:{token}})
           }
           else{

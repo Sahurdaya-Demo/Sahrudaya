@@ -1,8 +1,13 @@
-import { useEffect} from 'react';
+import { useEffect,useState} from 'react';
+import axios from 'axios';
 import LoadExternalScript from '../../LoadExternalScript';
+import { useLocation } from 'react-router-dom';
 function Counseldash(){
+    const[profile,setprofile]=useState([])
+    const location = useLocation();
     useEffect(()=>{
 		LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','counseljs/tablescript.js']);
+        
 	},[])
     return(
         <>
@@ -15,7 +20,7 @@ function Counseldash(){
 
                         {/* columns for messages */}
                         
-                        <div className='card  col-lg-12 m-1 mt-4 my-3 mb-3' style={{height:"450px"}}></div>
+                        <div className='card  col-lg-12 m-1 mt-4 my-3 mb-3 flex justify-content-center text-center' style={{height:"450px"}}>hello{}</div>
                             <div className="col-lg-4">
                                 <div className='card mb-3'>
                                     <div className='card-body mb-3 card-he'></div>

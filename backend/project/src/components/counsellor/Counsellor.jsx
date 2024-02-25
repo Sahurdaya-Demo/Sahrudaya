@@ -23,6 +23,7 @@ function Counsellor() {
   useEffect(()=>{
     let token;
     token=localStorage.getItem('token')
+    // console.log(location.state.token)
     if(token===null)
     navigate('/',{ replace: true })
     else{
@@ -35,7 +36,7 @@ function Counsellor() {
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${location.state.token.access}`, // Include the access token in the Authorization header
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
       },
       url:'http://127.0.0.1:8000/profile/',
     }).then(response=>{
@@ -127,7 +128,7 @@ const handlesaveClick = () => {
                     <div className="sb-sidenav-menu">
                         <div className="nav">
                             <div className="sb-sidenav-menu-heading">Core</div>
-                            <Link className="nav-link" to="">
+                            <Link to="" className="nav-link" >
                                 <div className="sb-nav-link-icon"><i className="fa fa-tachometer-alt"></i></div>
                                 Dashboard
                             </Link>
