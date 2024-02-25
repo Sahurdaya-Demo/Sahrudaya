@@ -20,6 +20,18 @@ class EmpView(viewsets.ModelViewSet):
             return Response({"message": "Record deleted successfully"},status=status.HTTP_200_OK)
         except employee.DoesNotExist:
             return Response({"error": "Record not found"}, status=status.HTTP_404_NOT_FOUND)
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        emp=employee.objects.get(id=instance.id)
+        user=User.objects.get(email=emp.email)
+     #    print(request.data['name'])
+        user.name=request.data['name']
+        user.save()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)   
     
 class ValidPost(APIView):
      def post(self, request, format=None):

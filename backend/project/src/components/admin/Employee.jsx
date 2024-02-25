@@ -25,7 +25,8 @@ function Employee() {
     const jsonData = await response.json();
    //  strr=JSON.stringify(res.data)
     setRecords(jsonData)
-    // console.log(Res)
+    // console.log(Records)
+    // console.log(Records)
    }
 
  const handleClick = async() => {

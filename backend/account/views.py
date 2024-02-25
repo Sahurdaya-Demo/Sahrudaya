@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from account.serializers import SendPasswordResetEmailSerializer, UserChangePasswordSerializer, UserLoginSerializer, UserPasswordResetSerializer, UserProfileSerializer, UserRegistrationSerializer
 from django.contrib.auth import authenticate,logout
 # from account.renderers import UserRenderer
+from Employee.models import employee
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from .models import User
@@ -99,8 +100,10 @@ class UserProfileView(APIView):
   # renderer_classes = [UserRenderer]
   permission_classes = [IsAuthenticated]
   def get(self, request, format=None):
+    jj=employee.objects.filter(email=request.user)
+    serialized=EmpSerializer(jj,many=True)
     serializer = UserProfileSerializer(request.user)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serialized.data, status=status.HTTP_200_OK)
 class UserLogout(APIView):
    authentication_classes = ()
   #  permission_classes = [IsAuthenticated]
