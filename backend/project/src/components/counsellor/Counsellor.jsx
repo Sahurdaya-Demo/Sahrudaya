@@ -15,16 +15,16 @@ function Counsellor() {
     const [disableButton,setDisableButton] = useState(false)
     // const [isLoading, setIsLoading] = useState(false);
     const[profile,setprofile]=useState([])
-  useEffect(()=>{
-    let token;
-    token=localStorage.getItem('token')
-    if(token===null)
-    navigate('/',{ replace: true })
-    else{
-        view()
-    }
+  // useEffect(()=>{
+  //   let token;
+  //   token=localStorage.getItem('token')
+  //   if(token===null)
+  //   navigate('/',{ replace: true })
+  //   else{
+  //       view()
+  //   }
       
-  },[])
+  // },[])
   const view=async()=>{
     await axios({
       method: 'get',

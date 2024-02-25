@@ -23,16 +23,15 @@ function Register({secure})
       }
 	const check=()=>{
 		const fileInput = document.getElementById('check');
-		console.log("check")
 		if (fileInput.files.length > 0) {
 			const img = document.createElement('img');
 
 				const selectedImage = fileInput.files[0];
 
 				const objectURL = URL.createObjectURL(selectedImage);
-
+				console.log(selectedImage.size*0.001)
 				img.onload = function handleLoad() {
-				console.log(`Width: ${img.width}, Height: ${img.height}`);
+				console.log(`Width: ${img.width}, Height: ${img.height}`,);
 
 				if (img.width < 100 || img.height < 100) {
 					console.log(
@@ -168,7 +167,7 @@ return (
 					</div>
                     <hr/>
                     <div className="wrap-input100 validate-input" data-validate = "phone number is required:">
-					<input className="input100" type="file" name="image" placeholder="image" id='check' onChange={(e) => setimage(e.target.files[0])} style={{paddingTop:'10px'}}/>
+					<input className="input100" type="file" name="image" placeholder="image" id='check' onChange={(e) => {setimage(e.target.files[0]);check()}} style={{paddingTop:'10px'}}/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-picture-o" aria-hidden="true"></i>
@@ -184,9 +183,9 @@ return (
 					
 					
 				</form>
-				<button className="btn btn-primary" onClick={()=>check()}>
+				{/* <button className="btn btn-primary" onClick={()=>check()}>
 							chel
-						</button>
+						</button> */}
 			</div>
 		</div>
 		</div>

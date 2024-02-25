@@ -37,11 +37,31 @@ function Employee() {
     url:'http://127.0.0.1:8000/send-resgister-email/',
     data: formField
   }).then(response=>{
-    alert('send email')
-     handleClose(); 
+    setaltmsg('Email Send!!')
+    setbtalert('success')
+     setIsLoading(false)
+     setTimeout(() => {
+      setbtalert('')
+      setaltmsg('')
+      handleClose(); 
+    }, 2000);
   })
- 
-  // addItem();
+}
+const delemp=async(idi)=>{
+  if (window.confirm('Are you sure you wish to delete this item?')){
+  try{
+    await axios({
+      method: 'delete',
+      url:`http://127.0.0.1:8000/api/${idi}/`,
+      // data:formField,
+      
+    }).then(response=>{
+      alert(response.data.message);
+    })}
+    catch{
+     alert('Record not found')
+    }
+  }
 }
   // const toggleCardBody = (id) => {
   //   setRecords(prevItems =>
@@ -73,7 +93,7 @@ function Employee() {
                   <button type="button" className=" dropdown-toggle ms-1" data-bs-toggle="dropdown" aria-expanded="false">
                   Submissions
                   </button>
-              <button className="btn btn-danger float-end mb-1 me-2" onClick={()=>console.log(record.id)}>Delete</button>
+              <button className="btn btn-danger float-end mb-1 me-2" onClick={()=>delemp(record.id)}>Delete</button>
               <ul className="dropdown-menu">
                 <li><p className="dropdown-item">Today : {record.age}</p></li>
                 <li><p className="dropdown-item">Yesterday : {record.age}</p></li>
