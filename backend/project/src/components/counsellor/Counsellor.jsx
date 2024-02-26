@@ -41,7 +41,11 @@ function Counsellor() {
       url:'http://127.0.0.1:8000/profile/',
     }).then(response=>{
       // console.log(location.state)
-      console.log(response.data[0]);
+      
+      // localStorage.setItem('email',response.data[0].email)
+      // localStorage.setItem('name',response.data[0].name)
+      // // console.log(response.data[0]);
+      
         setprofile(response.data[0])
     })
 
@@ -291,3 +295,4 @@ const handlesaveClick = () => {
 }
 
 export default Counsellor
+// export let name=localStorage.getItem('name')
