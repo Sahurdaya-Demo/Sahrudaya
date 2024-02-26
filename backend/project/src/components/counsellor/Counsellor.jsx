@@ -5,6 +5,7 @@ import { Button,Image,Form} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal'
 import LoadExternalScript from '../../LoadExternalScript';
 import axios from 'axios';
+import Counseldash from './Counseldash';
 
 function Counsellor() {
     const navigate=useNavigate();
@@ -17,8 +18,6 @@ function Counsellor() {
     const[qualification,setqualification]=useState('')
     const[age,setage]=useState('')
     const[name,setname]=useState('')
-    // console.log(phone)
-    // const [isLoading, setIsLoading] = useState(false);
     const[profile,setprofile]=useState([])
   // useEffect(()=>{
   //   let token;
@@ -31,6 +30,7 @@ function Counsellor() {
   //   }
       
   // },[])
+
   const view=async()=>{
     await axios({
       method: 'get',
@@ -75,6 +75,7 @@ function Counsellor() {
 const handlesaveClick = () => {
     setDisableButton(!disableButton)
 };
+
   const Logout=async()=>{
     // await axios({
     //   method: 'post',
