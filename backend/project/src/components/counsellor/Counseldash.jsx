@@ -22,7 +22,22 @@ function Counseldash(){
 
                         {/* columns for messages */}
                         
-                        <div className='card  col-lg-12 m-1 mt-4 my-3 mb-3 flex justify-content-center text-center' style={{height:"450px"}}>hello</div>
+                        <div className='card area col-lg-12 m-1 mt-4 my-3 mb-3 ' style={{height:"450px", border:"none"}}>
+                            <div className='card-body align-items-center d-flex justify-content-center'>
+                            <ul className='circles'>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            </ul>
+                            <p className='lexend'>
+                            Hi , welcome! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
+                            </p>
+                            </div>
+                        </div>
                             <div className="col-lg-4">
                                 <div className='card mb-3'>
                                     <div className='card-body mb-3 card-he'></div>
