@@ -19,17 +19,17 @@ function Counsellor() {
     const[age,setage]=useState('')
     const[name,setname]=useState('')
     const[profile,setprofile]=useState([])
-  // useEffect(()=>{
-  //   let token;
-  //   token=localStorage.getItem('token')
-  //   // console.log(location.state.token)
-  //   if(token===null)
-  //   navigate('/',{ replace: true })
-  //   else{
-  //       view()
-  //   }
+  useEffect(()=>{
+    let token;
+    token=localStorage.getItem('token')
+    // console.log(location.state.token)
+    if(token===null)
+    navigate('/',{ replace: true })
+    else{
+        view()
+    }
       
-  // },[])
+  },[])
 
   const view=async()=>{
     await axios({
