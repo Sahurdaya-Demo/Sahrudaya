@@ -18,6 +18,7 @@ import Employee from './components/admin/Employee';
 import ValidLink from './components/Utils/ValidLink';
 import Register from './components/Utils/register/register';
 import Registervalid from './components/Utils/Registervalid';
+import Patients from './components/counsellor/Patients';
 function App() {
   
   
@@ -59,6 +60,7 @@ function App() {
           <Route path='counsellor' element={<Counsellorloading/>}>
             <Route path='' element={<Counseldash/>}/>
             <Route path='form' element={<Form/>}/>
+            <Route path='Patients' element={<Patients/>}/>
           </Route>
           <Route path='*' element={<Error/>}/>
           <Route path="user/reset/:id/:token/:secure" element={<ValidLink/>} />

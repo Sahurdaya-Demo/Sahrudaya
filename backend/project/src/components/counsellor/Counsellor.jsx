@@ -5,6 +5,7 @@ import { Button,Image,Form} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal'
 import LoadExternalScript from '../../LoadExternalScript';
 import axios from 'axios';
+import Counseldash from './Counseldash';
 
 function Counsellor() {
     const navigate=useNavigate();
@@ -17,8 +18,6 @@ function Counsellor() {
     const[qualification,setqualification]=useState('')
     const[age,setage]=useState('')
     const[name,setname]=useState('')
-    // console.log(phone)
-    // const [isLoading, setIsLoading] = useState(false);
     const[profile,setprofile]=useState([])
   useEffect(()=>{
     let token;
@@ -31,6 +30,7 @@ function Counsellor() {
     }
       
   },[])
+
   const view=async()=>{
     await axios({
       method: 'get',
@@ -41,7 +41,11 @@ function Counsellor() {
       url:'http://127.0.0.1:8000/profile/',
     }).then(response=>{
       // console.log(location.state)
-      console.log(response.data[0]);
+      
+      // localStorage.setItem('email',response.data[0].email)
+      // localStorage.setItem('name',response.data[0].name)
+      // // console.log(response.data[0]);
+      
         setprofile(response.data[0])
     })
 
@@ -75,6 +79,7 @@ function Counsellor() {
 const handlesaveClick = () => {
     setDisableButton(!disableButton)
 };
+
   const Logout=async()=>{
     // await axios({
     //   method: 'post',
@@ -148,37 +153,11 @@ const handlesaveClick = () => {
                                     <a className="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
                                 </nav>
                             </div> */}
-                            <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                             <Link className="nav-link" to="/counsellor/Patients">
                                 <div className="sb-nav-link-icon"><i className="fa fa-columns"></i></div>
-                                Pages
-                                <div className="sb-sidenav-collapse-arrow"><i className="fa fa-angle-down"></i></div>
-                            </a>
-                            <div className="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav className="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
-                                        <div className="sb-sidenav-collapse-arrow"><i className="fa fa-angle-down"></i></div>
-                                    </a>
-                                    <div className="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav className="sb-sidenav-menu-nested nav">
-                                            <a className="nav-link" href="login.html">Login</a>
-                                            <a className="nav-link" href="register.html">Register</a>
-                                            <a className="nav-link" href="password.html">Forgot Password</a>
-                                        </nav>
-                                    </div>
-                                    <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
-                                        <div className="sb-sidenav-collapse-arrow"><i className="fa fa-angle-down"></i></div>
-                                    </a>
-                                    <div className="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav className="sb-sidenav-menu-nested nav">
-                                            <a className="nav-link" href="401.html">401 Page</a>
-                                            <a className="nav-link" href="404.html">404 Page</a>
-                                            <a className="nav-link" href="500.html">500 Page</a>
-                                        </nav>
-                                    </div>
-                                </nav>
-                            </div>
+                                Patients
+                            </Link>
+                            {/*  */}
                             <div className="sb-sidenav-menu-heading">Addons</div>
                             <a className="nav-link" href="charts.html">
                                 <div className="sb-nav-link-icon"><i className="fa fa-chart-area"></i></div>
@@ -316,3 +295,4 @@ const handlesaveClick = () => {
 }
 
 export default Counsellor
+// export let name=localStorage.getItem('name')

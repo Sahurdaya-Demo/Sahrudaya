@@ -17,7 +17,9 @@ function Employee() {
   const[altmsg,setaltmsg]=useState('')
   const[email,setemail]=useState('')
   useEffect(()=>{
-  
+  setInterval(()=>{
+    retrieve()
+  },5000)
   retrieve()
   },[])
   const retrieve=async()=>{

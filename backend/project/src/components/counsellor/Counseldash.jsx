@@ -1,14 +1,28 @@
 import { useEffect,useState} from 'react';
 import axios from 'axios';
-import LoadExternalScript from '../../LoadExternalScript';
-import { useLocation } from 'react-router-dom';
 function Counseldash(){
     const[profile,setprofile]=useState([])
-    const location = useLocation();
+    // console.log({name})
+    // const location = useLocation();
+    // const[name,setname]=useState('')
     useEffect(()=>{
-		LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','counseljs/tablescript.js']);
+		view()
         
 	},[])
+    const view=async()=>{
+        await axios({
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
+          },
+          url:'http://127.0.0.1:8000/profile/',
+        }).then(response=>{
+          
+            setprofile(response.data[0])
+        })
+    
+      }
     return(
         <>
         {/* <h1 className="mt-4">Dashboard</h1>
@@ -20,7 +34,22 @@ function Counseldash(){
 
                         {/* columns for messages */}
                         
-                        <div className='card  col-lg-12 m-1 mt-4 my-3 mb-3 flex justify-content-center text-center' style={{height:"450px"}}>hello{}</div>
+                        <div className='card area col-lg-12 m-1 mt-4 my-3 mb-3 ' style={{height:"450px", border:"none"}}>
+                            <div className='card-body align-items-center d-flex justify-content-center'>
+                            <ul className='circles'>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            </ul>
+                            <p className='lexend'>
+                            Hi , welcome {profile.name}! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
+                            </p>
+                            </div>
+                        </div>
                             <div className="col-lg-4">
                                 <div className='card mb-3'>
                                     <div className='card-body mb-3 card-he'></div>
@@ -99,149 +128,7 @@ function Counseldash(){
                             </div>
                         </div>
                         <div >
-                        <div className="card mb-4">
-                            <div className="card-header">
-                                <i className="fa fa-table me-1"></i>
-                                DataTable Example
-                            </div>
-                            <div className="card-body">
-                            <table id="counsel" className="table table-striped" style={{width:'100%'}}>
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                        <th>Edit</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011-04-25</td>
-                                        <td>$320,800</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011-07-25</td>
-                                        <td>$170,750</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009-01-12</td>
-                                        <td>$86,000</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2012-03-29</td>
-                                        <td>$433,060</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Airi Satou</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>33</td>
-                                        <td>2008-11-28</td>
-                                        <td>$162,700</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brielle Williamson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>New York</td>
-                                        <td>61</td>
-                                        <td>2012-12-02</td>
-                                        <td>$372,000</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Herrod Chandler</td>
-                                        <td>Sales Assistant</td>
-                                        <td>San Francisco</td>
-                                        <td>59</td>
-                                        <td>2012-08-06</td>
-                                        <td>$137,500</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rhona Davidson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>Tokyo</td>
-                                        <td>55</td>
-                                        <td>2010-10-14</td>
-                                        <td>$327,900</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Colleen Hurst</td>
-                                        <td>Javascript Developer</td>
-                                        <td>San Francisco</td>
-                                        <td>39</td>
-                                        <td>2009-09-15</td>
-                                        <td>$205,500</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sonya Frost</td>
-                                        <td>Software Engineer</td>
-                                        <td>Edinburgh</td>
-                                        <td>23</td>
-                                        <td>2008-12-13</td>
-                                        <td>$103,600</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jena Gaines</td>
-                                        <td>Office Manager</td>
-                                        <td>London</td>
-                                        <td>30</td>
-                                        <td>2008-12-19</td>
-                                        <td>$90,560</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Quinn Flynn</td>
-                                        <td>Support Lead</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2013-03-03</td>
-                                        <td>$342,000</td>
-                                        <td><button className='btn btn-primary'>delete</button></td>
-                                    </tr>
-                                    
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot>
-                           </table>
                         
-                           </div>
-                        </div>
                 </div>
         </>
 
