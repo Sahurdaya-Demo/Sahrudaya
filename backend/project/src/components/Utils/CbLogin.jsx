@@ -3,7 +3,7 @@
 import axios from "axios";
 const CbLogin=async(navigate,email,password)=>{
     let token;
-    
+    let token1;
     if(email!==''&&email.includes('@')){
       if(password!==''){
           
@@ -20,6 +20,8 @@ const CbLogin=async(navigate,email,password)=>{
           // token=response.data.token.access;
           try{
           token=response.data.token.access;
+          // token1=response.data.token;
+          // console.log(token)
           localStorage.setItem('token',JSON.stringify(token))
           navigate(`/${response.data.type}`,{state:{token}})
           }

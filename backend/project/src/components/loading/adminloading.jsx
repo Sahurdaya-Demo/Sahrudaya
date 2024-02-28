@@ -1,10 +1,18 @@
 import Admin from "../admin/Admin";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Adminloading=()=>
 {
+  const navigate=useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
-
+  // console.log(location.state.token1)
   useEffect(() => {
+    if(localStorage.getItem('type')==='counselor')
+    {
+      navigate('*')
+    }
     // Simulate a delay to show the loading screen
     const timeout = setTimeout(() => {
       setLoading(false);

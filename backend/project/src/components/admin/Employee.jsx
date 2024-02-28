@@ -25,10 +25,14 @@ function Employee() {
   const retrieve=async()=>{
     const response= await fetch(`http://127.0.0.1:8000/api/`)
     const jsonData = await response.json();
-   //  strr=JSON.stringify(res.data)
+    for(let i=0;i<=Object.keys(jsonData).length;i++){
+      try{
+      if(jsonData[i].type==='admin')
+      delete jsonData[i]
+      }
+      catch{}
+    }
     setRecords(jsonData)
-    // console.log(Records)
-    // console.log(Records)
    }
 
  const handleClick = async() => {
@@ -123,7 +127,7 @@ const delemp=async(idi)=>{
            </div>
           </div>
 
-
+ 
           <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Register Counsellor</Modal.Title>

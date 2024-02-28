@@ -22,17 +22,18 @@ function Admin() {
     const [crpassword,setcrpassword]=useState('')
     const [disableButton,setDisableButton] = useState(false)
     
-    useEffect(()=>{
-      let token;
-      token=localStorage.getItem('token')
-      // console.log(location.state.token)
-      if(token===null)
-      navigate('/',{ replace: true })
-      else{
-          // view()
-      }
+    
+    // useEffect(()=>{
+    //   let token;
+    //   token=localStorage.getItem('token')
+    //   // console.log(location.state.token)
+    //   if(token===null)
+    //   navigate('/',{ replace: true })
+    //   else{
+    //       // view()
+    //   }
         
-    },[])
+    // },[])
   const changepassword=async()=>{
     if(password===crpassword){
     let formField = new FormData()
@@ -216,7 +217,7 @@ function Admin() {
       </div>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Register Counsellor</Modal.Title>
+          <Modal.Title>Change Password</Modal.Title>
         </Modal.Header>
         <Modal.Body className='p-2'>
 			<Form>
