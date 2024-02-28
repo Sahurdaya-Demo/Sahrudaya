@@ -13,12 +13,17 @@ function Counsellor() {
     const [show, setShow] = useState(false);
     const handleClose = () => {setShow(false);setDisableButton(false)};
     const handleShow = () => setShow(true);
+    const [viewpass, setviewpass] = useState(false);
+    const handleviewClose = () => setviewpass(false);
+    const handleviewShow = () => setviewpass(true);
     const [disableButton,setDisableButton] = useState(false)
     const[phone,setphone]=useState('')
     const[qualification,setqualification]=useState('')
     const[age,setage]=useState('')
     const[name,setname]=useState('')
     const[profile,setprofile]=useState([])
+    const [password,setpassword]=useState('')
+    const [crpassword,setcrpassword]=useState('')
   useEffect(()=>{
     let token;
     token=localStorage.getItem('token')
@@ -30,8 +35,31 @@ function Counsellor() {
     }
       
   },[])
+  const changepassword=async()=>{
+    if(password===crpassword){
+    let formField = new FormData()
+    formField.append('password',password)
+    formField.append('password2',crpassword)
+    await axios({
+    method: 'post',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
+       },
+    url:'http://127.0.0.1:8000/changepassword/',
+    data: formField,   
+    }).then(response=>{
+        alert(response.data.msg)
+        handleviewClose()
+    })
+    }
+    else{
+        alert('Password and Confirm Password Are Not Same!!')
+    }
+  }
 
   const view=async()=>{
+    try{
     await axios({
       method: 'get',
       headers: {
@@ -48,6 +76,8 @@ function Counsellor() {
       
         setprofile(response.data[0])
     })
+  }
+  catch{}
 
   }
   const update=async(id)=>{
@@ -120,7 +150,7 @@ const handlesaveClick = () => {
                     <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true"><i className="fa fa-user fa-fw"></i></a>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style={{left:'auto',right:0}}>
                         <li><a className="dropdown-item" onClick={handleShow}>Profile</a></li>
-                        <li><a className="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><a className="dropdown-item" onClick={handleviewShow}>Change Password</a></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><a className="dropdown-item" onClick={()=>{Logout()}}>Logout</a></li>
                     </ul>
@@ -199,6 +229,42 @@ const handlesaveClick = () => {
             </div>
         </div>
       </div>
+      <Modal show={viewpass} onHide={handleviewClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Change Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='p-2'>
+			<Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Enter New Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="********"
+                className='mb-2'
+                onChange={(e) => setpassword(e.target.value)}
+                autoFocus
+              />
+              <Form.Label>Confirm New Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="********"
+                onChange={(e) => setcrpassword(e.target.value)}
+                autoFocus
+              />
+            </Form.Group>
+            
+           
+          </Form>
+		  </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleviewClose}>
+            Close
+          </Button>
+          <Button  className='btn-primary' onClick={changepassword} variant='primary'>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Modal show={show} onHide={handleClose} centered>
         {/* <Modal.Header closeButton>
           <Modal.Title>Profile Page</Modal.Title>

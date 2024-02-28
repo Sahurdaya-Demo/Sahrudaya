@@ -10,6 +10,7 @@ function Counseldash(){
         
 	},[])
     const view=async()=>{
+        try{
         await axios({
           method: 'get',
           headers: {
@@ -21,7 +22,8 @@ function Counseldash(){
           
             setprofile(response.data[0])
         })
-    
+        }
+        catch{}
       }
     return(
         <>
