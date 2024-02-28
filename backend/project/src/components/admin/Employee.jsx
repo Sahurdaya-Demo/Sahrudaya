@@ -26,8 +26,11 @@ function Employee() {
     const response= await fetch(`http://127.0.0.1:8000/api/`)
     const jsonData = await response.json();
     for(let i=0;i<=Object.keys(jsonData).length;i++){
-      if(jsonData[i].type=='admin')
+      try{
+      if(jsonData[i].type==='admin')
       delete jsonData[i]
+      }
+      catch{}
     }
     setRecords(jsonData)
    }
