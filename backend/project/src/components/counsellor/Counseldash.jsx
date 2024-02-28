@@ -13,14 +13,10 @@ function Counseldash(){
 	// },[])
     return(
         <>
-        {/* <h1 className="mt-4">Dashboard</h1>
-                        <ol className="breadcrumb mb-4">
-                            <li className="breadcrumb-item active">Dashboard</li>
-                        </ol> */}
                         <div className="row">
 
 
-                        {/* columns for messages */}
+                        {/* columns for welcome */}
                         
                         <div className='card area col-lg-12 m-1 mt-4 my-3 mb-3 ' style={{height:"450px", border:"none"}}>
                             <div className='card-body align-items-center d-flex justify-content-center'>

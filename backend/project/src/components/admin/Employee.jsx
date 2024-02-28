@@ -123,7 +123,7 @@ const delemp=async(idi)=>{
            </div>
           </div>
 
-
+ 
           <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Register Counsellor</Modal.Title>

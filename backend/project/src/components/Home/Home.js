@@ -128,7 +128,7 @@ return(
           <Player 
           src='https://lottie.host/7ad77614-47f2-4d16-bc98-1e43dad79c14/Mr1blwHvwo.json'
           className="player ms-5"  
-
+          style={{filter:"drop-shadow(2px 4px 6px )"}}
           autoplay
           loop
           />
