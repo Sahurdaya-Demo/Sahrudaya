@@ -239,7 +239,7 @@ const handlesaveClick = () => {
         </Modal.Header>
         <Modal.Body className='p-2'>
 			<Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" >
               <Form.Label>Enter New Password</Form.Label>
               <Form.Control
                 type="password"
