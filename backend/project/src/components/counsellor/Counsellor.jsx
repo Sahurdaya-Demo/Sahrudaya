@@ -24,6 +24,7 @@ function Counsellor() {
     const[profile,setprofile]=useState([])
     const [password,setpassword]=useState('')
     const [crpassword,setcrpassword]=useState('')
+    
   useEffect(()=>{
     let token;
     token=localStorage.getItem('token')
@@ -32,8 +33,10 @@ function Counsellor() {
     navigate('/',{ replace: true })
     else{
         view()
+        localStorage.setItem('type','counselor')
     }
-      
+   
+    // return()=>{console.log('refresh')}
   },[])
   const changepassword=async()=>{
     if(password===crpassword){
@@ -127,6 +130,7 @@ const handlesaveClick = () => {
     // })
     
     localStorage.removeItem('token');
+    localStorage.removeItem('type');
     navigate('/',{replace:true})
   }
   return (
