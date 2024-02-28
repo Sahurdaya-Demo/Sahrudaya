@@ -19,9 +19,13 @@ import ValidLink from './components/Utils/ValidLink';
 import Register from './components/Utils/register/register';
 import Registervalid from './components/Utils/Registervalid';
 import Patients from './components/counsellor/Patients';
+// import { createBrowserHistory } from 'history';
+// import { useEffect } from 'react';
+// import usePageViews from './usePageView';
+
 function App() {
-  
-  
+ 
+// usePageViews();
 //   const LoadingScreen = () => {
 //     console.log('loading')
 //     return(
@@ -50,7 +54,9 @@ function App() {
         {/* {loading ? (
           <LoadingScreen />
         ) : ( */}
+
           <Routes>
+            
           <Route path='/' element={<Main/>}/>
           <Route path='login' element={<Loginloading/>}/>
           <Route path='admin' element={<Adminloading/>}>

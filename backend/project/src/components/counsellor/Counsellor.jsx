@@ -24,17 +24,20 @@ function Counsellor() {
     const[profile,setprofile]=useState([])
     const [password,setpassword]=useState('')
     const [crpassword,setcrpassword]=useState('')
-  useEffect(()=>{
-    let token;
-    token=localStorage.getItem('token')
-    // console.log(location.state.token)
-    if(token===null)
-    navigate('/',{ replace: true })
-    else{
-        view()
-    }
-      
-  },[])
+    
+  // useEffect(()=>{
+  //   let token;
+  //   token=localStorage.getItem('token')
+  //   // console.log(location.state.token)
+  //   if(token===null)
+  //   navigate('/',{ replace: true })
+  //   else{
+  //       view()
+  //       localStorage.setItem('type','counselor')
+  //   }
+   
+  //   // return()=>{console.log('refresh')}
+  // },[])
   const changepassword=async()=>{
     if(password===crpassword){
     let formField = new FormData()
@@ -127,6 +130,7 @@ const handlesaveClick = () => {
     // })
     
     localStorage.removeItem('token');
+    localStorage.removeItem('type');
     navigate('/',{replace:true})
   }
   return (

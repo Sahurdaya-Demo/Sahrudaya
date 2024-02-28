@@ -22,17 +22,18 @@ function Admin() {
     const [crpassword,setcrpassword]=useState('')
     const [disableButton,setDisableButton] = useState(false)
     
-    useEffect(()=>{
-      let token;
-      token=localStorage.getItem('token')
-      // console.log(location.state.token)
-      if(token===null)
-      navigate('/',{ replace: true })
-      else{
-          // view()
-      }
+    
+    // useEffect(()=>{
+    //   let token;
+    //   token=localStorage.getItem('token')
+    //   // console.log(location.state.token)
+    //   if(token===null)
+    //   navigate('/',{ replace: true })
+    //   else{
+    //       // view()
+    //   }
         
-    },[])
+    // },[])
   const changepassword=async()=>{
     if(password===crpassword){
     let formField = new FormData()
