@@ -25,19 +25,19 @@ function Counsellor() {
     const [password,setpassword]=useState('')
     const [crpassword,setcrpassword]=useState('')
     
-  useEffect(()=>{
-    let token;
-    token=localStorage.getItem('token')
-    // console.log(location.state.token)
-    if(token===null)
-    navigate('/',{ replace: true })
-    else{
-        view()
-        localStorage.setItem('type','counselor')
-    }
+  // useEffect(()=>{
+  //   let token;
+  //   token=localStorage.getItem('token')
+  //   // console.log(location.state.token)
+  //   if(token===null)
+  //   navigate('/',{ replace: true })
+  //   else{
+  //       view()
+  //       localStorage.setItem('type','counselor')
+  //   }
    
-    // return()=>{console.log('refresh')}
-  },[])
+  //   // return()=>{console.log('refresh')}
+  // },[])
   const changepassword=async()=>{
     if(password===crpassword){
     let formField = new FormData()
