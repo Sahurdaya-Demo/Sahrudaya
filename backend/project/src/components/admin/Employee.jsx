@@ -17,18 +17,19 @@ function Employee() {
   const[altmsg,setaltmsg]=useState('')
   const[email,setemail]=useState('')
   useEffect(()=>{
-  setInterval(()=>{
-    retrieve()
-  },5000)
+  // setInterval(()=>{
+  //   retrieve()
+  // },5000)
   retrieve()
   },[])
   const retrieve=async()=>{
     const response= await fetch(`http://127.0.0.1:8000/api/`)
     const jsonData = await response.json();
-   //  strr=JSON.stringify(res.data)
+    for(let i=0;i<=Object.keys(jsonData).length;i++){
+      if(jsonData[i].type=='admin')
+      delete jsonData[i]
+    }
     setRecords(jsonData)
-    // console.log(Records)
-    // console.log(Records)
    }
 
  const handleClick = async() => {
