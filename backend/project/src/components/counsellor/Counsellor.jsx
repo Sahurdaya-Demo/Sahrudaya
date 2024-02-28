@@ -150,7 +150,7 @@ const handlesaveClick = () => {
                     <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true"><i className="fa fa-user fa-fw"></i></a>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style={{left:'auto',right:0}}>
                         <li><a className="dropdown-item" onClick={handleShow}>Profile</a></li>
-                        <li><a className="dropdown-item" onClick={handleviewShow}>Change Password</a></li>
+                        <li><a className="dropdown-item" onClick={handleviewShow} style={{cursor:'pointer'}}>Change Password</a></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><a className="dropdown-item" onClick={()=>{Logout()}}>Logout</a></li>
                     </ul>
