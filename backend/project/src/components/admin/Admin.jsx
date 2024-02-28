@@ -216,7 +216,7 @@ function Admin() {
       </div>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Register Counsellor</Modal.Title>
+          <Modal.Title>Change Password</Modal.Title>
         </Modal.Header>
         <Modal.Body className='p-2'>
 			<Form>

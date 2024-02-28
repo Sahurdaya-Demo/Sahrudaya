@@ -1,16 +1,30 @@
 import { useEffect,useState} from 'react';
 import axios from 'axios';
-import LoadExternalScript from '../../LoadExternalScript';
-import { useLocation } from 'react-router-dom';
 function Counseldash(){
     const[profile,setprofile]=useState([])
     // console.log({name})
     // const location = useLocation();
-    
-    // useEffect(()=>{
-	// 	LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','counseljs/tablescript.js']);
+    // const[name,setname]=useState('')
+    useEffect(()=>{
+		view()
         
-	// },[])
+	},[])
+    const view=async()=>{
+        try{
+        await axios({
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
+          },
+          url:'http://127.0.0.1:8000/profile/',
+        }).then(response=>{
+          
+            setprofile(response.data[0])
+        })
+        }
+        catch{}
+      }
     return(
         <>
                         <div className="row">
@@ -30,7 +44,7 @@ function Counseldash(){
                             <li></li>
                             </ul>
                             <p className='lexend'>
-                            Hi , welcome! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
+                            Hi , welcome {profile.name}! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
                             </p>
                             </div>
                         </div>
