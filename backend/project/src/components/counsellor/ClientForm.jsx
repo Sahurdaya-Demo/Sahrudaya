@@ -1,10 +1,12 @@
 
 import React, { useState } from "react"
+import axios from "axios";
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios"
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
+function Details() { 
 
-function Form() { 
 	// const navigate=useNavigate();
 	// useUnload(e => {
 	// 	e.preventDefault();
@@ -33,7 +35,9 @@ function Form() {
 	const[referral,setreferral]=useState("")
 	const[outcome,setoutcome]=useState("")
 	const[remarks,setremarks]=useState("")
+	const[status,setstatus]=useState("")
 
+	
 
     const [count1, setCount1] = React.useState(0);
 	const [count2, setCount2] = React.useState(0);
@@ -88,57 +92,82 @@ function Form() {
 	
 	  const newdata =async()=>{
 		let formField= new FormData()
-   
+		formField.append("email",localStorage.getItem('email') )
 		formField.append('date',date)
-		formField.append('place',place)
+		formField.append('place_of_counselling',place)
 		formField.append('name',name)
 		formField.append('age',Age)
-		formField.append('Gender',Gender)
-		formField.append('f_status',f_status)
-		formField.append('m_status',m_status)
-		formField.append('School',School)
+		formField.append('gender',Gender)
+		formField.append('finacial_status',f_status)
+		formField.append('marital_status',m_status)
+		formField.append('school',School)
 		formField.append('religion',religion)
-		formField.append('f_education',f_education)
-		formField.append('f_occupation',f_occupation)
-		formField.append('m_education',m_education)
-		formField.append('m_occupation',m_occupation)
+		formField.append('fathers_education',f_education)
+		formField.append('fathers_occupation',f_occupation)
+		formField.append('mothers_education',m_education)
+		formField.append('mothers_occupation',m_occupation)
 		formField.append('problem',problem)
-		formField.append('history',history)
-		formField.append('Intervention',Intervention)
-		formField.append('challenge',challenge)
-		formField.append('follow_ups',follow_ups)
-		formField.append('referral',referral)
+		formField.append('history_of_problem',history)
+		formField.append('intervention',Intervention)
+		formField.append('challenges_by_counsellor',challenge)
+		formField.append('number_of_followup_sections',follow_ups)
+		formField.append('referral_service',referral)
 		formField.append('outcome',outcome)
 		formField.append('remarks',remarks)
+		formField.append('status',status)
 
 		
-   
-	//    await axios({
-	// 	   method: 'post',
-	// 	   url: 'http://127.0.0.1:8000/api/',
-	// 	   data: formField
-	//    }).then(response=>{
-	// 	   console.log(response.data)
+		try{
+	   await axios({
+		   method: 'post',
+		   url: 'http://127.0.0.1:8000/formsubmit/',
+		   data: formField
+	   }).then(response=>{
+		  
+		   alert('success')
 		   
-	//    })
+		   
+	   })
+	}
+	catch{}
 	   }
-	 
+	   const [validated, setValidated] = useState(false);
+	 const submithandler=(event)=>
+	 {
+		const form = event.currentTarget;
+		event.preventDefault();
+		if (form.checkValidity() === false) {
+		  
+		  event.stopPropagation();
+		}
+	
+		setValidated(true);
+      
+	 }
+
+	
+
 	return ( 
 		
-        <>
-		<br></br>
-		<div className="card" style={{boxShadow: "10px 8px 0px rgb(42, 38, 38)"}}>
-			<div className="card-body ">
-				  <div className="row">
-					<div className="col-md-6">
-                        <label>Date</label>
-		                <input type="date" className="form-control" style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}} onChange={(e)=>setdate(e.target.value)}/>
-                      </div>
-                      <div className="col-md-6">
-                        <label>Place of Counselling</label>
-						<select  className="form-select" onChange={(e)=>setplace(e.target.value)}>
-						   <option> </option>
-			               <option>Vypin-Rajagiri Sea Shore School</option>
+        
+		<Form onSubmit={submithandler} noValidate validated={validated}>
+      <br />
+      <div className="card" style={{ boxShadow: "10px 8px 0px rgb(42, 38, 38)" }}>
+        <div className="card-body">
+          <Row>
+            <Col md={6}>
+              <Form.Group controlId="date" >
+                <Form.Label>Date</Form.Label>
+                <Form.Control type="date" onChange={(e) => setdate(e.target.value)} required />
+				
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group controlId="place">
+                <Form.Label>Place of Counselling</Form.Label>
+                <Form.Control as="select" onChange={(e) => setplace(e.target.value)} required>
+                  <option></option>
+                  <option>Vypin-Rajagiri Sea Shore School</option>
 			               <option>Kakkanad</option>
 						   <option>Thevara-SH College(East Campus)</option>
 						   <option>Thevara-Higher Secondary School</option>
@@ -150,272 +179,253 @@ function Form() {
 						   <option>Kottarapalli-Amala Public School</option>
 						   <option>Manappuram-St Teresa's High School</option>
 						   <option>Pothy</option>
-		                </select>
-                      </div>
-					</div>
-					</div>
-					</div>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+          </Row>
+        </div>
+      </div>
 
-					
-					<div className="data-container">
-					<div className="card " style={{boxShadow: "10px 8px 0px rgb(42, 38, 38)"}}>
-						<div className="card-header"><h3>Personal Details</h3></div>
-					<div className="card-body">
-                    <div className="row">
-					<div className="col-md-8">
-                        <label>Name</label>
-		                <input type="text" className="form-control" maxLength={30}style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}} onChange={(e)=>setname(e.target.value)} required />
-                      </div>
-                      <div className="col-md-4">
-                        <label>Age</label>
-						<input type="number" className="form-control" style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}} onChange={(e)=>setage(e.target.value)} required />
-                      </div>
-					</div>
-					
+      <div className="data-container">
+        <div className="card " style={{ boxShadow: "10px 8px 0px rgb(42, 38, 38)" }}>
+          <div className="card-header"><h3>Personal Details</h3></div>
+          <div className="card-body">
+            <Row>
+              <Col md={8}>
+                <Form.Group controlId="name">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control type="text" maxLength={100} onChange={(e) => setname(e.target.value)} required />
+                </Form.Group>
+              </Col>
+              <Col md={4}>
+                <Form.Group controlId="age">
+                  <Form.Label>Age</Form.Label>
+                  <Form.Control type="number" onChange={(e) => setage(e.target.value)} required />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={4}>
+                <Form.Group controlId="gender">
+                  <Form.Label>Gender</Form.Label>
+                  <Form.Control as="select" onChange={(e) => setgender(e.target.value)} >
+                    <option></option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Others</option>
+                  </Form.Control>
+                </Form.Group>
+              </Col>
+              <Col md={4}>
+                <Form.Group controlId="finStatus">
+                  <Form.Label>Family Financial Status</Form.Label>
+                  <Form.Control as="select" onChange={(e) => setfinstatus(e.target.value)}>
+                    <option></option>
+                    <option>APL</option>
+                    <option>BPL</option>
+                  </Form.Control>
+                </Form.Group>
+              </Col>
+              <Col md={4}>
+                <Form.Group controlId="maritalStatus">
+                  <Form.Label>Marital Status</Form.Label>
+                  <Form.Control as="select" onChange={(e) => setmaritalstat(e.target.value)}>
+                    <option></option>
+                    <option>Married</option>
+                    <option>Unmarried</option>
+                    <option>Divorced</option>
+                    <option>Separated</option>
+                  </Form.Control>
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={4}>
+                <Form.Group controlId="school">
+                  <Form.Label>School</Form.Label>
+                  <Form.Control as="select" onChange={(e) => setschool(e.target.value)} >
+                    <option></option>
+                    <option>Government</option>
+                    <option>Aided</option>
+                    <option>Private</option>
+                  </Form.Control>
+                </Form.Group>
+              </Col>
+              <Col md={4}>
+                <Form.Group controlId="religion">
+                  <Form.Label>Religion</Form.Label>
+                  <Form.Control type="text" maxLength={20} onChange={(e) => setreligion(e.target.value)} />
+                </Form.Group>
+              </Col>
+            </Row>
+          </div>
+        </div>
+      </div>
 
-				
-					<div className="row">
-                      <div className="col-md-4">
-                        <label>Gender</label>
-		                <select className="form-select" onChange={(e)=>setgender(e.target.value)}>
-			               <option>Male</option>
-			               <option>Female</option>
-		                </select>
-                      </div>
-                      <div className="col-md-4">
-                        <label>Family financial status</label>
-						<select className="form-select" onChange={(e)=>setfinstatus(e.target.value)}>
-			               <option>APL</option>
-			               <option>BPL</option>
-		                </select>
-                      </div>
-					  <div className="col-md-4">
-						<label>Marital Status</label>
-						<select className="form-select"onChange={(e)=>setmaritalstat(e.target.value)}>
-			               <option>Married</option>
-						   <option>Unmarried</option>
-			               <option>Divorced</option>
-						   <option>Separate</option>
-		                </select>
-						</div>
-                    </div>
+      <div className="data-container">
+        <div className="card " style={{ boxShadow: "10px 8px 0px rgb(42, 38, 38)" }}>
+          <div className="card-header"><h3>Family Details</h3></div>
+          <div className="card-body">
+            <Row>
+              <Col md={6}>
+                <Form.Group controlId="fEducation">
+                  <Form.Label>Father's Education</Form.Label>
+                  <Form.Control type="text" maxLength={25} onChange={(e) => setfeducation(e.target.value)} />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group controlId="fOccupation">
+                  <Form.Label>Father's Occupation</Form.Label>
+                  <Form.Control type="text" maxLength={25} onChange={(e) => setfoccupation(e.target.value)} />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={6}>
+                <Form.Group controlId="mEducation">
+                  <Form.Label>Mother's Education</Form.Label>
+                  <Form.Control type="text" maxLength={25} onChange={(e) => setmeducation(e.target.value)} />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group controlId="mOccupation">
+                  <Form.Label>Mother's Occupation</Form.Label>
+                  <Form.Control type="text" maxLength={25} onChange={(e) => setmoccupation(e.target.value)} />
+                </Form.Group>
+              </Col>
+            </Row>
+          </div>
+        </div>
+      </div>
 
+      <div className="data-container">
+        <div className="card " style={{ boxShadow: "10px 8px 0px rgb(42, 38, 38)" }}>
+          <div className="card-header"><h3>Information</h3></div>
+          <div className="card-body">
+		  <Row>
+              <Col md={12}>
+                <Form.Group controlId="problem">
+                  <Form.Label>Problem</Form.Label>
+                  <Form.Control as="textarea" onChange={probcalculate} maxLength={200} required rows={5}>    
+                  </Form.Control>
+				  <span style={{ float: 'right', color: 'gray'}} >
+                  {count1}/200
+				</span>
+                </Form.Group>
+              </Col>
+            </Row>
+			<Row>
+              <Col md={12}>
+                <Form.Group controlId="history">
+                  <Form.Label>History of the Problem</Form.Label>
+                  <Form.Control as="textarea" onChange={histcalculate} maxLength={500} rows={6}>   
+                  </Form.Control>
+				  <span style={{ float: 'right', color: 'gray'}} >
+                  {count2}/500
+				</span>
+                </Form.Group>
+              </Col>
+            </Row>
+			<Row>
+              <Col md={12}>
+                <Form.Group controlId="intervention">
+                  <Form.Label>Intervention</Form.Label>
+                  <Form.Control as="textarea" onChange={interventioncalculate} maxLength={100} rows={3}>
+                  </Form.Control>
+				  <span style={{ float: 'right', color: 'gray'}} >
+                  {count3}/100
+				</span>
+                </Form.Group>
+              </Col>
+            </Row>
+			<Row>
+              <Col md={12}>
+                <Form.Group controlId="challenges">
+                  <Form.Label>Challenges by counsellor</Form.Label>
+                  <Form.Control as="textarea" onChange={challengecalculate} maxLength={200} rows={4}>    
+                  </Form.Control>
+				  <span style={{ float: 'right', color: 'gray'}} >
+                  {count4}/200
+				</span>
+                </Form.Group>
+              </Col>
+            </Row>
+			
+            <Row>
+              <Col md={12}>
+                <Form.Group controlId="session">
+                  <Form.Label>Number of Follow-up Sessions</Form.Label>
+                  <Form.Control type="number" onChange={(e) => setsession(e.target.value)} />
+                </Form.Group>
+              </Col>
+            </Row>
+            
+			<Row>
+              <Col md={12}>
+                <Form.Group controlId="referal">
+                  <Form.Label>Referral service</Form.Label>
+				  <Form.Control as="textarea" onChange={referralcalculate} maxLength={100} rows={3}>
+                  </Form.Control>
+				  <span style={{ float: 'right', color: 'gray'}} >
+                  {count5}/100
+				</span>
+                </Form.Group>
+              </Col>
+            </Row>
+			<Row>
+              <Col md={6}>
+                <Form.Group controlId="outcome">
+                  <Form.Label>Outcome</Form.Label>
+                  <Form.Control as="textarea" onChange={outcomecalculate} maxLength={250} rows={4}>   
+                  </Form.Control>
+				  <span style={{ float: 'right', color: 'gray'}} >
+                  {count6}/250
+				</span>
+                </Form.Group>
+              </Col>
+			  <Col md={6}>
+                <Form.Group controlId="remarks">
+                  <Form.Label>Remarks</Form.Label>
+                  <Form.Control as="textarea" onChange={remarkcalculate} maxLength={200} rows={4}>   
+                  </Form.Control>
+				  <span style={{ float: 'right', color: 'gray'}} >
+                  {count7}/200
+				</span>
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}>
+                <Form.Group controlId="status">
+                  <Form.Label>Status</Form.Label>
+                  <Form.Control as="select" onChange={(e) => setstatus(e.target.value)} required>
+                    <option></option>
+                    <option>Pending</option>
+                    <option>Completed</option>
+                  </Form.Control>
+                </Form.Group>
+              </Col>
+            </Row>
+			
+			<br></br>
+			<center>
+			<Button className="buttons btn btn-success" type="reset" style={{ marginRight: "20px" }} onClick={newdata}>
+        Submit
+      </Button>
+      <Button className="buttons btn btn-danger" type="reset" style={{ marginRight: "20px" }}>
+        Reset
+      </Button>
+	  </center>
+          </div>
+		  
+        </div>
+		
+      </div>
 
-					<div className="row">
-                      <div className="col-md-4">
-                        <label>School</label>
-						<select className="form-select" onChange={(e)=>setschool(e.target.value)} >
-			               <option>Government</option>
-			               <option>Aided</option>
-						   <option>Private</option>
-		                </select>
-                      </div>
-					  <div className="col-md-4">
-                        <label>Religion</label>
-						<input type="text" className="form-control" maxLength={20} style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}} onChange={(e)=>setreligion(e.target.value)}/>
-                      </div>
-					</div>
-					</div>
-                   </div>
-				   </div>
+      
+    </Form>
 
-				   <div className="data-container">
-				   <div className="card " style={{boxShadow: "10px 8px 0px rgb(42, 38, 38)"}}>
-				   <div className="card-header"><h3>Family Details</h3></div>
-				   <div className="card-body">
-					<div className="row">
-					<div className="col-md-6">
-                        <label>Father's Education</label>
-		                <input type="text" className="form-control" maxLength={30} style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}} onChange={(e)=>setfeducation(e.target.value)}/>
-                      </div>
-                      <div className="col-md-6">
-                        <label>Father's Occupation</label>
-						<input type="text" className="form-control" maxLength={30}  style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}}onChange={(e)=>setfoccupation(e.target.value)}/>
-                      </div>
-					</div>
-					<div className="row">
-					<div className="col-md-6">
-                        <label>Mothers's Education</label>
-		                <input type="text" className="form-control"  maxLength={30} style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}} onChange={(e)=>setmeducation(e.target.value)}/>
-                      </div>
-                      <div className="col-md-6">
-                        <label>Mother's Occupation</label>
-						<input type="text" className="form-control" maxLength={30} style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}} onChange={(e)=>setmoccupation(e.target.value)}/>
-                      </div>
-					</div>
-				</div>
-				</div>
-				</div>
-
-				<div className="data-container">	
-				<div className="card " style={{boxShadow: "10px 8px 0px rgb(42, 38, 38)"}}>
-				<div className="card-header"><h3>Information</h3></div>
-				<div className="card-body">
-				    <div className="row">
-                      <div className="col-md-12">
-                        <label>Problem</label>
-						<span style={{ float: 'right', color: 'gray' }}>
-                        {count1}/200
-                        </span>
-						<textarea 
-						name="problem"
-						id="problem"
-						cols="3"
-						rows="5"
-						maxLength={200}
-						onChange={ probcalculate }
-						className="form-control"
-						required 
-						style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}}
-						// onChange={(e)=>setproblem(e.target.value)}
-				        />
-                      </div>
-					</div>
-    
-					<div className="row">
-                      <div className="col-md-12">
-                        <label>History of the Problem (If any)</label>
-						<span style={{ float: 'right', color: 'gray' }}>
-                        {count2}/500
-                        </span>
-						<textarea 
-						name="history"
-						id="history"
-						cols="3"
-						rows="10"
-						maxLength={500}
-						className="form-control"
-						style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}}
-						onChange={ histcalculate }
-				        />
-                      </div>
-					</div>
-
-					
-
-                    
-
-					<div className="row">
-                      <div className="col-md-12">
-                        <label>Intervention</label>
-						<span style={{ float: 'right', color: 'gray' }}>
-                        {count3}/200
-                        </span>
-						<textarea 
-						name="Intervention"
-						id="Intervention"
-						cols="3"
-						rows="5"
-						className="form-control"
-						maxLength={200}
-						required 
-						style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}}
-						onChange={interventioncalculate}
-				        />
-                      </div>
-					</div>
-
-                    
-					<div className="row">
-                      <div className="col-md-12">
-                        <label>Challenges by Counsellor</label>
-						<span style={{ float: 'right', color: 'gray' }}>
-                        {count4}/200
-                        </span>
-						<textarea 
-						name="challenge"
-						id="challenge"
-						cols="3"
-						rows="5"
-						maxLength={200}
-						className="form-control"
-						required 
-						style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}}
-						onChange={challengecalculate}
-				        />
-                      </div>
-					</div>
-
-
-					<div className="row">
-                      <div className="col-md-4">
-                        <label>Number of Follow-ups Session</label>
-						<input type="number" className="form-control" style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}} onChange={(e)=>setsession(e.target.value)}/>
-                      </div>
-					</div>
-
-
-					<div className="row">
-                      <div className="col-md-12">
-                        <label>Referral service</label>
-						<span style={{ float: 'right', color: 'gray' }}>
-                        {count5}/200
-                        </span>
-						<textarea 
-						name="Referral"
-						id="Referral"
-						cols="2"
-						rows="4"
-						maxLength={200}
-						className="form-control"
-						required 
-						style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}}
-						onChange={referralcalculate}
-				        />
-                      </div>
-					</div>
-
-
-					<div className="row">
-					<div className="col-md-6">
-                        <label>Outcome</label>
-						<span style={{ float: 'right', color: 'gray' }}>
-                        {count6}/200
-                        </span>
-						<textarea 
-						name="outcome"
-						id="outcome"
-						cols="2"
-						rows="6"
-						maxLength={200}
-						className="form-control"
-						required 
-						style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}}
-						onChange={outcomecalculate}
-				        />
-                      </div>
-                      <div className="col-md-6">
-                        <label>Remarks</label>
-						<span style={{ float: 'right', color: 'gray' }}>
-                        {count7}/200
-                        </span>
-						<textarea 
-						name="remarks"
-						id="remarks"
-						cols="2"
-						rows="6"
-						maxLength={200}
-						className="form-control"
-						required 
-						style={{boxShadow: "1px 1px 3px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255,255,255,0.5) inset"}}
-						onChange={remarkcalculate}
-				        />
-                      </div>
-					</div>
-                    <center>
-						<br></br>
-					<button className="buttons" type="reset" value="reset" style={{marginRight:"20px"}} > 
-						Reset 
-					</button> 
-					<button className="buttons" type="submit" value="Submit" style={{marginRight:"20px"}} onClick={newdata}> 
-						Submit 
-					</button> 
-              </center>
-			</div>
-		</div> 
-</div>
-</>
 	); 
 } 
 
-export default Form;
+export default Details;

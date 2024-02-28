@@ -97,6 +97,7 @@ const handlesaveClick = () => {
     // })
     
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
     navigate('/',{replace:true})
   }
   return (

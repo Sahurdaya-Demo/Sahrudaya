@@ -20,6 +20,7 @@ function Counseldash(){
         }).then(response=>{
           
             setprofile(response.data[0])
+            localStorage.setItem('email',response.data[0].email)
         })
     
       }
