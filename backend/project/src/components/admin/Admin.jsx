@@ -15,13 +15,17 @@ function Admin() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [view, setview] = useState(false);
+    const [mview, setview] = useState(false);
     const handleviewClose = () => setview(false);
     const handleviewShow = () => setview(true);
     const [password,setpassword]=useState('')
     const [crpassword,setcrpassword]=useState('')
     const [disableButton,setDisableButton] = useState(false)
-    
+    const[phone,setphone]=useState('')
+    const[qualification,setqualification]=useState('')
+    const[age,setage]=useState('')
+    const[name,setname]=useState('')
+    const[profile,setprofile]=useState([])
     
     // useEffect(()=>{
     //   let token;
@@ -34,6 +38,22 @@ function Admin() {
     //   }
         
     // },[])
+    const update=async(id)=>{
+    let formField = new FormData()
+      formField.append('name',name)
+      formField.append('age',age)
+      formField.append('qualification',qualification)
+      formField.append('phone',phone)
+    await axios({
+      method: 'PUT',
+      url:`http://127.0.0.1:8000/api/${id}/`,
+      data:formField,
+    }).then(response=>{
+      console.log(response.data);
+      handleClose()
+    }
+    )
+  }
   const changepassword=async()=>{
     if(password===crpassword){
     let formField = new FormData()
@@ -70,7 +90,41 @@ function Admin() {
   const handlesaveClick = () => {
     setDisableButton(!disableButton)
     };
+useEffect(()=>{
+    let token;
+    token=localStorage.getItem('token')
+    // console.log(location.state.token)
+    if(token===null)
+    navigate('/',{ replace: true })
+    else{
+        view()
+        // localStorage.setItem('type','counselor')
+    }
+   
+    // return()=>{console.log('refresh')}
+  },[])
+   const view=async()=>{
+    try{
+    await axios({
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
+      },
+      url:'http://127.0.0.1:8000/profile/',
+    }).then(response=>{
+      // console.log(location.state)
+      
+      // localStorage.setItem('email',response.data[0].email)
+      // localStorage.setItem('name',response.data[0].name)
+      // // console.log(response.data[0]);
+      
+        setprofile(response.data[0])
+    })
+  }
+  catch{}
 
+  }
 
   const Logout=async()=>{
     // await axios({
@@ -252,7 +306,7 @@ function Admin() {
         </Modal.Footer>
       </Modal>
 
-      <Modal show={view} onHide={handleviewClose} centered>
+      <Modal show={mview} onHide={handleClose} centered>
         {/* <Modal.Header closeButton>
           <Modal.Title>Profile Page</Modal.Title>
         </Modal.Header> */}
@@ -261,7 +315,7 @@ function Admin() {
             
             <Image className="rounded-circle mx-auto d-block"
                
-                src="../assets/team/team-1.JPG"
+                src={`http://127.0.0.1:8000${profile.image}`}
                 style={{width: 125, height: 125, borderRadius: 125/ 2 }}
                 // onChange={(e) => {setemailchange(e.target.value);}}
               />
@@ -270,10 +324,12 @@ function Admin() {
               <Form.Control
                 type="text"
                 placeholder="name"
-                readOnly
-                disabled
+                defaultValue={profile.name}
+                // readOnly
+                // disabled
+                disabled={!disableButton}
                 autoFocus
-                // onChange={(e) => {setemailchange(e.target.value);}}
+                onChange={(e) => {setname(e.target.value);}}
               />
               </Form.Group>
                <Form.Group className="mb-3">
@@ -281,6 +337,7 @@ function Admin() {
               <Form.Control
                 type="email"
                 placeholder="name@example.com"
+                value={profile.email}
                 autoFocus
                 disabled
                 readOnly
@@ -292,9 +349,10 @@ function Admin() {
               <Form.Control
                 type="number"
                 placeholder="age"
+                defaultValue={profile.age}
                 autoFocus
                 disabled={!disableButton}
-                // onChange={(e) => {setemailchange(e.target.value);}}
+                onChange={(e) => {setage(e.target.value);}}
               />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -302,9 +360,10 @@ function Admin() {
               <Form.Control
                 type="text"
                 placeholder="qualification"
+                defaultValue={profile.qualification}
                 autoFocus
                 disabled={!disableButton}
-                // onChange={(e) => {setemailchange(e.target.value);}}
+                onChange={(e) => {setqualification(e.target.value);}}
               />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -312,13 +371,16 @@ function Admin() {
               <Form.Control
                 type="number"
                 placeholder="phone number"
+                defaultValue={profile.phone}
                 autoFocus
                 disabled={!disableButton}
-                // onChange={(e) => {setemailchange(e.target.value);}}
+                onChange={(e) => {setphone(e.target.value);}}
               />
             
             </Form.Group>
-        
+            {/* <div className={`${btalert!==''?`${btalert==='success'?'alert alert-success':'alert alert-danger'}`:'visible-false'}`} role="alert">
+                 {altmsg}
+            </div> */}
           </Form>
 		  </Modal.Body>
         <Modal.Footer>
@@ -329,7 +391,7 @@ function Admin() {
           <Button variant="btn btn-primary"  onClick={handleeditClick} disabled={disableButton} >
             Edit
           </Button>
-          <Button   className='btn btn-success' variant='primary' onClick={handlesaveClick} disabled={!disableButton} >
+          <Button   className='btn btn-success' variant='primary' onClick={()=>{handlesaveClick();update(profile.id)}} disabled={!disableButton} >
           {/* {isLoading ?  <Spinner size='sm'/>:null} */}
           Save
           </Button>
