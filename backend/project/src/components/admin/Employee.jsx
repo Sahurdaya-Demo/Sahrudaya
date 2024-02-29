@@ -114,7 +114,7 @@ const delemp=async(idi)=>{
 {/* <div className="col-12 p-0 d-flex flex-wrap justify-content-center flex-sm-row flex-column"> */}
 
               <div className="mb-0 m-0 " >
-                  <Card className="Card credentialing" onClick={handleShow} style={{ width: "12.2rem", height: "12.2rem",}}>
+                  <Card className="Card credentialing" onClick={handleShow} style={{ width: "12.2rem", height: "13.9rem",}}>
                   <div className='overlay'></div>
                   <div className='circle'>
                 <CardBody className="card-body ">
