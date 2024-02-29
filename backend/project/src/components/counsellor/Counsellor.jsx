@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal'
 import LoadExternalScript from '../../LoadExternalScript';
 import axios from 'axios';
 import Counseldash from './Counseldash';
-
+import view from './Data';
 function Counsellor() {
     const navigate=useNavigate();
     const location = useLocation();
@@ -25,19 +25,19 @@ function Counsellor() {
     const [password,setpassword]=useState('')
     const [crpassword,setcrpassword]=useState('')
     
-  // useEffect(()=>{
-  //   let token;
-  //   token=localStorage.getItem('token')
-  //   // console.log(location.state.token)
-  //   if(token===null)
-  //   navigate('/',{ replace: true })
-  //   else{
-  //       view()
-  //       localStorage.setItem('type','counselor')
-  //   }
+  useEffect(()=>{
+    let token;
+    token=localStorage.getItem('token')
+    // console.log(location.state.token)
+    if(token===null)
+    navigate('/',{ replace: true })
+    else{
+        view(setprofile)
+        localStorage.setItem('type','counselor')
+    }
    
-  //   // return()=>{console.log('refresh')}
-  // },[])
+    // return()=>{console.log('refresh')}
+  },[])
   const changepassword=async()=>{
     if(password===crpassword){
     let formField = new FormData()
@@ -61,28 +61,7 @@ function Counsellor() {
     }
   }
 
-  const view=async()=>{
-    try{
-    await axios({
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
-      },
-      url:'http://127.0.0.1:8000/profile/',
-    }).then(response=>{
-      // console.log(location.state)
-      
-      // localStorage.setItem('email',response.data[0].email)
-      // localStorage.setItem('name',response.data[0].name)
-      // // console.log(response.data[0]);
-      
-        setprofile(response.data[0])
-    })
-  }
-  catch{}
-
-  }
+ 
   const update=async(id)=>{
     let formField = new FormData()
       formField.append('name',name)
