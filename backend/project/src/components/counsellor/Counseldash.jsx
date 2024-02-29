@@ -2,12 +2,16 @@ import { useEffect,useState} from 'react';
 import view from './Data';
 function Counseldash(){
     const[profile,setprofile]=useState('')
-  
+  let profilejson=[]
     // const[name,setname]=useState('')
     useEffect(()=>{
 		view(setprofile)
         
 	},[])
+    try{
+    profilejson=profile[0][0]
+    }
+    catch{}
     return(
         <>
                         <div className="row">
@@ -27,7 +31,7 @@ function Counseldash(){
                             <li></li>
                             </ul>
                             <p className='lexend'>
-                            Hi , welcome {profile.name}! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
+                            Hi , welcome {profilejson.name}! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
                             </p>
                             </div>
                         </div>
