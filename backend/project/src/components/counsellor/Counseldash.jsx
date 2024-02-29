@@ -1,31 +1,17 @@
 import { useEffect,useState} from 'react';
-import axios from 'axios';
+import view from './Data';
 function Counseldash(){
-    const[profile,setprofile]=useState([])
-    // console.log({name})
-    // const location = useLocation();
+    const[profile,setprofile]=useState('')
+  let profilejson=[]
     // const[name,setname]=useState('')
     useEffect(()=>{
-		view()
+		view(setprofile)
         
 	},[])
-    const view=async()=>{
-        try{
-        await axios({
-          method: 'get',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
-          },
-          url:'http://127.0.0.1:8000/profile/',
-        }).then(response=>{
-          
-            setprofile(response.data[0])
-            localStorage.setItem('email',response.data[0].email)
-        })
-        }
-        catch{}
-      }
+    try{
+    profilejson=profile[0][0]
+    }
+    catch{}
     return(
         <>
                         <div className="row">
@@ -45,7 +31,7 @@ function Counseldash(){
                             <li></li>
                             </ul>
                             <p className='lexend'>
-                            Hi , welcome {profile.name}! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
+                            Hi , welcome {profilejson.name}! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
                             </p>
                             </div>
                         </div>

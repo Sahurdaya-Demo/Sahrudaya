@@ -14,6 +14,7 @@ import LoadExternalScript from "../../LoadExternalScript";
 import { useNavigate } from "react-router-dom";
 import { UnloadExternalScript } from "../../UnloadExternalScript";
 import emailjs from '@emailjs/browser';
+import { Form, Button, Row, Col ,ProgressBar} from 'react-bootstrap';
 function Home(){
   const navigate=useNavigate();
      useEffect(() => {
@@ -62,11 +63,12 @@ function Home(){
 //   })
 //  }
 
+const [loading, setLoading] = useState(false);
 const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     emailjs
       .sendForm('service_231syu2', 'template_wo7d03j', form.current, {
         publicKey: 'ewrAx0BTzngglql6A',
@@ -74,13 +76,14 @@ const form = useRef();
       .then(
         () => {
           console.log('SUCCESS!');
-          // e.target.reset();
           alert('succesfull');
+          setLoading(false);
           document.getElementById("form").reset();
 
         },
         (error) => {
           console.log('FAILED...', error.text);
+          setLoading(false);
         },
       );
   };
@@ -473,51 +476,34 @@ return(
 
           </div>
 
-          <div className="col-lg-6">
-            <form   ref={form}  className="php-email-form" id="form">
-              <div className="row gy-4">
-
-                <div className="col-md-6">
-                  <input type="text" name="user_name" className="form-control" 
-                  placeholder="Your Name" required
-                  // onChange={(e) => setname(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-md-6 ">
-                  <input type="email" className="form-control" 
-                  name="user_email" placeholder="Your Email" required 
-                  // onChange={(e) => setemail(e.target.value)} 
-                  />
-                </div>
-
-                <div className="col-md-12">
-                  <input type="text" className="form-control" 
-                  name="subject" placeholder="Subject" required
-                  // onChange={(e) => setsubject(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-md-12">
-                  <textarea className="form-control"
-                   name="message" rows="6" placeholder="Message" required
-                  //  onChange={(e) => setbody(e.target.value)}
-                   ></textarea>
-                </div>
-
-                <div className="col-md-12 text-center">
-                  <div className="loading">Loading</div>
-                  <div className="error-message"></div>
-                  <div className="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit" onClick={sendEmail} >Send Message</button>
-                </div>
-
-              </div>
-            </form>
-
-          </div>
-
+               <div className="col-lg-6">
+      <Form ref={form} className="php-email-form" id="form" onSubmit={sendEmail}>
+        <Row className="gy-4">
+          <Col md={6}>
+            <Form.Control type="text" name="user_name" placeholder="Your Name" required />
+          </Col>
+          <Col md={6}>
+            <Form.Control type="email" name="user_email" placeholder="Your Email" required />
+          </Col>
+          <Col md={12}>
+            <Form.Control type="text" name="subject" placeholder="Subject" required />
+          </Col>
+          <Col md={12}>
+            <Form.Control as="textarea" name="message" rows="6" placeholder="Message" required />
+          </Col>
+           <Col md={12} className="text-center">
+            {/* {loading ? (
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            ) : ( */}
+                <Button type="submit" disabled={loading}>Send Message
+                {loading ?  <ProgressBar animated variant="success" now={100} />:null}</Button>
+           
+          </Col>
+        </Row>
+      </Form>
+    </div>
         </div>
 
       </div>

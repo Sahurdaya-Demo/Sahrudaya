@@ -6,8 +6,9 @@ import Modal from 'react-bootstrap/Modal'
 import LoadExternalScript from '../../LoadExternalScript';
 import axios from 'axios';
 import Counseldash from './Counseldash';
-
+import view from './Data';
 function Counsellor() {
+  let profilejson=[]
     const navigate=useNavigate();
     const location = useLocation();
     const [show, setShow] = useState(false);
@@ -32,7 +33,7 @@ function Counsellor() {
     if(token===null)
     navigate('/',{ replace: true })
     else{
-        view()
+        view(setprofile)
         localStorage.setItem('type','counselor')
     }
    
@@ -61,28 +62,6 @@ function Counsellor() {
     }
   }
 
-  const view=async()=>{
-    try{
-    await axios({
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
-      },
-      url:'http://127.0.0.1:8000/profile/',
-    }).then(response=>{
-      // console.log(location.state)
-      
-      // localStorage.setItem('email',response.data[0].email)
-      // localStorage.setItem('name',response.data[0].name)
-      // // console.log(response.data[0]);
-      
-        setprofile(response.data[0])
-    })
-  }
-  catch{}
-
-  }
   const update=async(id)=>{
     let formField = new FormData()
       formField.append('name',name)
@@ -94,7 +73,7 @@ function Counsellor() {
       url:`http://127.0.0.1:8000/api/${id}/`,
       data:formField,
     }).then(response=>{
-      console.log(response.data);
+      // console.log(response.data);
       handleClose()
     }
     )
@@ -134,6 +113,11 @@ const handlesaveClick = () => {
     localStorage.removeItem('email');
     navigate('/',{replace:true})
   }
+  try{
+    //  console.log(profile[0][0])
+     profilejson=profile[0][0]
+    }
+  catch{}
   return (
     <>
     <link rel='stylesheet'type='text/css' href='../../../counselcss/styles.css'></link>
@@ -279,7 +263,7 @@ const handlesaveClick = () => {
             
             <Image className="rounded-circle mx-auto d-block"
                
-                src={`http://127.0.0.1:8000${profile.image}`}
+                src={`http://127.0.0.1:8000${profilejson.image}`}
                 style={{width: 125, height: 125, borderRadius: 125/ 2 }}
                 // onChange={(e) => {setemailchange(e.target.value);}}
               />
@@ -288,7 +272,7 @@ const handlesaveClick = () => {
               <Form.Control
                 type="text"
                 placeholder="name"
-                defaultValue={profile.name}
+                defaultValue={profilejson.name}
                 // readOnly
                 // disabled
                 disabled={!disableButton}
@@ -301,7 +285,7 @@ const handlesaveClick = () => {
               <Form.Control
                 type="email"
                 placeholder="name@example.com"
-                value={profile.email}
+                value={profilejson.email}
                 autoFocus
                 disabled
                 readOnly
@@ -313,7 +297,7 @@ const handlesaveClick = () => {
               <Form.Control
                 type="number"
                 placeholder="age"
-                defaultValue={profile.age}
+                defaultValue={profilejson.age}
                 autoFocus
                 disabled={!disableButton}
                 onChange={(e) => {setage(e.target.value);}}
@@ -324,7 +308,7 @@ const handlesaveClick = () => {
               <Form.Control
                 type="text"
                 placeholder="qualification"
-                defaultValue={profile.qualification}
+                defaultValue={profilejson.qualification}
                 autoFocus
                 disabled={!disableButton}
                 onChange={(e) => {setqualification(e.target.value);}}
@@ -335,7 +319,7 @@ const handlesaveClick = () => {
               <Form.Control
                 type="number"
                 placeholder="phone number"
-                defaultValue={profile.phone}
+                defaultValue={profilejson.phone}
                 autoFocus
                 disabled={!disableButton}
                 onChange={(e) => {setphone(e.target.value);}}
@@ -355,7 +339,7 @@ const handlesaveClick = () => {
           <Button variant="btn btn-primary"  onClick={handleeditClick} disabled={disableButton} >
             Edit
           </Button>
-          <Button   className='btn btn-success' variant='primary' onClick={()=>{handlesaveClick();update(profile.id)}} disabled={!disableButton} >
+          <Button   className='btn btn-success' variant='primary' onClick={()=>{handlesaveClick();update(profilejson.id)}} disabled={!disableButton} >
           {/* {isLoading ?  <Spinner size='sm'/>:null} */}
           Save
           </Button>

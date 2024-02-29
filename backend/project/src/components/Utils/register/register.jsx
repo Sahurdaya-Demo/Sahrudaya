@@ -76,13 +76,13 @@ function Register({secure})
 					'Content-type': 'multipart/form-data',
 				  }
 			  }).then(response=>{
-					alert("success")
-					window.close()
+					
 					if(response.data.errors){
 						alert('Already Registered email id!!')
 					}
 					else{
 						alert('Registration Successfull!!')
+						window.close()
 					}
 				})
 			  }

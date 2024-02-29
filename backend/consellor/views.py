@@ -5,5 +5,5 @@ from .serializers import CounsellorSerializer
 # Creatclasse your views here.
 
 class submitview(viewsets.ModelViewSet):
- querset= counsellor.objects.all()
+ queryset= counsellor.objects.all()
  serializer_class = CounsellorSerializer
