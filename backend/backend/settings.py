@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'account.apps.AccountConfig',
-    'Employee.apps.EmployeeConfig'
+    'Employee.apps.EmployeeConfig',
+    'consellor.apps.ConsellorConfig'
 ]
 
 MIDDLEWARE = [

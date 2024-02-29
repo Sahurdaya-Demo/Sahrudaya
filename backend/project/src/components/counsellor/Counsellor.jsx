@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal'
 import LoadExternalScript from '../../LoadExternalScript';
 import axios from 'axios';
 import Counseldash from './Counseldash';
-
+import view from './Data';
 function Counsellor() {
     const navigate=useNavigate();
     const location = useLocation();
@@ -32,7 +32,7 @@ function Counsellor() {
     if(token===null)
     navigate('/',{ replace: true })
     else{
-        view()
+        view(setprofile)
         localStorage.setItem('type','counselor')
     }
    
@@ -61,28 +61,7 @@ function Counsellor() {
     }
   }
 
-  const view=async()=>{
-    try{
-    await axios({
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
-      },
-      url:'http://127.0.0.1:8000/profile/',
-    }).then(response=>{
-      // console.log(location.state)
-      
-      // localStorage.setItem('email',response.data[0].email)
-      // localStorage.setItem('name',response.data[0].name)
-      // // console.log(response.data[0]);
-      
-        setprofile(response.data[0])
-    })
-  }
-  catch{}
-
-  }
+ 
   const update=async(id)=>{
     let formField = new FormData()
       formField.append('name',name)
@@ -131,6 +110,7 @@ const handlesaveClick = () => {
     
     localStorage.removeItem('token');
     localStorage.removeItem('type');
+    localStorage.removeItem('email');
     navigate('/',{replace:true})
   }
   return (
@@ -239,7 +219,7 @@ const handlesaveClick = () => {
         </Modal.Header>
         <Modal.Body className='p-2'>
 			<Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" >
               <Form.Label>Enter New Password</Form.Label>
               <Form.Control
                 type="password"

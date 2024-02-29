@@ -6,7 +6,7 @@ import Main from './main';
 // import Admin from './components/admin/Admin';
 // import Login from './components/login/Login';
 // import Counsellor from './components/counsellor/Counsellor';
-import Form from './components/counsellor/ClientForm';
+import Details from './components/counsellor/ClientForm';
 import Error from './components/Utils/error';
 import Counseldash from './components/counsellor/Counseldash';
 import Adminloading from './components/loading/adminloading';
@@ -65,7 +65,7 @@ function App() {
           </Route>
           <Route path='counsellor' element={<Counsellorloading/>}>
             <Route path='' element={<Counseldash/>}/>
-            <Route path='form' element={<Form/>}/>
+            <Route path='form' element={<Details/>}/>
             <Route path='Patients' element={<Patients/>}/>
           </Route>
           <Route path='*' element={<Error/>}/>
