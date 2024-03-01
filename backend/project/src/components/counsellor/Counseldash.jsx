@@ -39,6 +39,7 @@ function Counseldash(){
     profilejson=profile[0][0]
     countjson=profile[1]
     pendingRecords=countjson.filter(record=>record.status==='Pending').length
+    // console.log(countjson)
     completedRecords=countjson.filter(record=>record.status==='Completed').length
     }
     catch{}
