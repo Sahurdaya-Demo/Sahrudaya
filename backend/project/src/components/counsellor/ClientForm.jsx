@@ -1,5 +1,5 @@
 
-import React, { useState } from "react"
+import React, { useState,useRef } from "react"
 import axios from "axios";
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios"
@@ -14,11 +14,11 @@ function Details() {
 	// 	navigate('/counsellor',{replace:true})
 	//   });
 	
-	const[date,setdate]=useState(null)
+	const[date,setdate]=useState("")
 	const[place,setplace]=useState("")
 	const[name,setname]=useState("")
-	const[Age, setage] = useState(0);
-	const[Gender, setgender] = useState("");
+	const[Age, setage] = useState("")
+	const[Gender, setgender] = useState("")
 	const[f_status,setfinstatus]=useState("")
 	const[m_status,setmaritalstat]=useState("")
 	const[School,setschool]=useState("")
@@ -30,35 +30,36 @@ function Details() {
 	const[problem,setproblem]=useState("")
 	const[history,sethistory]=useState("")
 	const[Intervention,setintervention]=useState("")
-	const[challenge,setchallenge]=useState(0)
+	const[challenge,setchallenge]=useState("")
 	const[follow_ups,setsession]=useState("")
 	const[referral,setreferral]=useState("")
 	const[outcome,setoutcome]=useState("")
 	const[remarks,setremarks]=useState("")
 	const[status,setstatus]=useState("")
+  const formRef = useRef(null);
 
 	
 
-    const [count1, setCount1] = React.useState(0);
-	const [count2, setCount2] = React.useState(0);
-	const [count3, setCount3] = React.useState(0);
-	const [count4, setCount4] = React.useState(0);
-	const [count5, setCount5] = React.useState(0);
-	const [count6, setCount6] = React.useState(0);
-	const [count7, setCount7] = React.useState(0);
+  const [count1, setCount1] =useState(0);
+	const [count2, setCount2] = useState(0);
+	const [count3, setCount3] = useState(0);
+	const [count4, setCount4] = useState(0);
+	const [count5, setCount5] = useState(0);
+	const [count6, setCount6] = useState(0);
+	const [count7, setCount7] = useState(0);
 
-    const probcalculate = e => {
+  const probcalculate = e => {
 		
 		setCount1(e.target.value.length);
 		setproblem(e.target.value);	
 
-	  };
+	};
 	const histcalculate = e => {
 		
 		setCount2(e.target.value.length);
 		sethistory(e.target.value);	
 
-	  };
+	};
 	  const interventioncalculate = e => {
 		
 		setCount3(e.target.value.length);
@@ -89,6 +90,41 @@ function Details() {
 		setremarks(e.target.value);	
 
 	  };
+
+
+    const reset=()=>{
+      setValidated(false)
+      setdate('');
+      setplace('');
+      setname('');
+      setage('');
+      setgender('');
+      setfinstatus('');
+      setmaritalstat('');
+      setschool('');
+      setreligion('');
+      setfeducation('');
+      setfoccupation('');
+      setmeducation('');
+      setmoccupation('');
+      setproblem('');
+      sethistory('');
+      setintervention('');
+      setchallenge('');
+      setreferral('')
+      setoutcome('');
+      setremarks('');
+      setsession('');
+      setstatus('');
+      setCount1(0);
+      setCount2(0);
+      setCount3(0);
+      setCount4(0);
+      setCount5(0);
+      setCount6(0);
+      setCount7(0);
+     
+    }
 	
 	  const newdata =async()=>{
 		let formField= new FormData()
@@ -124,33 +160,43 @@ function Details() {
 		   data: formField
 	   }).then(response=>{
 		  
-		   alert('success')
-		   
+		  alert('success')
+      formRef.current.reset();
+      setValidated(false)
+      reset();
 		   
 	   })
-	}
+    }
 	catch{}
 	   }
-	   const [validated, setValidated] = useState(false);
+	const [validated, setValidated] = useState(false);
+
+
 	 const submithandler=(event)=>
 	 {
 		const form = event.currentTarget;
-		event.preventDefault();
+    event.preventDefault();
+       
 		if (form.checkValidity() === false) {
-		  
+     
 		  event.stopPropagation();
 		}
-	
+	  // handleReset();
 		setValidated(true);
-      
+    
 	 }
+ 
 
-	
+  //  const handleReset = () => {
+    
+  //    setValidated(false);
+     
+  // };
 
 	return ( 
 		
-        
-		<Form onSubmit={submithandler} noValidate validated={validated}>
+       
+		<Form onSubmit={submithandler} noValidate validated={validated} ref={formRef}>
       <br />
       <div className="card" style={{ boxShadow: "10px 8px 0px rgb(42, 38, 38)" }}>
         <div className="card-body">
@@ -165,7 +211,7 @@ function Details() {
             <Col md={6}>
               <Form.Group controlId="place">
                 <Form.Label>Place of Counselling</Form.Label>
-                <Form.Control as="select" onChange={(e) => setplace(e.target.value)} required>
+                <Form.Control as="select" onChange={(e) => setplace(e.target.value)} required >
                   <option></option>
                   <option>Vypin-Rajagiri Sea Shore School</option>
 			               <option>Kakkanad</option>
@@ -208,7 +254,7 @@ function Details() {
               <Col md={4}>
                 <Form.Group controlId="gender">
                   <Form.Label>Gender</Form.Label>
-                  <Form.Control as="select" onChange={(e) => setgender(e.target.value)} >
+                  <Form.Control as="select" onChange={(e) => setgender(e.target.value)} required >
                     <option></option>
                     <option>Male</option>
                     <option>Female</option>
@@ -219,7 +265,7 @@ function Details() {
               <Col md={4}>
                 <Form.Group controlId="finStatus">
                   <Form.Label>Family Financial Status</Form.Label>
-                  <Form.Control as="select" onChange={(e) => setfinstatus(e.target.value)}>
+                  <Form.Control as="select" onChange={(e) => setfinstatus(e.target.value)} required>
                     <option></option>
                     <option>APL</option>
                     <option>BPL</option>
@@ -229,7 +275,7 @@ function Details() {
               <Col md={4}>
                 <Form.Group controlId="maritalStatus">
                   <Form.Label>Marital Status</Form.Label>
-                  <Form.Control as="select" onChange={(e) => setmaritalstat(e.target.value)}>
+                  <Form.Control as="select" onChange={(e) => setmaritalstat(e.target.value)} required>
                     <option></option>
                     <option>Married</option>
                     <option>Single</option>
@@ -357,7 +403,7 @@ function Details() {
               <Col md={12}>
                 <Form.Group controlId="session">
                   <Form.Label>Number of Follow-up Sessions</Form.Label>
-                  <Form.Control type="number" onChange={(e) => setsession(e.target.value)} />
+                  <Form.Control type="number" onChange={(e) => setsession(e.target.value)} required/>
                 </Form.Group>
               </Col>
             </Row>
@@ -411,10 +457,10 @@ function Details() {
 			
 			<br></br>
 			<center>
-			<Button className="buttons btn btn-success" type="reset" style={{ marginRight: "20px" }} onClick={newdata}>
+			<Button className="buttons btn btn-success" type="submit" style={{ marginRight: "20px" }} onClick={newdata}>
         Submit
       </Button>
-      <Button className="buttons btn btn-danger" type="reset" style={{ marginRight: "20px" }}>
+      <Button className="buttons btn btn-danger" type="reset" style={{ marginRight: "20px" }} onClick={reset}>
         Reset
       </Button>
 	  </center>
