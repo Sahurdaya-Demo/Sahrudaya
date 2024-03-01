@@ -411,7 +411,7 @@ function Details() {
 			
 			<br></br>
 			<center>
-			<Button className="buttons btn btn-success" type="reset" style={{ marginRight: "20px" }} onClick={newdata}>
+			<Button className="buttons btn btn-success" type="submit" style={{ marginRight: "20px" }} onClick={newdata}>
         Submit
       </Button>
       <Button className="buttons btn btn-danger" type="reset" style={{ marginRight: "20px" }}>
