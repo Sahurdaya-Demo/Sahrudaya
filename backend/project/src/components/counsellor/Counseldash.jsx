@@ -1,6 +1,6 @@
 import { useEffect,useState} from 'react';
 import view from './Data';
-import AnimatedNumbers from "react-animated-numbers"
+// import AnimatedNumbers from "react-animated-numbers"
 import CountUp from 'react-countup';
 import axios from 'axios';
 
