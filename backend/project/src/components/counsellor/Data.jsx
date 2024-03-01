@@ -9,8 +9,9 @@ const view=async(setprofile)=>{
       },
       url:'http://127.0.0.1:8000/profile/',
     }).then(response=>{
-      localStorage.setItem('email',response.data[0].email)
-        setprofile(response.data[0])
+        // console.log(response.data[1])
+      localStorage.setItem('email',response.data[0][0].email)
+        setprofile(response.data)
     })
   }
   catch{}

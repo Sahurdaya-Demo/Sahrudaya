@@ -22,11 +22,11 @@ function Details() {
 	const[f_status,setfinstatus]=useState("")
 	const[m_status,setmaritalstat]=useState("")
 	const[School,setschool]=useState("")
-    const[religion,setreligion]=useState("")
+  const[religion,setreligion]=useState("")
 	const[f_education,setfeducation]=useState("")
 	const[f_occupation,setfoccupation]=useState("")
 	const[m_education,setmeducation]=useState("")
-    const[m_occupation,setmoccupation]=useState("")
+  const[m_occupation,setmoccupation]=useState("")
 	const[problem,setproblem]=useState("")
 	const[history,sethistory]=useState("")
 	const[Intervention,setintervention]=useState("")
@@ -232,8 +232,10 @@ function Details() {
                   <Form.Control as="select" onChange={(e) => setmaritalstat(e.target.value)}>
                     <option></option>
                     <option>Married</option>
-                    <option>Unmarried</option>
-                    <option>Divorced</option>
+                    <option>Single</option>
+                    <option>Divorcee</option>
+                    <option>Widower</option>
+                    <option>Widow</option>
                     <option>Separated</option>
                   </Form.Control>
                 </Form.Group>

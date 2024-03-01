@@ -6,6 +6,7 @@ import CountUp from 'react-countup';
 
 function Counseldash(){
     const[profile,setprofile]=useState('')
+  let profilejson=[]
     const[Records,setRecords]=useState('')
 
     useEffect(() => {
@@ -26,6 +27,10 @@ function Counseldash(){
 		view(setprofile)
         
 	},[])
+    try{
+    profilejson=profile[0][0]
+    }
+    catch{}
 
     return(
         <>
@@ -43,7 +48,7 @@ function Counseldash(){
                             <li></li>
                             </ul>
                             <p className='lexend'>
-                            Hi , welcome {profile.name}! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
+                            Hi , welcome {profilejson.name}! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
                             </p>
                             </div>
                         </div>
