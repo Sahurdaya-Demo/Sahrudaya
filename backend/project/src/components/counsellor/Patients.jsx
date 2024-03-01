@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import view from "./Data";
+import axios from "axios";
 function Patients()
 {
     const[profile,setprofile]=useState([])
@@ -44,7 +45,7 @@ function Patients()
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
-    const handleClose = () => {setShow(false);setDisableButton(false)};
+    const handleClose = () => {setShow(false);setDisableButton(false)}
 
 
     const handleeditClick = () => {
@@ -53,6 +54,15 @@ function Patients()
     const handlesaveClick = () => {
         setDisableButton(!disableButton)
     };
+    const getformdetails=async(id)=>{
+        
+        const result=await axios.get(`http://127.0.0.1:8000/formsubmit/${id}`)
+        console.log(result.data)
+        setname(result.data.name)
+        setage(result.data.age)
+        setgender(result.data.gender);
+        
+    }
     
     return(
         <>
@@ -72,7 +82,7 @@ function Patients()
                                         <th>Problem</th>
                                         <th>Status</th>
                                         
-                                        <th>Delete</th>
+                                        <th>Action</th>
                                         
                                     </tr>
                                 </thead>
@@ -85,7 +95,7 @@ function Patients()
                                         <td>{record.place_of_counselling}</td>
                                         <td>{record.problem}</td>
                                         <td>{record.status}</td>
-                                        <td><button className='btn btn-danger' onClick={()=>{console.log(record.id)}}>delete</button></td>
+                                        <td><button className='btn btn-danger' onClick={()=>{console.log(record.id)}}>Delete</button><span className="mx-2"></span><button className='btn btn-warning' onClick={()=>{handleShow();getformdetails(record.id)}}>Edit</button></td>
                                         </tr>
                                         )}
                                     
@@ -98,7 +108,7 @@ function Patients()
                                         <th>Place Of Couneslling</th>
                                         <th>Problem</th>
                                         <th>Status</th>
-                                        <th>Delete</th>
+                                        <th>Action</th>
                                         
                                     </tr>
                                 </tfoot>
@@ -106,7 +116,7 @@ function Patients()
                         
                            </div>
                         </div>
-                    <button className='btn btn-warning' onClick={handleShow}>Edit</button>
+                    
                     <Modal show={show} onHide={handleClose} centered>
                         <Modal.Header closeButton onClick={handleClose}>
                             <Modal.Title>Edit Data</Modal.Title>
@@ -121,7 +131,7 @@ function Patients()
                                     autoFocus
                                 />
                                 <Form.Label>Place of Counselling</Form.Label>
-                                <select className="form-select" onChange={(e) => {setplace(e.target.value);}} required disabled={!disableButton}>
+                                <select className="form-select" onChange={(e) => {setplace(e.target.value);}} required disabled={!disableButton} defaultValue={place}>
                                     <option>Vypin-Rajagiri Sea Shore School</option>
 			                        <option>Kakkanad</option>
 						            <option>Thevara-SH College(East Campus)</option>
@@ -144,6 +154,7 @@ function Patients()
                                     maxLength={100}
                                     onChange={(e) => {setname(e.target.value);}}
                                     required
+                                    defaultValue={name}
                                     disabled={!disableButton}
                                     autoFocus
                                 />
@@ -157,6 +168,7 @@ function Patients()
                                     type="number"
                                     placeholder=""
                                     onChange={(e) => {setage(e.target.value);}} 
+                                    value={Age}
                                     required
                                     autoFocus
                                     disabled={!disableButton}

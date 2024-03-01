@@ -11518,3 +11518,25 @@ smi-navbar {
 .form-label{
   font-weight: bold;
 }
+.AnimatedNumberItem {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.AnimatedNumberItem__wrapper {
+  transition: transform ease-out 0.2s;
+}
+
+.AnimatedNumberItem__number {
+  line-height: 1;
+  text-align: center;
+}
+.ReactAwesomeAnimatedNumber {
+  display: inline-flex;
+  flex-direction: row-reverse;
+}
+
+.ReactAwesomeAnimatedNumber__text {
+  display: inline-block;
+  line-height: 1;
+}
