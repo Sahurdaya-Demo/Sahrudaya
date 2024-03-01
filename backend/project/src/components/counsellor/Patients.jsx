@@ -13,12 +13,15 @@ function Patients()
     
     useEffect(()=>{
     LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','../../../counseljs/tablescript.js']);
-    
+     setInterval(()=>{
+    view(setprofile)
+        },5000)
     view(setprofile)
     
     },[])
 
-
+    const[id,setid]=useState("")
+    const[date,setdate]=useState("")
     const[place,setplace]=useState("")
     const[name,setname]=useState("")
     const[Age, setage] = useState(0);
@@ -46,6 +49,42 @@ function Patients()
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
     const handleClose = () => {setShow(false);setDisableButton(false);}
+    
+     const update=async(id)=>{
+    let formField = new FormData()
+      formField.append("email",localStorage.getItem('email') )
+		formField.append('date',date)
+		formField.append('place_of_counselling',place)
+		formField.append('name',name)
+		formField.append('age',Age)
+		formField.append('gender',Gender)
+		formField.append('finacial_status',f_status)
+		formField.append('marital_status',m_status)
+		formField.append('school',School)
+		formField.append('religion',religion)
+		formField.append('fathers_education',f_education)
+		formField.append('fathers_occupation',f_occupation)
+		formField.append('mothers_education',m_education)
+		formField.append('mothers_occupation',m_occupation)
+		formField.append('problem',problem)
+		formField.append('history_of_problem',history)
+		formField.append('intervention',Intervention)
+		formField.append('challenges_by_counsellor',challenge)
+		formField.append('number_of_followup_sections',follow_ups)
+		formField.append('referral_service',referral)
+		formField.append('outcome',outcome)
+		formField.append('remarks',remarks)
+		formField.append('status',status)
+    await axios({
+      method: 'PUT',
+      url:`http://127.0.0.1:8000/formsubmit/${id}/`,
+      data:formField,
+    }).then(response=>{
+      // console.log(response.data);
+      handleClose()
+    }
+    )
+  }
 
     const handleeditClick = () => {
         setDisableButton(!disableButton)
@@ -57,6 +96,8 @@ function Patients()
         
         const result=await axios.get(`http://127.0.0.1:8000/formsubmit/${id}`)
         console.log(result.data)
+        setdate(result.data.date)
+        setid(result.data.id)
         setname(result.data.name)
         setage(result.data.age)
         setgender(result.data.gender)
@@ -143,6 +184,8 @@ function Patients()
                                 <Form.Control
                                     type="date"
                                     placeholder=""
+                                    value={date||''}
+                                     onChange={(e) => setdate(e.target.value)}
                                     disabled={!disableButton}
                                     autoFocus
                                 />
@@ -365,15 +408,15 @@ function Patients()
                                 </Form.Group>
                                 <Form.Group>
                                 <Form.Label>Status</Form.Label>
-                                <select className="form-select" onChange={(e) => {setstatus(e.target.value);}} required value={status||""}>
-                                    <option value="pending">Pending</option>
+                                <select className="form-select" onChange={(e) => {setstatus(e.target.value);}} required value={status||""} disabled={!disableButton}>
+                                    <option value="Pending">Pending</option>
                                     <option value="Completed">Completed</option>                           
                                 </select>
                                 </Form.Group>
                                 <Modal.Footer>
                                 <Form.Group className="d-flex justify-content-end align-content-end">
                                 <Button variant="btn btn-warning py-1 m-1 "  onClick={handleeditClick} disabled={disableButton} style={{color:'white'}}> Edit</Button>
-                                <Button variant="btn btn-success py-1 m-1" onClick={handlesaveClick} disabled={!disableButton}>Save</Button>
+                                <Button variant="btn btn-success py-1 m-1" onClick={()=>{handlesaveClick();update(id);}} disabled={!disableButton}>Save</Button>
                                 <Button variant="btn btn-danger py-1 m-1" onClick={handleClose}>Close</Button>
                         </Form.Group>
                         </Modal.Footer>
