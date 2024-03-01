@@ -9,7 +9,7 @@ class counsellor(models.Model):
     gender = models.CharField(max_length=10)
     finacial_status = models.CharField(max_length=10)
     marital_status = models.CharField(max_length=10)
-    school=  models.CharField(max_length=15)
+    school=  models.CharField(max_length=15,default='null',null=True)
     religion= models.CharField(max_length=20,default='null',null=True)
     fathers_occupation= models.CharField(max_length=25,default='null',null=True)
     mothers_occupation= models.CharField(max_length=25,default='null',null=True)

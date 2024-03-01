@@ -22,7 +22,7 @@ function Patients()
     const[place,setplace]=useState("")
     const[name,setname]=useState("")
     const[Age, setage] = useState(0);
-    const[Gender, setgender] = useState("");
+    const[Gender, setgender] = useState("")
     const[f_status,setfinstatus]=useState("")
     const[m_status,setmaritalstat]=useState("")
     const[School,setschool]=useState("")
@@ -34,7 +34,7 @@ function Patients()
     const[problem,setproblem]=useState("")
     const[history,sethistory]=useState("")
     const[Intervention,setintervention]=useState("")
-    const[challenge,setchallenge]=useState(0)
+    const[challenge,setchallenge]=useState("")
     const[follow_ups,setsession]=useState("")
     const[referral,setreferral]=useState("")
     const[outcome,setoutcome]=useState("")
@@ -45,8 +45,7 @@ function Patients()
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
-    const handleClose = () => {setShow(false);setDisableButton(false)}
-
+    const handleClose = () => {setShow(false);setDisableButton(false);}
 
     const handleeditClick = () => {
         setDisableButton(!disableButton)
@@ -60,8 +59,25 @@ function Patients()
         console.log(result.data)
         setname(result.data.name)
         setage(result.data.age)
-        setgender(result.data.gender);
-        
+        setgender(result.data.gender)
+        setfinstatus(result.data.finacial_status)
+        setmaritalstat(result.data.marital_status)
+        setschool(result.data.school)
+        setreligion(result.data.religion)
+        setfeducation(result.data.fathers_education)
+        setfoccupation(result.data.fathers_occupation)
+        setmeducation(result.data.mothers_education)
+        setmoccupation(result.data.mothers_occupation)
+        sethistory(result.data.history_of_problem)
+        setproblem(result.data.problem)
+        setintervention(result.data.intervention)
+        setchallenge(result.data.challenges_by_counsellor)
+        setsession(result.data.number_of_followup_sections)
+        setreferral(result.data.referral_service)
+        setoutcome(result.data.outcome)
+        setremarks(result.data.remarks)
+        setstatus(result.data.status);
+        setplace(result.data.place_of_counselling)
     }
     
     return(
@@ -95,7 +111,7 @@ function Patients()
                                         <td>{record.place_of_counselling}</td>
                                         <td>{record.problem}</td>
                                         <td>{record.status}</td>
-                                        <td><button className='btn btn-danger' onClick={()=>{console.log(record.id)}}>Delete</button><span className="mx-2"></span><button className='btn btn-warning' onClick={()=>{handleShow();getformdetails(record.id)}}>Edit</button></td>
+                                        <td><button className='btn btn-danger' onClick={()=>{console.log(record.id)}}>Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();getformdetails(record.id)}}>View</button></td>
                                         </tr>
                                         )}
                                     
@@ -118,10 +134,10 @@ function Patients()
                         </div>
                     
                     <Modal show={show} onHide={handleClose} centered>
-                        <Modal.Header closeButton onClick={handleClose}>
+                        <Modal.Header closeButton onClick={handleClose} style={{backgroundColor:"#75E3B9",opacity:".7",border:'none'}}>
                             <Modal.Title>Edit Data</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body className='p-2'style={{backgroundColor:"#75E3B9",opacity:".7",filter:"drop-shadow(4px 4px 2px )"}}>
+                        <Modal.Body className='p-2'style={{backgroundColor:"#75E3B9",opacity:".7"}}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Date</Form.Label>
                                 <Form.Control
@@ -131,7 +147,8 @@ function Patients()
                                     autoFocus
                                 />
                                 <Form.Label>Place of Counselling</Form.Label>
-                                <select className="form-select" onChange={(e) => {setplace(e.target.value);}} required disabled={!disableButton} defaultValue={place}>
+                                <select className="form-select" onChange={(e) => {setplace(e.target.value);}} required disabled={!disableButton} value={place||""}>
+                                    <option></option>
                                     <option>Vypin-Rajagiri Sea Shore School</option>
 			                        <option>Kakkanad</option>
 						            <option>Thevara-SH College(East Campus)</option>
@@ -154,7 +171,7 @@ function Patients()
                                     maxLength={100}
                                     onChange={(e) => {setname(e.target.value);}}
                                     required
-                                    defaultValue={name}
+                                    value={name||""}
                                     disabled={!disableButton}
                                     autoFocus
                                 />
@@ -168,7 +185,7 @@ function Patients()
                                     type="number"
                                     placeholder=""
                                     onChange={(e) => {setage(e.target.value);}} 
-                                    value={Age}
+                                    value={Age||""}
                                     required
                                     autoFocus
                                     disabled={!disableButton}
@@ -176,10 +193,11 @@ function Patients()
                                 </div>
 					            <div className="col-md-6">
                                 <Form.Label>Gender</Form.Label>
-                                <select className="form-select" onChange={(e) => {setgender(e.target.value);}} disabled={!disableButton}>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="others">Others</option>
+                                <select className="form-select" onChange={(e) => {setgender(e.target.value);}} disabled={!disableButton} value={Gender||""}>
+                                    <option></option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others">Others</option>
                                 </select>
                                 </div>
                                 </div>
@@ -188,9 +206,10 @@ function Patients()
                                 <div className="row">
 					            <div className="col-md-6">
                                 <Form.Label>Financial Status</Form.Label>
-                                <select className="form-select" onChange={(e) => {setfinstatus(e.target.value);}} disabled={!disableButton}>
-                                    <option value="apl">APL</option>
-                                    <option value="bpl">BPL</option>
+                                <select className="form-select" onChange={(e) => {setfinstatus(e.target.value);}} disabled={!disableButton} value={f_status||""}>
+                                    <option></option>
+                                    <option value="APL">APL</option>
+                                    <option value="BPL">BPL</option>
                                 </select>
                                 
                                 
@@ -198,7 +217,8 @@ function Patients()
                                 <div className="col-md-6">
                                 
                                 <Form.Label>Martial Status</Form.Label>
-                                <select className="form-select" onChange={(e) => {setmaritalstat(e.target.value);}} disabled={!disableButton}>
+                                <select className="form-select" onChange={(e) => {setmaritalstat(e.target.value);}} disabled={!disableButton} value={m_status||""}>
+                                    <option></option>
                                 <option>Married</option>
                                 <option>Single</option>
                                 <option>Divorcee</option>
@@ -211,10 +231,11 @@ function Patients()
                                 </Form.Group>
                                 <Form.Group>
                                 <Form.Label>School</Form.Label>
-                                <select className="form-select" onChange={(e) => {setschool(e.target.value);}} disabled={!disableButton}>
-                                    <option value="govt">Government</option>
-                                    <option value="aided">Aided</option>   
-                                    <option value="aided">Private</option>                           
+                                <select className="form-select" onChange={(e) => {setschool(e.target.value);}} disabled={!disableButton} value={School||""}>
+                                    <option></option>
+                                    <option value="Government">Government</option>
+                                    <option value="Aided">Aided</option>   
+                                    <option value="Private">Private</option>                           
                                 </select>
                                 <Form.Label>Father's Occupation</Form.Label>
                                 <Form.Control
@@ -224,6 +245,7 @@ function Patients()
                                     onChange={(e) => {setfoccupation(e.target.value);}}
                                     autoFocus
                                     disabled={!disableButton}
+                                    value={f_occupation||""}
                                 />
                                 <Form.Label>Father's Education</Form.Label>
                                 <Form.Control
@@ -233,6 +255,7 @@ function Patients()
                                     onChange={(e) => {setfeducation(e.target.value);}}
                                     autoFocus
                                     disabled={!disableButton}
+                                    value={f_education||""}
                                 />
                                 <Form.Label>Mother's Occupation</Form.Label>
                                 <Form.Control
@@ -242,6 +265,7 @@ function Patients()
                                     onChange={(e) => {setmoccupation(e.target.value);}}
                                     autoFocus
                                     disabled={!disableButton}
+                                    value={m_occupation||""}
                                 />
                                 <Form.Label>Mother's Education</Form.Label>
                                 <Form.Control
@@ -251,6 +275,7 @@ function Patients()
                                     onChange={(e) => {setmeducation(e.target.value);}}
                                     autoFocus
                                     disabled={!disableButton}
+                                    value={m_education||""}
                                 />
                                 <Form.Label>Religion</Form.Label>
                                 <Form.Control
@@ -260,6 +285,7 @@ function Patients()
                                     onChange={(e) => {setreligion(e.target.value);}}
                                     autoFocus
                                     disabled={!disableButton}
+                                    value={religion||""}
                                 />
                                 </Form.Group>
                                 <Form.Group>
@@ -271,6 +297,7 @@ function Patients()
                                 onChange={(e)=>{setproblem(e.target.value);}}
                                 required
                                 disabled={!disableButton}
+                                value={problem||""}
                                 />
                                 <Form.Label>History of Problem</Form.Label>
                                 <textarea 
@@ -279,6 +306,7 @@ function Patients()
                                 maxLength={500} 
                                 disabled={!disableButton}
                                 onChange={(e)=>{sethistory(e.target.value);}}
+                                value={history||""}
                                 />
                                 <Form.Label>Intervention</Form.Label>
                                 <textarea 
@@ -287,6 +315,7 @@ function Patients()
                                 maxLength={100}
                                 disabled={!disableButton}
                                 onChange={(e)=>{setintervention(e.target.value);}}
+                                value={Intervention||""}
                                 />
                                 <Form.Label>Challenges by Counsellor</Form.Label>
                                 <textarea
@@ -295,6 +324,7 @@ function Patients()
                                 maxLength={200}
                                 disabled={!disableButton}
                                 onChange={(e)=>{setchallenge(e.target.value);}}
+                                value={challenge||""}
                                 />
                                 <Form.Label>No. of follow up sessions</Form.Label>
                                 <Form.Control
@@ -302,6 +332,7 @@ function Patients()
                                     placeholder=" "
                                     onChange={(e) => {setsession(e.target.value);}}
                                     disabled={!disableButton}
+                                    value={follow_ups||""}
                                     autoFocus
                                 />
                                 <Form.Label>Referal Service</Form.Label>
@@ -311,6 +342,7 @@ function Patients()
                                 maxLength={100}
                                 disabled={!disableButton}
                                 onChange={(e) => {setreferral(e.target.value);}}
+                                value={referral||""}
                                 />
                                 <Form.Label>Outcome</Form.Label>
                                 <textarea 
@@ -319,6 +351,7 @@ function Patients()
                                 maxLength={250}
                                 disabled={!disableButton}
                                 onChange={(e) => {setoutcome(e.target.value);}}
+                                value={outcome||""}
                                 />
                                 <Form.Label>Remarks</Form.Label>
                                 <textarea 
@@ -327,20 +360,21 @@ function Patients()
                                 maxLength={200}
                                 onChange={(e) => {setremarks(e.target.value);}}
                                 disabled={!disableButton}
+                                value={remarks||""}
                                 />
                                 </Form.Group>
                                 <Form.Group>
                                 <Form.Label>Status</Form.Label>
-                                <select className="form-select" onChange={(e) => {setstatus(e.target.value);}} required>
+                                <select className="form-select" onChange={(e) => {setstatus(e.target.value);}} required value={status||""}>
                                     <option value="pending">Pending</option>
-                                    <option value="Completed">Completed</option>                            
+                                    <option value="Completed">Completed</option>                           
                                 </select>
                                 </Form.Group>
                                 <Modal.Footer>
                                 <Form.Group className="d-flex justify-content-end align-content-end">
-                                <Button variant="btn btn-info py-1 m-1 "  onClick={handleeditClick} disabled={disableButton} > Edit</Button>
-                                <Button className="btn btn-success py-1 m-1" onClick={handlesaveClick} disabled={!disableButton}>Save</Button>
-                                <Button className="btn btn-danger py-1 m-1" onClick={handleClose}>Close</Button>
+                                <Button variant="btn btn-warning py-1 m-1 "  onClick={handleeditClick} disabled={disableButton} style={{color:'white'}}> Edit</Button>
+                                <Button variant="btn btn-success py-1 m-1" onClick={handlesaveClick} disabled={!disableButton}>Save</Button>
+                                <Button variant="btn btn-danger py-1 m-1" onClick={handleClose}>Close</Button>
                         </Form.Group>
                         </Modal.Footer>
                         </Modal.Body>
