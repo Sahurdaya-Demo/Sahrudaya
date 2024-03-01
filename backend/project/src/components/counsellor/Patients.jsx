@@ -85,6 +85,21 @@ function Patients()
     }
     )
   }
+  const delrecord=async(id)=>{
+    if (window.confirm('Are you sure you wish to delete this item?')){
+    try{
+    await axios({
+        method: 'delete',
+        url:`http://127.0.0.1:8000/formsubmit/${id}/`,
+      }).then(response=>{
+        console.log(response.data);
+        alert('Record Deleted Successfully!!')
+      }
+      )}
+      catch{}
+    }
+
+  }
 
     const handleeditClick = () => {
         setDisableButton(!disableButton)
@@ -152,7 +167,7 @@ function Patients()
                                         <td>{record.place_of_counselling}</td>
                                         <td>{record.problem}</td>
                                         <td>{record.status}</td>
-                                        <td><button className='btn btn-danger' onClick={()=>{console.log(record.id)}}>Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();getformdetails(record.id)}}>View</button></td>
+                                        <td><button className='btn btn-danger' onClick={()=>{delrecord(record.id)}}>Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();getformdetails(record.id)}}>View</button></td>
                                         </tr>
                                         )}
                                     
