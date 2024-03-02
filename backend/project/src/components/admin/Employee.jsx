@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { Card, CardBody } from "reactstrap";
 import axios from 'axios';
 import {Spinner } from 'react-bootstrap';
+import Dropdown from 'react-bootstrap/Dropdown';
 function Employee() {
   // const [items, setItems] = useState([]);
   // let empdetails
@@ -16,6 +17,7 @@ function Employee() {
   const[btalert,setbtalert]=useState('')
   const[altmsg,setaltmsg]=useState('')
   const[email,setemail]=useState('')
+  // let json;
   useEffect(()=>{
   // setInterval(()=>{
   //   retrieve()
@@ -23,15 +25,49 @@ function Employee() {
   retrieve()
   },[])
   const retrieve=async()=>{
+    let todayrecord;
+    let yesterdayrecord;
     const response= await fetch(`http://127.0.0.1:8000/api/`)
     const jsonData = await response.json();
-    for(let i=0;i<=Object.keys(jsonData).length;i++){
+    const responsecon= await fetch(`http://127.0.0.1:8000/formsubmit/`)
+    const jsonDatacon = await responsecon.json();
+    let yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    var today = new Date();
+    var ddy = String(yesterday.getDate()).padStart(2, '0');
+    var mmy = String(yesterday.getMonth() + 1).padStart(2, '0'); 
+    var yyy =  yesterday.getFullYear();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+     today = yyyy + '-' + mm + '-' + dd ;
+     yesterday = yyy + '-' + mmy + '-' + ddy;
+     console.log(today,"",yesterday)
+    for(let i=0;i<Object.keys(jsonData).length;i++)
+    {
+      yesterdayrecord=0
+      todayrecord=0;
+      for(let j=0;j<Object.keys(jsonDatacon).length;j++){
+      if(jsonData[i].email===jsonDatacon[j].email){
+        if(jsonDatacon[j].date===today)
+          todayrecord++
+        if(jsonDatacon[j].date===yesterday)
+          yesterdayrecord++
+      }
+      }
+      jsonData[i]['todaycount']=todayrecord;
+      jsonData[i]['yesterdaycount']=yesterdayrecord;
+    }
+    
+    for(let i=0;i<Object.keys(jsonData).length;i++){
       try{
       if(jsonData[i].type==='admin')
       delete jsonData[i]
       }
       catch{}
     }
+    
+    console.log(jsonData)
     setRecords(jsonData)
    }
 
@@ -100,12 +136,13 @@ const delemp=async(idi)=>{
                   <button type="button" className=" dropdown-toggle ms-1" data-bs-toggle="dropdown" aria-expanded="false">
                   Submissions
                   </button>
-              <button className="btn btn-danger float-end mb-1 me-2" onClick={()=>delemp(record.id)}>Delete</button>
-              <ul className="dropdown-menu">
-                <li><p className="dropdown-item">Today : {record.age}</p></li>
-                <li><p className="dropdown-item">Yesterday : {record.age}</p></li>
-                <li><p className="dropdown-item">Last Week : {record.age}</p></li>
-              </ul>
+              
+                  <ul className="dropdown-menu" >
+                    <li><p className="dropdown-item">Today : {record.age}</p></li>
+                    <li><p className="dropdown-item">Yesterday : {record.age}</p></li>
+                    <li><p className="dropdown-item">Last Week : {record.age}</p></li>
+                  </ul>
+                 <button className="btn btn-danger float-end mb-1 me-2" onClick={()=>delemp(record.id)}>Delete</button>
                   </div>
                 </div>
               </div>

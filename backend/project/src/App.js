@@ -24,6 +24,16 @@ import Patients from './components/counsellor/Patients';
 // import usePageViews from './usePageView';
 
 function App() {
+//   window.onbeforeunload = function (e) {
+//     window.onunload = function () {
+          
+//     }
+//     return undefined;
+// };
+
+// window.onload = function () {
+            
+// };
  
 // usePageViews();
 //   const LoadingScreen = () => {
