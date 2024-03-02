@@ -189,7 +189,7 @@ const handlesaveClick = () => {
                         </div>
                     </div>
                     <div className="sb-sidenav-footer">
-                        <div className="small">Logged in as: <h1>{profile.name}</h1></div>
+                        <div className="small">Logged in as: <h1>{profilejson.name}</h1></div>
                         {/* Start Bootstrap */}
                     </div>
                 </nav>

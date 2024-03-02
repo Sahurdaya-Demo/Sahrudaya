@@ -15,7 +15,7 @@ function Counseldash(){
     let countjson=[]
     let pendingRecords;
     let completedRecords;
-
+    let todayrecord;
     // const[name,setname]=useState('')
     useEffect(()=>{
 		view(setprofile)
@@ -38,8 +38,14 @@ function Counseldash(){
     try{
     profilejson=profile[0][0]
     countjson=profile[1]
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd ;
     pendingRecords=countjson.filter(record=>record.status==='Pending').length
-    // console.log(countjson)
+    todayrecord=countjson.filter(record=>record.date===today).length
     completedRecords=countjson.filter(record=>record.status==='Completed').length
     }
     catch{}
@@ -59,7 +65,7 @@ function Counseldash(){
                         <li></li>
                         </ul>
                         <p className='lexend'>
-                        Hi , welcome <p className="lexend" style={{display:"inline",color:"lightgreen"}}>{profilejson.name}</p> ! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
+                        Hi , welcome <span className="lexend" style={{display:"inline",color:"lightgreen"}}>{profilejson.name}</span> ! <img src='../assets/hand.gif' style={{width:"70px",height:"70px"}}></img>
                         </p>
                     </div>
                 </div>
@@ -94,6 +100,13 @@ function Counseldash(){
                     <div className="col-lg-4">
                         <div className=" card mb-3">
                             <div className='card-body mb-3 card-he'>
+                            <p className='font-lexend ' style={{fontSize:'25px'}}>
+                                Today's Sessions
+                            </p>
+
+                            <CountUp                             
+                                end={todayrecord}
+                                style={{ fontSize: '40px',  color: 'lightgreen' }}/>
                             
                             </div>
                         </div>
