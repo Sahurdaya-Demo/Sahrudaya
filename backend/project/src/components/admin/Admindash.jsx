@@ -368,6 +368,254 @@ function Admindash()
                         
                            </div>
                         </div>
+                        <Modal show={show} onHide={handleClose} centered>
+                        <Modal.Header closeButton onClick={handleClose} style={{backgroundColor:"#75E3B9",opacity:".7",border:'none'}}>
+                            <Modal.Title>Edit Data</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className='p-2'style={{backgroundColor:"#75E3B9",opacity:".7"}}>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Date</Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    placeholder=""
+                                    value={date||''}
+                                     onChange={(e) => setdate(e.target.value)}
+                                    disabled={true}
+                                    autoFocus
+                                />
+                                <Form.Label>Place of Counselling</Form.Label>
+                                <select className="form-select" onChange={(e) => {setplace(e.target.value);}} required disabled={true} value={place||""}>
+                                    <option></option>
+                                    <option>Vypin-Rajagiri Sea Shore School</option>
+			                        <option>Kakkanad</option>
+						            <option>Thevara-SH College(East Campus)</option>
+						            <option>Thevara-Higher Secondary School</option>
+						            <option>Thevara-SH UP</option>
+						            <option>Thevara-SH High School</option>
+						            <option>Karukutty-Christ the King monastery Church </option>
+						            <option>Kanjoor</option>
+						            <option>Eloor-SHJ UP School</option>
+						            <option>Kottarapalli-Amala Public School</option>
+						            <option>Manappuram-St Teresa's High School</option>
+						            <option>Pothy</option>
+                                </select>
+                                </Form.Group>
+                                <Form.Group>
+                            <Form.Label>Name</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder=""
+                                    maxLength={100}
+                                    onChange={(e) => {setname(e.target.value);}}
+                                    required
+                                    value={name||""}
+                                    disabled={true}
+                                    autoFocus
+                                />
+                                </Form.Group>
+                                <Form.Group>
+                                <div className="row">
+					            <div className="col-md-6">
+                                
+                                <Form.Label>Age</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    placeholder=""
+                                    onChange={(e) => {setage(e.target.value);}} 
+                                    value={Age||""}
+                                    required
+                                    autoFocus
+                                    disabled={true}
+                                />
+                                </div>
+					            <div className="col-md-6">
+                                <Form.Label>Gender</Form.Label>
+                                <select className="form-select" onChange={(e) => {setgender(e.target.value);}} disabled={true} value={Gender||""}>
+                                    <option></option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                                </div>
+                                </div>
+                                </Form.Group>
+                                <Form.Group>
+                                <div className="row">
+					            <div className="col-md-6">
+                                <Form.Label>Financial Status</Form.Label>
+                                <select className="form-select" onChange={(e) => {setfinstatus(e.target.value);}} disabled={true} value={f_status||""}>
+                                    <option></option>
+                                    <option value="APL">APL</option>
+                                    <option value="BPL">BPL</option>
+                                </select>
+                                
+                                
+                                </div>
+                                <div className="col-md-6">
+                                
+                                <Form.Label>Martial Status</Form.Label>
+                                <select className="form-select" onChange={(e) => {setmaritalstat(e.target.value);}} disabled={true} value={m_status||""}>
+                                    <option></option>
+                                <option>Married</option>
+                                <option>Single</option>
+                                <option>Divorcee</option>
+                                <option>Widower</option>
+                                <option>Widow</option>
+                                <option>Separated</option>
+                                </select>
+                                </div>
+                                </div>
+                                </Form.Group>
+                                <Form.Group>
+                                <Form.Label>School</Form.Label>
+                                <select className="form-select" onChange={(e) => {setschool(e.target.value);}} disabled={true} value={School||""}>
+                                    <option></option>
+                                    <option value="Government">Government</option>
+                                    <option value="Aided">Aided</option>   
+                                    <option value="Private">Private</option>                           
+                                </select>
+                                <Form.Label>Father's Occupation</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder=" "
+                                    maxLength={25}
+                                    onChange={(e) => {setfoccupation(e.target.value);}}
+                                    autoFocus
+                                    disabled={true}
+                                    value={f_occupation||""}
+                                />
+                                <Form.Label>Father's Education</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder=" "
+                                    maxLength={25}
+                                    onChange={(e) => {setfeducation(e.target.value);}}
+                                    autoFocus
+                                    disabled={true}
+                                    value={f_education||""}
+                                />
+                                <Form.Label>Mother's Occupation</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder=" "
+                                    maxLength={25}
+                                    onChange={(e) => {setmoccupation(e.target.value);}}
+                                    autoFocus
+                                    disabled={true}
+                                    value={m_occupation||""}
+                                />
+                                <Form.Label>Mother's Education</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder=" "
+                                    maxLength={25}
+                                    onChange={(e) => {setmeducation(e.target.value);}}
+                                    autoFocus
+                                    disabled={true}
+                                    value={m_education||""}
+                                />
+                                <Form.Label>Religion</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder=" "
+                                    maxLength={20}
+                                    onChange={(e) => {setreligion(e.target.value);}}
+                                    autoFocus
+                                    disabled={true}
+                                    value={religion||""}
+                                />
+                                </Form.Group>
+                                <Form.Group>
+                                <Form.Label>Problem</Form.Label>
+                                <textarea 
+                                className="col-12 rounded form-control" 
+                                rows={3}  
+                                maxLength={200} 
+                                onChange={(e)=>{setproblem(e.target.value);}}
+                                required
+                                disabled={true}
+                                value={problem||""}
+                                />
+                                <Form.Label>History of Problem</Form.Label>
+                                <textarea 
+                                className="col-12 rounded form-control" 
+                                rows={4}  
+                                maxLength={500} 
+                                disabled={true}
+                                onChange={(e)=>{sethistory(e.target.value);}}
+                                value={history||""}
+                                />
+                                <Form.Label>Intervention</Form.Label>
+                                <textarea 
+                                className="col-12 rounded form-control"
+                                rows={2}
+                                maxLength={100}
+                                disabled={true}
+                                onChange={(e)=>{setintervention(e.target.value);}}
+                                value={Intervention||""}
+                                />
+                                <Form.Label>Challenges by Counsellor</Form.Label>
+                                <textarea
+                                className="col-12 rounded form-control" 
+                                rows={2}
+                                maxLength={200}
+                                disabled={true}
+                                onChange={(e)=>{setchallenge(e.target.value);}}
+                                value={challenge||""}
+                                />
+                                <Form.Label>No. of follow up sessions</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    placeholder=" "
+                                    onChange={(e) => {setsession(e.target.value);}}
+                                    disabled={true}
+                                    value={follow_ups||""}
+                                    autoFocus
+                                />
+                                <Form.Label>Referal Service</Form.Label>
+                                <textarea 
+                                className="col-12 rounded form-control" 
+                                rows={2}
+                                maxLength={100}
+                                disabled={true}
+                                onChange={(e) => {setreferral(e.target.value);}}
+                                value={referral||""}
+                                />
+                                <Form.Label>Outcome</Form.Label>
+                                <textarea 
+                                className="col-12 rounded form-control" 
+                                rows={2} 
+                                maxLength={250}
+                                disabled={true}
+                                onChange={(e) => {setoutcome(e.target.value);}}
+                                value={outcome||""}
+                                />
+                                <Form.Label>Remarks</Form.Label>
+                                <textarea 
+                                className="col-12 rounded form-control" 
+                                rows={3} 
+                                maxLength={200}
+                                onChange={(e) => {setremarks(e.target.value);}}
+                                disabled={true}
+                                value={remarks||""}
+                                />
+                                </Form.Group>
+                                <Form.Group>
+                                <Form.Label>Status</Form.Label>
+                                <select className="form-select" onChange={(e) => {setstatus(e.target.value);}} required value={status||""} disabled={true}>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Completed">Completed</option>                           
+                                </select>
+                                </Form.Group>
+                                <Modal.Footer>
+                                <Form.Group className="d-flex justify-content-end align-content-end">
+                                {/* <Button variant="btn btn-warning py-1 m-1 "  onClick={handleeditClick} disabled={disableButton} style={{color:'white'}}> Edit</Button> */}
+                                {/* <Button variant="btn btn-success py-1 m-1" onClick={()=>{handlesaveClick();update(id);}} disabled={true}>Save</Button> */}
+                                <Button variant="btn btn-danger py-1 m-1" onClick={handleClose}>Close</Button>
+                        </Form.Group>
+                        </Modal.Footer>
+                        </Modal.Body>
+                    </Modal> 
                        
 
         </>
