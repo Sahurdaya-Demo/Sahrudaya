@@ -53,12 +53,14 @@ function Admindash()
         const jsonData = await response.json();
         setdata(jsonData)
         // console.log(new Date(jsonData[1].date).getMonth()==2)
-        let pendingRecords=jsonData.filter(record=>new Date(record.date).getMonth()==2).length
-        console.log(pendingRecords)
-
         
-
-      }
+        for(let i=0;i<12;i++){
+            males.push(jsonData.filter(record=>record.gender==='Male'&&new Date(record.date).getMonth()===i).length)
+            females.push(jsonData.filter(record=>record.gender==='Female'&&new Date(record.date).getMonth()===i).length)
+            others.push(jsonData.filter(record=>record.gender==='Others'&&new Date(record.date).getMonth()===i).length)
+        // console.log(pendingRecords)
+        
+        } }
 
       const getformdetails=async(id)=>{
         
@@ -91,13 +93,6 @@ function Admindash()
     
 
        
-        for(let i=0;i<12;i++){
-            males.push(jsonData.filter(record=>record.gender==='Male'&&new Date(record.date).getMonth()===i).length)
-            females.push(jsonData.filter(record=>record.gender==='Female'&&new Date(record.date).getMonth()===i).length)
-            others.push(jsonData.filter(record=>record.gender==='Others'&&new Date(record.date).getMonth()===i).length)
-        // console.log(pendingRecords)
-        
-        }
         // male=males[2]
         // console.log(males[2],females[0],others[0])
         
@@ -346,8 +341,7 @@ function Admindash()
                                         <td>{record.place_of_counselling}</td>
                                         <td>{record.problem}</td>
                                         <td>{record.status}</td>
-                                        <td><button className='btn btn-danger' >Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();getformdetails(record.id)}}>View</button></td>
-                                        <td><button className='btn btn-danger' onClick={()=>{delrecord(record.id)}} >Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{}}>View</button></td>
+                                        <td><button className='btn btn-danger' onClick={()=>{delrecord(record.id)}} >Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();getformdetails(record.id)}}>View</button></td>
                                         </tr>
                                         )}
                                     
