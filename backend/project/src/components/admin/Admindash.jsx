@@ -7,7 +7,6 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import axios from 'axios';
 function Admindash()
 {
     const [show, setShow] = useState(false);
