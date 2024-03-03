@@ -1,6 +1,8 @@
 import LoadExternalScript from '../../LoadExternalScript';
 import PureCounter from "@srexi/purecounterjs";
 import { useEffect, useState} from 'react';
+import { Chart as ChartJS, defaults } from "chart.js/auto";
+import { Bar, Doughnut, Line } from "react-chartjs-2";
 function Admindash()
 {
     const[data,setdata]=useState([])
@@ -13,7 +15,13 @@ function Admindash()
         const response= await fetch(`http://127.0.0.1:8000/formsubmit/`)
         const jsonData = await response.json();
         setdata(jsonData)
+        // console.log(new Date(jsonData[1].date).getMonth()==2)
+        let pendingRecords=jsonData.filter(record=>new Date(record.date).getMonth()==2).length
+        console.log(pendingRecords)
       }
+
+      defaults.maintainAspectRatio=false;
+      defaults.responsive=true;
     return(
         <>
         <div className="row mt-lg-4" style={{alignItems:'center',justifyContent:'center'}}>
@@ -134,7 +142,28 @@ function Admindash()
                                         <i className="fa fa-chart-area me-1"></i>
                                         Area Chart Example
                                     </div>
-                                    <div className="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                    <div className="card-body" style={{position:'relative'}}>
+                                        <Bar
+                                            data={{
+                                                labels:["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEPT","OCT","NOV","DEC"],
+                                                datasets:[
+                                                    {
+                                                        label:"MALES",
+                                                        data:[200,300,500],
+                                                    },
+                                                    {
+                                                        label:"FEMALES",
+                                                        data:[90,80,70],
+                                                    },
+                                                    {
+                                                        label:"OTHERS",
+                                                        data:[200,300,500],
+                                                    },
+                                                ],
+                                            }}
+                                            style={{height:'400px'}}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             <div className="col-xl-6">

@@ -27,6 +27,7 @@ function Employee() {
   const retrieve=async()=>{
     let todayrecord;
     let yesterdayrecord;
+    let overall;
     const response= await fetch(`http://127.0.0.1:8000/api/`)
     const jsonData = await response.json();
     const responsecon= await fetch(`http://127.0.0.1:8000/formsubmit/`)
@@ -47,8 +48,10 @@ function Employee() {
     {
       yesterdayrecord=0
       todayrecord=0;
+      overall=0;
       for(let j=0;j<Object.keys(jsonDatacon).length;j++){
       if(jsonData[i].email===jsonDatacon[j].email){
+        overall++;
         if(jsonDatacon[j].date===today)
           todayrecord++
         if(jsonDatacon[j].date===yesterday)
@@ -57,6 +60,7 @@ function Employee() {
       }
       jsonData[i]['todaycount']=todayrecord;
       jsonData[i]['yesterdaycount']=yesterdayrecord;
+      jsonData[i]['overall']=overall;
     }
     
     for(let i=0;i<Object.keys(jsonData).length;i++){
