@@ -36,9 +36,13 @@ function Admindash()
     const[remarks,setremarks]=useState("")
     const[status,setstatus]=useState("")
     const[data,setdata]=useState([])
+    const [pending,setpending]=useState([]);
+    const [completed,setcompleted]=useState([]);
+    const [overall, setoverall] = useState([]);
     const [males, setmales] = useState([]);
     const [females, setfemales] = useState([]);
     const [others, setothers] = useState([]);
+    
     useEffect(()=>{
         LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','adminjs/tablescript.js']);
         new PureCounter();
@@ -52,6 +56,12 @@ function Admindash()
             males.push(jsonData.filter(record=>record.gender==='Male'&&new Date(record.date).getMonth()===i).length)
             females.push(jsonData.filter(record=>record.gender==='Female'&&new Date(record.date).getMonth()===i).length)
             others.push(jsonData.filter(record=>record.gender==='Others'&&new Date(record.date).getMonth()===i).length)
+        
+        }
+        for(let i=0;i<12;i++){
+            pending.push(jsonData.filter(record=>record.status==='Pending'&&new Date(record.date).getMonth()===i).length)
+            completed.push(jsonData.filter(record=>record.status==='Completed'&&new Date(record.date).getMonth()===i).length)
+            overall.push(jsonData.filter(record=>new Date(record.date).getMonth()===i).length)
         
         }
     }
@@ -101,6 +111,42 @@ function Admindash()
   }
   defaults.maintainAspectRatio=false;
   defaults.responsive=true;
+
+  const datasess = {
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
+  datasets: [
+    {
+      label: 'Completed',
+      fill: false,
+      lineTension: 0.1,
+      data: [completed[0],completed[1],completed[2],completed[3],completed[4],completed[5],completed[6],completed[7],completed[8],completed[9],completed[10],completed[11]]
+      },
+    {
+      label: 'Pending',
+      fill: false,
+      lineTension: 0.1,
+       data: [pending[0],pending[1],pending[2],pending[3],pending[4],pending[5],pending[6],pending[7],pending[8],pending[9],pending[10],pending[11]]
+    },
+    {
+      label: 'Overall',
+      fill: false,
+      lineTension: 0.1,
+       data: [overall[0],overall[1],overall[2],overall[3],overall[4],overall[5],overall[6],overall[7],overall[8],overall[9],overall[10],overall[11]]
+    },
+  ]
+};
+
+const options = {
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: true
+        }
+      }
+    ]
+  }
+};
     return(
         <>
         <div className="row mt-lg-4" style={{alignItems:'center',justifyContent:'center'}}>
@@ -265,13 +311,26 @@ function Admindash()
                                     </div>
                                 </div>
                             </div>
+                            
                             <div className="col-xl-6">
                                 <div className="card mb-4">
+                                    <div className="card-header">
+                                        <i className="fa fa-chart-area me-1"></i>
+                                        Sessions Chart
+                                    </div>
+                                    <div className="card-body" style={{position:'relative'}}>
+                                     <Line data={datasess} options={options}  style={{height:'400px'}}/>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    
+                            {/* <div className="col-xl-6">
+                                <div className="card mb-4"> */}
                                     {/* <div className="card-header">
                                         <i className="fa fa-chart-bar me-1"></i>
                                         Bar Chart Example
                                     </div> */}
-                                    <div className="card-body">
+                                    {/* <div className="card-body"> */}
                                     {/* <Carousel autoPlay={false} infiniteLoop={true} showThumbs={false} showArrows={true}  showIndicators={false} showStatus={false} className=' h-100 w-100'>
                                         <div className='flex flex-row'>
                                             <div className='w-50'>
@@ -286,10 +345,10 @@ function Admindash()
                                             <div className=' w-50' style={{backgroundColor:'blue'}}>b</div>
                                         </div>
                                     </Carousel> */}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                    {/* </div> */}
+                                {/* </div>
+                            </div>*/}
+                        </div> 
                         <div className="card mb-4">
                             <div className="card-header">
                                 <i className="fa fa-table me-1"></i>
