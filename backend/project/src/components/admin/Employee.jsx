@@ -147,9 +147,9 @@ const delemp=async(idi)=>{
                   placement='bottom'
                   overlay={
                     <Popover >
-                      <Popover.Header as="h3">Today    :<strong> 15</strong></Popover.Header>
-                      <Popover.Header as="h3">Yesterday:<strong> 15</strong></Popover.Header>
-                      <Popover.Header as="h3">Tomarrow :< strong> 15</strong></Popover.Header>
+                      <Popover.Header as="h3">Today    :<strong> {record.todaycount}</strong></Popover.Header>
+                      <Popover.Header as="h3">Yesterday:<strong> {record.yesterdaycount}</strong></Popover.Header>
+                      <Popover.Header as="h3">Overall:< strong> {record.overall}</strong></Popover.Header>
                     </Popover>
                   }
                 >
