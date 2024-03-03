@@ -9,6 +9,7 @@ import axios from 'axios';
 
 function Register({secure})
 {
+	const[alerted,setalerted]=useState(false)
     const[email,setemail]=useState('')
     const[name,setname]=useState('')
     const[password,setpassword]=useState('')
@@ -33,7 +34,8 @@ function Register({secure})
 				img.onload = function handleLoad() {
 				console.log(`Width: ${img.width}, Height: ${img.height}`,);
 
-				if (img.width < 100 || img.height < 100) {
+				if ((img.width == 378 && img.height == 508) && (selectedImage.size*0.001)<100) {
+					setalerted(true)
 					console.log(
 					"The image's width or height is less than 100px",
 					);
@@ -46,6 +48,7 @@ function Register({secure})
 	}
 	const Registration=async()=>{
 		let type='counsellor'
+		 if(alerted){
 		  if(email!==''&&email.includes('@')){
 			if(password!==''&&password===crpassword){
 				
@@ -94,11 +97,16 @@ function Register({secure})
 				alert('Password and Confirm Password Not Matching')
 			}
 			}
+		}
+		else{
+			alert('Change the image dimension to 378 width and 508 height and reduce the size  of Image less than 100kb');
+		}
 	}
 	  useEffect(()=>{
 		LoadExternalScript(['../../../loginvendor/jquery/jquery-3.2.1.min.js','../../../loginjs/main.js']);
 		// return()=>{UnloadExternalScript(['loginvendor/jquery/jquery-3.2.1.min.js','loginjs/main.js']);}
 		},[])
+		
 		
 return (  
 	
@@ -166,14 +174,17 @@ return (
 						</span>
 					</div>
                     <hr/>
-                    <div className="wrap-input100 validate-input" data-validate = "phone number is required:">
+                    <div className="wrap-input100 validate-input" data-validate = "image is required:">
 					<input className="input100" type="file" name="image" placeholder="image" id='check' onChange={(e) => {setimage(e.target.files[0]);check()}} style={{paddingTop:'10px'}}/>
+					
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-picture-o" aria-hidden="true"></i>
 						</span>
+						
 					</div>
-					
+					<p >Required <span style={{color:"red"}}>width :379px </span>, <span style={{color:"red"}}>height :508px</span> , <span style={{color:"red"}}>size :less than 100kb</span> </p>
+					<a href="https://www.resizepixel.com/reduce-image-in-kb/">Click to resize</a>
 					<div className="container-login100-form-btn">
                         <button className="btn btn-primary" onClick={()=>Registration()} >
 							Register
