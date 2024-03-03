@@ -35,8 +35,6 @@ function Admindash()
     const[outcome,setoutcome]=useState("")
     const[remarks,setremarks]=useState("")
     const[status,setstatus]=useState("")
-    // const handleClose = () => {setShow(false);setDisableButton(false);}
-
     const[data,setdata]=useState([])
     const [males, setmales] = useState([]);
     const [females, setfemales] = useState([]);
@@ -50,13 +48,13 @@ function Admindash()
         const response= await fetch(`http://127.0.0.1:8000/formsubmit/`)
         const jsonData = await response.json();
         setdata(jsonData)
-        // console.log(new Date(jsonData[1].date).getMonth()==2)
-        let pendingRecords=jsonData.filter(record=>new Date(record.date).getMonth()==2).length
-        console.log(pendingRecords)
-
+        for(let i=0;i<12;i++){
+            males.push(jsonData.filter(record=>record.gender==='Male'&&new Date(record.date).getMonth()===i).length)
+            females.push(jsonData.filter(record=>record.gender==='Female'&&new Date(record.date).getMonth()===i).length)
+            others.push(jsonData.filter(record=>record.gender==='Others'&&new Date(record.date).getMonth()===i).length)
         
-
-      }
+        }
+    }
 
       const getformdetails=async(id)=>{
         
@@ -86,24 +84,7 @@ function Admindash()
         setstatus(result.data.status);
         setplace(result.data.place_of_counselling)
     }
-    
-
-       
-        for(let i=0;i<12;i++){
-            males.push(jsonData.filter(record=>record.gender==='Male'&&new Date(record.date).getMonth()===i).length)
-            females.push(jsonData.filter(record=>record.gender==='Female'&&new Date(record.date).getMonth()===i).length)
-            others.push(jsonData.filter(record=>record.gender==='Others'&&new Date(record.date).getMonth()===i).length)
-        
-        }
-        // male=males[2]
-        // console.log(males[2],females[0],others[0])
-        
-    //   console.log(artists[0])
-      defaults.maintainAspectRatio=false;
-      defaults.responsive=true;
-
-
-      const delrecord=async(id)=>{
+    const delrecord=async(id)=>{
     if (window.confirm('Are you sure you wish to delete this item?')){
     try{
     await axios({
@@ -118,6 +99,8 @@ function Admindash()
     }
 
   }
+  defaults.maintainAspectRatio=false;
+  defaults.responsive=true;
     return(
         <>
         <div className="row mt-lg-4" style={{alignItems:'center',justifyContent:'center'}}>
@@ -336,8 +319,7 @@ function Admindash()
                                         <td>{record.place_of_counselling}</td>
                                         <td>{record.problem}</td>
                                         <td>{record.status}</td>
-                                        <td><button className='btn btn-danger' >Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();getformdetails(record.id)}}>View</button></td>
-                                        <td><button className='btn btn-danger' onClick={()=>{delrecord(record.id)}} >Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{}}>View</button></td>
+                                        <td><button className='btn btn-danger' onClick={()=>{delrecord(record.id)}}>Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();getformdetails(record.id)}}>View</button></td>
                                         </tr>
                                         )}
                                     
