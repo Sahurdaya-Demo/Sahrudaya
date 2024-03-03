@@ -5,7 +5,9 @@ import Form from 'react-bootstrap/Form';
 import { Card, CardBody } from "reactstrap";
 import axios from 'axios';
 import {Spinner } from 'react-bootstrap';
-import Dropdown from 'react-bootstrap/Dropdown';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+
 function Employee() {
   // const [items, setItems] = useState([]);
   // let empdetails
@@ -137,15 +139,22 @@ const delemp=async(idi)=>{
                     <p className="card-text text-success ms-1">Email : <small className="text-body-secondary text-dark">{record.email}</small></p>
                     <p className="card-text text-success ms-1">Phone No. : <small className="text-body-secondary text-dark">{record.phone}</small></p>
                     <p className="card-text text-success ms-1">Qualification : <small className="text-body-secondary text-dark">{record.qualification}</small></p>
-                  <button type="button" className=" dropdown-toggle ms-1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Submissions
-                  </button>
+
               
-                  <ul className="dropdown-menu" >
-                    <li><p className="dropdown-item">Today : {record.age}</p></li>
-                    <li><p className="dropdown-item">Yesterday : {record.age}</p></li>
-                    <li><p className="dropdown-item">Last Week : {record.age}</p></li>
-                  </ul>
+                  <OverlayTrigger
+                  trigger="click"
+                  // key={placement}
+                  placement='bottom'
+                  overlay={
+                    <Popover >
+                      <Popover.Header as="h3">Today    :<strong> 15</strong></Popover.Header>
+                      <Popover.Header as="h3">Yesterday:<strong> 15</strong></Popover.Header>
+                      <Popover.Header as="h3">Tomarrow :< strong> 15</strong></Popover.Header>
+                    </Popover>
+                  }
+                >
+                <Button variant="success">Submissions</Button>
+                </OverlayTrigger>
                  <button className="btn btn-danger float-end mb-1 me-2" onClick={()=>delemp(record.id)}>Delete</button>
                   </div>
                 </div>

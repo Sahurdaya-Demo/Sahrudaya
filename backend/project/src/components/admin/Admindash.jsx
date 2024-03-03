@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import axios from 'axios';
 function Admindash()
 {
     const [show, setShow] = useState(false);
@@ -38,12 +39,17 @@ function Admindash()
     // const handleClose = () => {setShow(false);setDisableButton(false);}
 
     const[data,setdata]=useState([])
+    const [males, setmales] = useState([]);
+    const [females, setfemales] = useState([]);
+    const [others, setothers] = useState([]);
+    // var datas;
     useEffect(()=>{
         LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','adminjs/tablescript.js']);
         new PureCounter();
         retrieve()
       },[])
       const retrieve=async()=>{
+        
         const response= await fetch(`http://127.0.0.1:8000/formsubmit/`)
         const jsonData = await response.json();
         setdata(jsonData)
@@ -85,8 +91,38 @@ function Admindash()
     }
     
 
+       
+        for(let i=0;i<12;i++){
+            males.push(jsonData.filter(record=>record.gender==='Male'&&new Date(record.date).getMonth()===i).length)
+            females.push(jsonData.filter(record=>record.gender==='Female'&&new Date(record.date).getMonth()===i).length)
+            others.push(jsonData.filter(record=>record.gender==='Others'&&new Date(record.date).getMonth()===i).length)
+        // console.log(pendingRecords)
+        
+        }
+        // male=males[2]
+        // console.log(males[2],females[0],others[0])
+        
+      }
+    //   console.log(artists[0])
       defaults.maintainAspectRatio=false;
       defaults.responsive=true;
+
+
+      const delrecord=async(id)=>{
+    if (window.confirm('Are you sure you wish to delete this item?')){
+    try{
+    await axios({
+        method: 'delete',
+        url:`http://127.0.0.1:8000/formsubmit/${id}/`,
+      }).then(response=>{
+        console.log(response.data);
+        alert('Record Deleted Successfully!!')
+      }
+      )}
+      catch{}
+    }
+
+  }
     return(
         <>
         <div className="row mt-lg-4" style={{alignItems:'center',justifyContent:'center'}}>
@@ -94,8 +130,10 @@ function Admindash()
                             <div className="col-xl-4 col-md-6">
                                 <div className="card bg-primary text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
-                                    <div className="card-body" style={{fontWeight:600,fontSize:'0.8rem'}}>Vypin-Rajagiri Sea Shore School</div>
+                                    <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Vypin-Rajagiri Sea Shore School</div>
+                                    <div className='card-body col-5'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
                                     </div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="#">View Details</a>
@@ -106,8 +144,10 @@ function Admindash()
                             <div className="col-xl-4 col-md-6">
                                 <div className="card bg-primary text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
-                                    <div className="card-body" style={{fontWeight:600,fontSize:'0.8rem'}}>Kakkanad</div>
+                                    <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Kakkanad</div>
+                                    <div className='card-body col-5'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
                                     </div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="#">View Details</a>
@@ -118,8 +158,10 @@ function Admindash()
                             <div className="col-xl-4 col-md-6">
                                 <div className="card bg-primary text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
-                                    <div className="card-body" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH College(East Campus)</div>
+                                    <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH College(East Campus)</div>
+                                    <div className='card-body col-5'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
                                     </div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="#">View Details</a>
@@ -130,8 +172,10 @@ function Admindash()
                             <div className="col-xl-4 col-md-6">
                                 <div className="card bg-primary text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
-                                    <div className="card-body" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-Higher Secondary School</div>
+                                    <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-Higher Secondary School</div>
+                                    <div className='card-body col-5'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
                                     </div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="#">View Details</a>
@@ -142,8 +186,10 @@ function Admindash()
                             <div className="col-xl-4 col-md-6">
                                 <div className="card bg-primary text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
-                                    <div className="card-body" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH UP</div>
+                                    <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH UP</div>
+                                    <div className='card-body col-5'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
                                     </div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="#">View Details</a>
@@ -154,8 +200,10 @@ function Admindash()
                             <div className="col-xl-4 col-md-6">
                                 <div className="card bg-primary text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
-                                    <div className="card-body" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH High School</div>
+                                    <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH High School</div>
+                                    <div className='card-body'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
                                     </div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="#">View Details</a>
@@ -166,8 +214,10 @@ function Admindash()
                             <div className="col-xl-4 col-md-6">
                                 <div className="card bg-primary text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
-                                    <div className="card-body" style={{fontWeight:600,fontSize:'0.8rem'}}>Karukutty-Christ the King monastery Church </div>
+                                    <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Karukutty-Christ the King monastery Church </div>
+                                    <div className='card-body col-5'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
                                     </div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="#">View Details</a>
@@ -178,8 +228,10 @@ function Admindash()
                             <div className="col-xl-4 col-md-6">
                                 <div className="card bg-primary text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
-                                    <div className="card-body" style={{fontWeight:600,fontSize:'0.8rem'}}>Kanjoor</div>
+                                    <div className="card-body  col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Kanjoor</div>
+                                    <div className='card-body col-5'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
                                     </div>
                                     <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="#">View Details</a>
@@ -190,8 +242,10 @@ function Admindash()
                             <div className="col-xl-4 col-md-6">
                                 <div className="card bg-primary text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
-                                    <div className="card-body" style={{fontWeight:600,fontSize:'0.8rem'}}>Eloor-SHJ UP School</div>
+                                    <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Eloor-SHJ UP School</div>
+                                    <div className='card-body col-5'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
                                     </div>
                                     {/* <div className="card-footer d-flex align-items-center justify-content-between">
                                         <a className="small text-white stretched-link" href="#">View Details</a>
@@ -208,23 +262,32 @@ function Admindash()
                                         Area Chart Example
                                     </div>
                                     <div className="card-body" style={{position:'relative'}}>
+                                         
                                         <Bar
                                             data={{
                                                 labels:["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEPT","OCT","NOV","DEC"],
                                                 datasets:[
                                                     {
                                                         label:"MALES",
-                                                        data:[200,300,500],
+                                                        data:[males[0],males[1],males[2],males[3],males[4],males[5],males[6],males[7],males[8],males[9],males[10],males[11]],
+                                                        // data:[ar]
                                                     },
                                                     {
                                                         label:"FEMALES",
-                                                        data:[90,80,70],
+                                                        data:[females[0],females[1],females[2],females[3],females[4],females[5],females[6],females[7],females[8],females[9],females[10],females[11]],
                                                     },
                                                     {
                                                         label:"OTHERS",
-                                                        data:[200,300,500],
+                                                        data:[others[0],others[1],others[2],others[3],others[4],others[5],others[6],others[7],others[8],others[9],others[10],others[11]],
                                                     },
                                                 ],
+                                                // datasets:[
+                                                //     {
+                                                //         label:"Males",
+                                                //         data:[100,200,300]
+                                                //     }
+
+                                                // ],
                                             }}
                                             style={{height:'400px'}}
                                         />
@@ -286,6 +349,7 @@ function Admindash()
                                         <td>{record.problem}</td>
                                         <td>{record.status}</td>
                                         <td><button className='btn btn-danger' >Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();getformdetails(record.id)}}>View</button></td>
+                                        <td><button className='btn btn-danger' onClick={()=>{delrecord(record.id)}} >Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{}}>View</button></td>
                                         </tr>
                                         )}
                                     
