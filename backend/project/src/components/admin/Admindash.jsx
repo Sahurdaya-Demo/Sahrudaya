@@ -324,7 +324,7 @@ function Admindash()
                                                     },
                                                 ],
                                             }}
-                                            style={{height:'400px'}}
+                                            style={{height:'350px'}}
                                         />
                                     </div>
                                 </div>
@@ -337,7 +337,7 @@ function Admindash()
                                         Sessions Chart
                                     </div>
                                     <div className="card-body" style={{position:'relative'}}>
-                                     <Line data={datasess}   style={{height:'400px'}}/>
+                                     <Line data={datasess}   style={{height:'350px'}}/>
                                     </div>
                                     </div>
                                     </div>
