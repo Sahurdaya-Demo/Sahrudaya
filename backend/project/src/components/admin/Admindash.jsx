@@ -136,145 +136,151 @@ function Admindash()
   ]
 };
 
-const options = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true
-        }
-      }
-    ]
-  }
-};
+// const options = {
+//   scales: {
+//     yAxes: [
+//       {
+//         ticks: {
+//           beginAtZero: true
+//         }
+//       }
+//     ]
+//   }
+// };
     return(
         <>
         <div className="row mt-lg-4" style={{alignItems:'center',justifyContent:'center'}}>
                             <h1>Centers</h1>
                             <div className="col-xl-4 col-md-6">
-                                <div className="card bg-primary text-white mb-4 " >
+                                <div className="card cardey text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Vypin-Rajagiri Sea Shore School</div>
-                                    <div className='card-body col-5'>
+                                    <div className='card-body col-5 ms-3'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
                                     </div>
                                     </div>
-                                    <div className="card-footer d-flex align-items-center justify-content-between">
-                                        <a className="small text-white stretched-link" href="#">View Details</a>
-                                        <div className="small text-white"><i className="fa fa-angle-right"></i></div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                             <div className="col-xl-4 col-md-6">
-                                <div className="card bg-primary text-white mb-4 " >
+                                <div className="card cardey text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Kakkanad</div>
-                                    <div className='card-body col-5'>
+                                    <div className='card-body col-5 ms-3'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
                                     </div>
                                     </div>
-                                    <div className="card-footer d-flex align-items-center justify-content-between">
-                                        <a className="small text-white stretched-link" href="#">View Details</a>
-                                        <div className="small text-white"><i className="fa fa-angle-right"></i></div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                             <div className="col-xl-4 col-md-6">
-                                <div className="card bg-primary text-white mb-4 " >
+                                <div className="card cardey text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH College(East Campus)</div>
-                                    <div className='card-body col-5'>
+                                    <div className='card-body col-5 ms-3'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
                                     </div>
                                     </div>
-                                    <div className="card-footer d-flex align-items-center justify-content-between">
-                                        <a className="small text-white stretched-link" href="#">View Details</a>
-                                        <div className="small text-white"><i className="fa fa-angle-right"></i></div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                             <div className="col-xl-4 col-md-6">
-                                <div className="card bg-primary text-white mb-4 " >
+                                <div className="card cardey text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-Higher Secondary School</div>
-                                    <div className='card-body col-5'>
+                                    <div className='card-body col-5 ms-3'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
                                     </div>
                                     </div>
-                                    <div className="card-footer d-flex align-items-center justify-content-between">
-                                        <a className="small text-white stretched-link" href="#">View Details</a>
-                                        <div className="small text-white"><i className="fa fa-angle-right"></i></div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                             <div className="col-xl-4 col-md-6">
-                                <div className="card bg-primary text-white mb-4 " >
+                                <div className="card cardey text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH UP</div>
-                                    <div className='card-body col-5'>
+                                    <div className='card-body col-5 ms-3'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
                                     </div>
                                     </div>
-                                    <div className="card-footer d-flex align-items-center justify-content-between">
-                                        <a className="small text-white stretched-link" href="#">View Details</a>
-                                        <div className="small text-white"><i className="fa fa-angle-right"></i></div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                             <div className="col-xl-4 col-md-6">
-                                <div className="card bg-primary text-white mb-4 " >
+                                <div className="card cardey text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH High School</div>
-                                    <div className='card-body'>
+                                    <div className='card-body col-5 ms-3'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
                                     </div>
                                     </div>
-                                    <div className="card-footer d-flex align-items-center justify-content-between">
-                                        <a className="small text-white stretched-link" href="#">View Details</a>
-                                        <div className="small text-white"><i className="fa fa-angle-right"></i></div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                             <div className="col-xl-4 col-md-6">
-                                <div className="card bg-primary text-white mb-4 " >
+                                <div className="card cardey text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Karukutty-Christ the King monastery Church </div>
                                     <div className='card-body col-5'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
                                     </div>
                                     </div>
-                                    <div className="card-footer d-flex align-items-center justify-content-between">
-                                        <a className="small text-white stretched-link" href="#">View Details</a>
-                                        <div className="small text-white"><i className="fa fa-angle-right"></i></div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                             <div className="col-xl-4 col-md-6">
-                                <div className="card bg-primary text-white mb-4 " >
+                                <div className="card cardey text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="card-body  col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Kanjoor</div>
-                                    <div className='card-body col-5'>
+                                    <div className='card-body col-5 ms-3'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
                                     </div>
                                     </div>
-                                    <div className="card-footer d-flex align-items-center justify-content-between">
-                                        <a className="small text-white stretched-link" href="#">View Details</a>
-                                        <div className="small text-white"><i className="fa fa-angle-right"></i></div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                             <div className="col-xl-4 col-md-6">
-                                <div className="card bg-primary text-white mb-4 " >
+                                <div className="card cardey text-white mb-4 " >
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Eloor-SHJ UP School</div>
-                                    <div className='card-body col-5'>
+                                    <div className='card-body col-5 ms-3'>
                                     <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
                                     </div>
                                     </div>
-                                    {/* <div className="card-footer d-flex align-items-center justify-content-between">
-                                        <a className="small text-white stretched-link" href="#">View Details</a>
-                                        <div className="small text-white"><i className="fa fa-angle-right"></i></div>
-                                    </div> */}
+                                     
+                                </div>
+                            </div>
+                            <div className="col-xl-4 col-md-6">
+                                <div className="card cardey text-white mb-4 " >
+                                    <div className='d-flex flex-lg-row flex-column align-items-center'>
+                                    <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Kottarapalli Amala Public School</div>
+                                    <div className='card-body col-5 ms-3'>
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
+                                    </div>
+                                     
+                                </div>
+                            </div>
+                            <div className="col-xl-4 col-md-6">
+                                <div className="card cardey text-white mb-4 " >
+                                    <div className='d-flex flex-lg-row flex-column align-items-center'>
+                                    <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Manappuram St.Theresa's high school</div>
+                                    <div className='card-body col-5 ms-3'>
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
+                                    </div>
+                                     
+                                </div>
+                            </div>
+                            <div className="col-xl-4 col-md-6">
+                                <div className="card cardey text-white mb-4 " >
+                                    <div className='d-flex flex-lg-row flex-column align-items-center'>
+                                    <div className="card-body col-xl-9" style={{fontWeight:600,fontSize:'0.8rem'}}>Pothy</div>
+                                    <div className='card-body col-5 ms-3'>
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 pe-lg-5" style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    </div>
+                                    </div>
+                                     
                                 </div>
                             </div>
                         </div>
@@ -319,7 +325,7 @@ const options = {
                                         Sessions Chart
                                     </div>
                                     <div className="card-body" style={{position:'relative'}}>
-                                     <Line data={datasess} options={options}  style={{height:'400px'}}/>
+                                     <Line data={datasess}   style={{height:'400px'}}/>
                                     </div>
                                     </div>
                                     </div>

@@ -4180,7 +4180,7 @@ textarea.form-control-lg {
   --bs-card-cap-bg: rgba(0, 0, 0, 0.03);
   --bs-card-cap-color: ;
   --bs-card-height: ;
-  --bs-card-color: ;
+  --bs-card-color: #fff;
   --bs-card-bg: #fff;
   --bs-card-img-overlay-padding: 1rem;
   --bs-card-group-margin: 0.75rem;
@@ -4221,7 +4221,7 @@ textarea.form-control-lg {
 .card-body {
   flex: 1 1 auto;
   padding:15px;
-  color: var(--bs-card-color);
+  color: #000;
 }
 
 .card-title {
@@ -11365,4 +11365,11 @@ smi-navbar {
   .navbar .dropdown ul{
     display:block
   }
+}
+.cardey{
+  background-color: #fff;
+  border-color: #000;
+  color: #000;
+  box-shadow: 6px 6px  2px rgba(52, 52, 52, 0.1) ;
+  transition: all 0.5s ease-out;
 }
