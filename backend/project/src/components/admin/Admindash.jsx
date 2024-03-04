@@ -136,17 +136,17 @@ function Admindash()
   ]
 };
 
-const options = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true
-        }
-      }
-    ]
-  }
-};
+// const options = {
+//   scales: {
+//     yAxes: [
+//       {
+//         ticks: {
+//           beginAtZero: true
+//         }
+//       }
+//     ]
+//   }
+// };
     return(
         <>
         <div className="row mt-lg-4" style={{alignItems:'center',justifyContent:'center'}}>
@@ -319,7 +319,7 @@ const options = {
                                         Sessions Chart
                                     </div>
                                     <div className="card-body" style={{position:'relative'}}>
-                                     <Line data={datasess} options={options}  style={{height:'400px'}}/>
+                                     <Line data={datasess} style={{height:'400px'}}/>
                                     </div>
                                     </div>
                                     </div>

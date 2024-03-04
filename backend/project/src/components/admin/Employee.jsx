@@ -153,9 +153,9 @@ const delemp=async(idi)=>{
                     </Popover>
                   }
                 >
-                <Button variant="success">Submissions</Button>
+                <Button variant="success" className='mt-4'>Submissions</Button>
                 </OverlayTrigger>
-                 <button className="btn btn-danger float-end mb-1 me-2" onClick={()=>delemp(record.id)}>Delete</button>
+                 <button className="btn btn-danger float-end mb-1  mt-4" onClick={()=>delemp(record.id)}>Delete</button>
                   </div>
                 </div>
               </div>
