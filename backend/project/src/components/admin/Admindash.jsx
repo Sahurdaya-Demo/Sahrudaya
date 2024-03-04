@@ -147,6 +147,17 @@ function Admindash()
 //     ]
 //   }
 // };
+// const options = {
+//   scales: {
+//     yAxes: [
+//       {
+//         ticks: {
+//           beginAtZero: true
+//         }
+//       }
+//     ]
+//   }
+// };
     return(
         <>
         <div className="row mt-lg-4" style={{alignItems:'center',justifyContent:'center'}}>
