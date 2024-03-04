@@ -22,7 +22,7 @@ const CbLogin=async(navigate,email,password)=>{
           token=response.data.token.access;
           // token1=response.data.token;
           // console.log(token)
-          localStorage.setItem('token',JSON.stringify(token))
+          sessionStorage.setItem('token',JSON.stringify(token))
           // sessionStorage.setItem('token','token')
           navigate(`/${response.data.type}`,{state:{token}})
           }

@@ -28,13 +28,13 @@ function Counsellor() {
     
   useEffect(()=>{
     let token;
-    token=localStorage.getItem('token')
+    token=sessionStorage.getItem('token')
     // console.log(location.state.token)
     if(token===null)
     navigate('/',{ replace: true })
     else{
         view(setprofile)
-        localStorage.setItem('type','counselor')
+        sessionStorage.setItem('type','counselor')
     }
    
     // return()=>{console.log('refresh')}
@@ -48,7 +48,7 @@ function Counsellor() {
     method: 'post',
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
+        'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`, // Include the access token in the Authorization header
        },
     url:'http://127.0.0.1:8000/changepassword/',
     data: formField,   
@@ -108,9 +108,9 @@ const handlesaveClick = () => {
     //   // localStorage.setItem('sharedData','false')
     // })
     
-    localStorage.removeItem('token');
-    localStorage.removeItem('type');
-    localStorage.removeItem('email');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('type');
+    sessionStorage.removeItem('email');
     navigate('/',{replace:true})
   }
   try{

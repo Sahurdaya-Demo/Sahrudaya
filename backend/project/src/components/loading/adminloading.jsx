@@ -9,7 +9,7 @@ const Adminloading=()=>
   const [loading, setLoading] = useState(true);
   // console.log(location.state.token1)
   useEffect(() => {
-    if(localStorage.getItem('type')==='counselor')
+    if(sessionStorage.getItem('type')==='counselor')
     {
       navigate('*')
     }

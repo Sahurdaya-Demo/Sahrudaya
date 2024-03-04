@@ -29,7 +29,7 @@ function Admin() {
     
     // useEffect(()=>{
     //   let token;
-    //   token=localStorage.getItem('token')
+    //   token=sessionStorage.getItem('token')
     //   // console.log(location.state.token)
     //   if(token===null)
     //   navigate('/',{ replace: true })
@@ -63,7 +63,7 @@ function Admin() {
     method: 'post',
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
+        'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`, // Include the access token in the Authorization header
        },
     url:'http://127.0.0.1:8000/changepassword/',
     data: formField,   
@@ -90,26 +90,13 @@ function Admin() {
   const handlesaveClick = () => {
     setDisableButton(!disableButton)
     };
-useEffect(()=>{
-    let token;
-    token=localStorage.getItem('token')
-    // console.log(location.state.token)
-    if(token===null)
-    navigate('/',{ replace: true })
-    else{
-        view()
-        // localStorage.setItem('type','counselor')
-    }
-   
-    // return()=>{console.log('refresh')}
-  },[])
    const view=async()=>{
     try{
     await axios({
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`, // Include the access token in the Authorization header
+        'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`, // Include the access token in the Authorization header
       },
       url:'http://127.0.0.1:8000/profile/',
     }).then(response=>{
@@ -141,7 +128,7 @@ useEffect(()=>{
     //   navigate('/',{ replace: true })
     //   // localStorage.setItem('sharedData','false')
     // })
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     navigate('/',{replace:true})
     }
   return (
