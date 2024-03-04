@@ -157,7 +157,7 @@ function Admindash()
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Vypin-Rajagiri Sea Shore School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -169,7 +169,7 @@ function Admindash()
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Kakkanad</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -181,7 +181,7 @@ function Admindash()
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH College(East Campus)</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -193,7 +193,7 @@ function Admindash()
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-Higher Secondary School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -205,7 +205,7 @@ function Admindash()
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH UP</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -217,7 +217,7 @@ function Admindash()
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH High School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -229,7 +229,7 @@ function Admindash()
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Karukutty-Christ the King monastery Church </div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -241,7 +241,7 @@ function Admindash()
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Kanjoor</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -253,7 +253,7 @@ function Admindash()
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Eloor-SHJ UP School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                      </div>
@@ -265,7 +265,7 @@ function Admindash()
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Kottarapalli Amala Public School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                      </div>
@@ -277,7 +277,7 @@ function Admindash()
                                         <div className='d-flex flex-lg-row flex-column align-items-center'>
                                             <div className="col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{ fontWeight: 600, fontSize: '0.8rem' }}>Manappuram St.Theresa's high school</div>
                                             <div className='col-lg-4'>
-                                                <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6" style={{ fontFamily: 'Poppins-Regular, sans-serif', fontWeight: 600 }}></span>
+                                                <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6" style={{ fontFamily: 'Poppins-Regular, sans-serif', fontWeight: 600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span>
                                             </div>
                                         </div>
                                     </div>
@@ -289,7 +289,7 @@ function Admindash()
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className=" col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Pothy</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                      </div>
