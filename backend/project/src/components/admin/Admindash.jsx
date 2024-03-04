@@ -324,30 +324,6 @@ const options = {
                                     </div>
                                     </div>
                                     
-                            {/* <div className="col-xl-6">
-                                <div className="card mb-4"> */}
-                                    {/* <div className="card-header">
-                                        <i className="fa fa-chart-bar me-1"></i>
-                                        Bar Chart Example
-                                    </div> */}
-                                    {/* <div className="card-body"> */}
-                                    {/* <Carousel autoPlay={false} infiniteLoop={true} showThumbs={false} showArrows={true}  showIndicators={false} showStatus={false} className=' h-100 w-100'>
-                                        <div className='flex flex-row'>
-                                            <div className='w-50'>
-                                            <img src='../../../assets/team/team-3.JPG'style={{maxHeight:'305px'}}/>
-                                            </div>
-                                            <div className=' w-50' style={{backgroundColor:'blue'}}>b</div>
-                                        </div>
-                                        <div className='flex flex-row'>
-                                            <div className='w-50'>
-                                            <img src='../../../assets/team/team-2.JPG' style={{maxHeight:'305px'}}/>
-                                            </div>
-                                            <div className=' w-50' style={{backgroundColor:'blue'}}>b</div>
-                                        </div>
-                                    </Carousel> */}
-                                    {/* </div> */}
-                                {/* </div>
-                            </div>*/}
                         </div> 
                         <div className="card mb-4">
                             <div className="card-header">
