@@ -128,6 +128,7 @@ function Details() {
 	
 	  const newdata =async()=>{
 		let formField= new FormData()
+    formField.append("nameofcounsellor",sessionStorage.getItem('name') )
 		formField.append("email",sessionStorage.getItem('email') )
 		formField.append('date',date)
 		formField.append('place_of_counselling',place)
