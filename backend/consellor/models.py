@@ -5,6 +5,7 @@ class counsellor(models.Model):
     place_of_counselling = models.CharField(max_length=50  )
     name = models.CharField(max_length=100)
     email=models.CharField(max_length=50,default='null')
+    nameofcounsellor=models.CharField(max_length=100,default='xyz')
     age =  models.CharField(max_length=10)
     gender = models.CharField(max_length=10)
     finacial_status = models.CharField(max_length=10)

@@ -342,12 +342,12 @@ function Admindash()
                             <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Name of Couneslor</th>
                                         <th>Gender</th>
                                         <th>Date</th>
                                         <th>Place Of Couneslling</th>
                                         <th>Problem</th>
                                         <th>Status</th>
-                                        
                                         <th>Action</th>
                                         
                                     </tr>
@@ -356,6 +356,7 @@ function Admindash()
                                 {data?.map(record => 
                                         <tr key={record.id}>
                                         <td>{record.name}</td>
+                                        <td>{record.nameofcounsellor}</td>
                                         <td>{record.gender}</td>
                                         <td>{record.date}</td>
                                         <td>{record.place_of_counselling}</td>
@@ -369,6 +370,7 @@ function Admindash()
                                 <tfoot>
                                     <tr>
                                     <th>Name</th>
+                                    <th>Name of Couneslor</th>
                                         <th>Gender</th>
                                         <th>Date</th>
                                         <th>Place Of Couneslling</th>
