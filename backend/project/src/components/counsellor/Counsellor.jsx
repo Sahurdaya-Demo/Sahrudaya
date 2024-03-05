@@ -126,8 +126,14 @@ const handlesaveClick = () => {
        
     <nav className="sb-topnav navbar navbar-expand navbar-dark ">
             
-            <a className="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+            {/* <a className="navbar-brand ps-3" href="index.html">Start Bootstrap</a> */}
             
+                                <div className="navbar-brand ps-1">
+                                <Link to="" className="nav-link" >
+                                Counsellor Dashboard
+                            </Link>
+                                </div>
+                                
             <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" onClick={handletoggle} href="#!"><i className="fa fa-bars"></i></button>
            
             <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -141,7 +147,7 @@ const handlesaveClick = () => {
                         <li><a className="dropdown-item" onClick={handleShow}>Profile</a></li>
                         <li><a className="dropdown-item" onClick={handleviewShow} style={{cursor:'pointer'}}>Change Password</a></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" onClick={()=>{Logout()}}>Logout</a></li>
+                        <li><a className="dropdown-item" style={{cursor:"pointer"}} onClick={()=>{Logout()}}>Logout</a></li>
                     </ul>
                 </li>
             </ul>
