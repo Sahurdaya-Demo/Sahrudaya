@@ -11371,6 +11371,13 @@ tfoot tr {
   .navbar .dropdown ul{
     display:block
   }
+
+}
+@media (max-width: 600px){
+.button-group {
+  margin-bottom: 5px;
+}
+
 }
 .cardey{
   background-color: #fff;
@@ -11382,4 +11389,5 @@ tfoot tr {
 
 .button-group button {
     margin-right: 1px; /* Adjust this value as needed to add spacing between buttons */
+    margin-bottom: 3px;
 }
