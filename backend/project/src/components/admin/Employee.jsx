@@ -78,6 +78,8 @@ function Employee() {
    }
 
  const handleClick = async() => {
+  if(email!=='')
+  {
   setIsLoading(true);
   let formField = new FormData()
   formField.append('email',email)
@@ -95,6 +97,7 @@ function Employee() {
       handleClose(); 
     }, 2000);
   })
+  }
 }
 const delemp=async(idi)=>{
   if (window.confirm('Are you sure you wish to delete this item?')){

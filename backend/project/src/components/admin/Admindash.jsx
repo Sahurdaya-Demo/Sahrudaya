@@ -8,14 +8,16 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Toast from 'react-bootstrap/Toast';
+import { Row,Col} from "react-bootstrap";
 function Admindash()
 {
     const windowWidth = useRef(window.innerWidth);
-  const windowHeight = useRef(window.innerHeight);
-  const [show, setShow] = useState(false);
+    const windowHeight = useRef(window.innerHeight);
+    const [show, setShow] = useState(false);
     const [showA, setShowA] = useState(false);
+    const[toastdata,settoastdata]=useState(false)
     const handleShow = () => setShow(true);
-    const handleClose = () => {setShow(false);toggleCloseA()};
+    const handleClose = () => {setShow(false);toggleCloseA();settoastdata(false)};
     const toggleShowA = () => {setShowA(true)};
     const toggleCloseA = () => {setShowA(false)};
     const[id,setid]=useState("")
@@ -52,11 +54,22 @@ function Admindash()
     const [others, setOthers] = useState([]);
     const [dtoast,setdtoast]=useState([]);
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+    const [selectYear, setSelectYear] = useState(new Date().getFullYear());
     useEffect(() => {
         LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','adminjs/tablescript.js']);
         new PureCounter();
-        retrieveData();
-        }, [selectedYear]); 
+        }, []); 
+        useEffect(() => {
+            retrieveData();
+            }, [selectedYear]);    
+        
+        useEffect(() => {
+            retrieveData();
+            }, [selectYear]);
+        const handlescroll=()=>{
+            document.getElementById('modal')?.scrollIntoView({behavior:'smooth'})
+            toggleShowA()
+        }
     
         const retrieveData = async () => {
             const response = await fetch('http://127.0.0.1:8000/formsubmit/');
@@ -65,6 +78,9 @@ function Admindash()
             const maleCounts = Array(12).fill(0);
             const femaleCounts = Array(12).fill(0);
             const otherCounts = Array(12).fill(0);
+            const completedCounts = Array(12).fill(0);
+            const pendingCounts = Array(12).fill(0);
+            const overallCounts = Array(12).fill(0);
     
             jsonData.forEach(record => {
                 const date = new Date(record.date);
@@ -74,11 +90,20 @@ function Admindash()
                     else if (record.gender === 'Female') femaleCounts[month]++;
                     else otherCounts[month]++;
                 }
+                if (date.getFullYear() === selectYear) {
+                    const month = date.getMonth();
+                    if (record.status === 'Completed') completedCounts[month]++;
+                    else if (record.status === 'Pending') pendingCounts[month]++;
+                    overallCounts[month]++;
+                }
             });
     
             setMales(maleCounts);
             setFemales(femaleCounts);
             setOthers(otherCounts);
+            setcompleted(completedCounts);
+            setpending(pendingCounts);
+            setoverall(overallCounts);
             setData(jsonData)
         };
     // useEffect(()=>{
@@ -209,7 +234,6 @@ const fetchemail=async()=>{
         }
         catch{}
     }
-    console.log(jsonData)
     setdtoast(jsonData)
 }
 
@@ -375,7 +399,7 @@ const fetchemail=async()=>{
                                                 {2000 + index+1}
                                             </option>
                                         ))}
-                                    </select>
+                                        </select>
                                     
                                     </div>
                                     
@@ -410,6 +434,15 @@ const fetchemail=async()=>{
                                     <div className="card-header">
                                         <i className="fa fa-chart-area me-1"></i>
                                         Sessions Chart
+                                        
+                                         <select value={selectYear} onChange={e => setSelectYear(parseInt(e.target.value))} className='float-end'>
+                                        {Array.from({ length: new Date().getFullYear() - 2000 }, (_, index) => (
+                                            <option key={index} value={2000 + index+1}>
+                                                {2000 + index+1}
+                                            </option>
+                                        ))}
+                                    </select>
+                            
                                     </div>
                                     <div className="card-body" style={{position:'relative'}}>
                                      <Line data={datasess}   style={{height:'350px'}}/>
@@ -476,19 +509,19 @@ const fetchemail=async()=>{
                            </div>
                            {/* {console.log(screen.height)} */}
                         </div>
-                        <Modal show={show} onHide={handleClose} centered>
-                        <Toast show={showA} onClose={toggleCloseA} className=' position-absolute  translate-middle-y' style={{zIndex:10000,top:`${windowHeight.current*(3.5/100)}%`,right:`${windowWidth.current*(-5/100)}%`}}>
+                        <Modal size='xl' id='modal' show={show} onHide={handleClose} centered>
+                        <Toast show={showA} onClose={toggleCloseA} className=' position-absolute  translate-middle-y' style={{zIndex:10000,top:`${windowHeight.current*(4.0/100)}%`,right:`${windowWidth.current*(2.0/100)}%`}}>
                         <Toast.Header>
                             <img
                             src="holder.js/20x20?text=%20"
                             className="rounded me-2"
                             alt=""
                             />
-                            <strong className="me-auto">Notify!!</strong>
+                            <strong className="me-auto">Notification</strong>
                             {/* <small>11 mins ago</small> */}
                         </Toast.Header>
                         
-                        <Toast.Body>It Seems Like Counselor <strong>{nameofcon}</strong> Has Been Deleted. Would Like To Change Access
+                        <Toast.Body>{toastdata?'Change Access':<span>It Seems Like Counselor <strong>{nameofcon}</strong> Has Been Deleted. Would You Like To Change Access</span>}
                         <Form.Control as="select" onChange={(e)=>setcaemail(e.target.value)} required onClick={()=>fetchemail()}>
                             <option></option>
                             {
@@ -505,250 +538,293 @@ const fetchemail=async()=>{
                             <Modal.Title>Edit Data</Modal.Title>
                         </Modal.Header>
                         <Modal.Body className='p-2'style={{backgroundColor:"#75E3B9",opacity:".7"}}>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Date</Form.Label>
-                                <Form.Control
-                                    type="date"
-                                    placeholder=""
-                                    value={date}
-                                     onChange={(e) => setdate(e.target.value)}
-                                    disabled={true}
-                                    autoFocus
-                                />
-                                <Form.Label>Place of Counselling</Form.Label>
-                                <select className="form-select" onChange={(e) => {setplace(e.target.value);}} required disabled={true} value={place}>
-                                    <option></option>
-                                    <option>Vypin-Rajagiri Sea Shore School</option>
-			                        <option>Kakkanad</option>
-						            <option>Thevara-SH College(East Campus)</option>
-						            <option>Thevara-Higher Secondary School</option>
-						            <option>Thevara-SH UP</option>
-						            <option>Thevara-SH High School</option>
-						            <option>Karukutty-Christ the King monastery Church </option>
-						            <option>Kanjoor</option>
-						            <option>Eloor-SHJ UP School</option>
-						            <option>Kottarapalli-Amala Public School</option>
-						            <option>Manappuram-St Teresa's High School</option>
-						            <option>Pothy</option>
-                                </select>
-                                </Form.Group>
-                                <Form.Group>
-                            <Form.Label>Name</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder=""
-                                    maxLength={100}
-                                    onChange={(e) => {setname(e.target.value);}}
-                                    required
-                                    value={name}
-                                    disabled={true}
-                                    autoFocus
-                                />
-                                </Form.Group>
-                                <Form.Group>
-                                <div className="row">
-					            <div className="col-md-6">
-                                
-                                <Form.Label>Age</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    placeholder=""
-                                    onChange={(e) => {setage(e.target.value);}} 
-                                    value={Age}
-                                    required
-                                    autoFocus
-                                    disabled={true}
-                                />
-                                </div>
-					            <div className="col-md-6">
-                                <Form.Label>Gender</Form.Label>
-                                <select className="form-select" onChange={(e) => {setgender(e.target.value);}} disabled={true} value={Gender}>
-                                    <option></option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                </div>
-                                </div>
-                                </Form.Group>
-                                <Form.Group>
-                                <div className="row">
-					            <div className="col-md-6">
-                                <Form.Label>Financial Status</Form.Label>
-                                <select className="form-select" onChange={(e) => {setfinstatus(e.target.value);}} disabled={true} value={f_status}>
-                                    <option></option>
-                                    <option value="APL">APL</option>
-                                    <option value="BPL">BPL</option>
-                                </select>
-                                
-                                
-                                </div>
-                                <div className="col-md-6">
-                                
-                                <Form.Label>Martial Status</Form.Label>
-                                <select className="form-select" onChange={(e) => {setmaritalstat(e.target.value);}} disabled={true} value={m_status}>
-                                    <option></option>
-                                <option>Married</option>
-                                <option>Single</option>
-                                <option>Divorcee</option>
-                                <option>Widower</option>
-                                <option>Widow</option>
-                                <option>Separated</option>
-                                </select>
-                                </div>
-                                </div>
-                                </Form.Group>
-                                <Form.Group>
-                                <Form.Label>School</Form.Label>
-                                <select className="form-select" onChange={(e) => {setschool(e.target.value);}} disabled={true} value={School==='null'?'':School}>
-                                    <option></option>
-                                    <option value="Government">Government</option>
-                                    <option value="Aided">Aided</option>   
-                                    <option value="Private">Private</option>                           
-                                </select>
-                                <Form.Label>Father's Occupation</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder=" "
-                                    maxLength={25}
-                                    onChange={(e) => {setfoccupation(e.target.value);}}
-                                    autoFocus
-                                    disabled={true}
-                                    value={f_occupation==='null'?'':f_occupation}
-                                />
-                                <Form.Label>Father's Education</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder=" "
-                                    maxLength={25}
-                                    onChange={(e) => {setfeducation(e.target.value);}}
-                                    autoFocus
-                                    disabled={true}
-                                    value={f_education==='null'?'':f_education}
-                                />
-                                <Form.Label>Mother's Occupation</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder=" "
-                                    maxLength={25}
-                                    onChange={(e) => {setmoccupation(e.target.value);}}
-                                    autoFocus
-                                    disabled={true}
-                                    value={m_occupation==='null'?'':m_occupation}
-                                />
-                                <Form.Label>Mother's Education</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder=" "
-                                    maxLength={25}
-                                    onChange={(e) => {setmeducation(e.target.value);}}
-                                    autoFocus
-                                    disabled={true}
-                                    value={m_education==='null'?'':m_education}
-                                />
-                                <Form.Label>Religion</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder=" "
-                                    maxLength={20}
-                                    onChange={(e) => {setreligion(e.target.value);}}
-                                    autoFocus
-                                    disabled={true}
-                                    value={religion==='null'?'':religion}
-                                />
-                                </Form.Group>
-                                <Form.Group>
-                                <Form.Label>Problem</Form.Label>
-                                <textarea 
-                                className="col-12 rounded form-control" 
-                                rows={3}  
-                                maxLength={200} 
-                                onChange={(e)=>{setproblem(e.target.value);}}
-                                required
-                                disabled={true}
-                                value={problem}
-                                />
-                                <Form.Label>History of Problem</Form.Label>
-                                <textarea 
-                                className="col-12 rounded form-control" 
-                                rows={4}  
-                                maxLength={500} 
-                                disabled={true}
-                                onChange={(e)=>{sethistory(e.target.value);}}
-                                value={history==='null'?'':history}
-                                />
-                                <Form.Label>Intervention</Form.Label>
-                                <textarea 
-                                className="col-12 rounded form-control"
-                                rows={2}
-                                maxLength={100}
-                                disabled={true}
-                                onChange={(e)=>{setintervention(e.target.value);}}
-                                value={Intervention==='null'?'':Intervention}
-                                />
-                                <Form.Label>Challenges by Counsellor</Form.Label>
-                                <textarea
-                                className="col-12 rounded form-control" 
-                                rows={2}
-                                maxLength={200}
-                                disabled={true}
-                                onChange={(e)=>{setchallenge(e.target.value);}}
-                                value={challenge==='null'?'':challenge}
-                                />
-                                <Form.Label>No. of follow up sessions</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    placeholder=" "
-                                    onChange={(e) => {setsession(e.target.value);}}
-                                    disabled={true}
-                                    value={follow_ups}
-                                    autoFocus
-                                />
-                                <Form.Label>Referal Service</Form.Label>
-                                <textarea 
-                                className="col-12 rounded form-control" 
-                                rows={2}
-                                maxLength={100}
-                                disabled={true}
-                                onChange={(e) => {setreferral(e.target.value);}}
-                                value={referral==='null'?'':referral}
-                                />
-                                <Form.Label>Outcome</Form.Label>
-                                <textarea 
-                                className="col-12 rounded form-control" 
-                                rows={2} 
-                                maxLength={250}
-                                disabled={true}
-                                onChange={(e) => {setoutcome(e.target.value);}}
-                                value={outcome==='null'?'':outcome}
-                                />
-                                <Form.Label>Remarks</Form.Label>
-                                <textarea 
-                                className="col-12 rounded form-control" 
-                                rows={3} 
-                                maxLength={200}
-                                onChange={(e) => {setremarks(e.target.value);}}
-                                disabled={true}
-                                value={remarks==='null'?'':remarks}
-                                />
-                                </Form.Group>
-                                <Form.Group>
-                                <Form.Label>Status</Form.Label>
-                                <select className="form-select" onChange={(e) => {setstatus(e.target.value);}} required value={status} disabled={true}>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Completed">Completed</option>                           
-                                </select>
-                                </Form.Group>
+                        <Form className="mb-3" >
+                        <Row>
+                                    <Col md={6}>
+                                        <Form.Group>
+                                            <Form.Label>Date</Form.Label>
+                                            <Form.Control
+                                                type="date"
+                                                placeholder=""
+                                                value={date||''}
+                                                
+                                               disabled
+                                                autoFocus
+                                            />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col md={6}>
+                                        <Form.Group>
+                                            <Form.Label>Place of Counselling</Form.Label>
+                                            <Form.Control as="select" disabled value={place||""}>
+                                            <option></option>
+                                            <option>Vypin-Rajagiri Sea Shore School</option>
+                                            <option>Kakkanad</option>
+                                            <option>Thevara-SH College(East Campus)</option>
+                                            <option>Thevara-Higher Secondary School</option>
+                                            <option>Thevara-SH UP</option>
+                                            <option>Thevara-SH High School</option>
+                                            <option>Karukutty-Christ the King monastery Church </option>
+                                            <option>Kanjoor</option>
+                                            <option>Eloor-SHJ UP School</option>
+                                            <option>Kottarapalli-Amala Public School</option>
+                                            <option>Manappuram-St Teresa's High School</option>
+                                            <option>Pothy</option>
+                                            </Form.Control>
+                                        </Form.Group>
+                                    </Col>
+                                </Row> 
+                                <Row> 
+                                    <Col md={6}>
+                                        <Form.Label>Name</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder=""
+                                            maxLength={100}
+                                            value={name||""}
+                                           disabled                                            
+                                            autoFocus
+                                        />
+                                    </Col>
+                                    <Col md={3}>
+                                        <Form.Label>Age</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            placeholder=""
+                                            
+                                            value={Age||""}
+                                           
+                                            autoFocus
+                                           disabled
+                                            min={1}
+                                        />
+                                    </Col>
+                                    <Col md={3}>
+                                        <Form.Label>Gender</Form.Label>
+                                        <Form.Control as="select" disabled value={Gender||""} >
+                                            <option></option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Others">Others</option>
+                                        </Form.Control>
+                                    </Col>
+                                </Row>  
+                                <Row>
+                                    <Col md={3}>
+                                        <Form.Label>Financial Status</Form.Label>
+                                        <Form.Control as="select" disabled value={f_status||""} >
+                                            <option></option>
+                                            <option value="APL">APL</option>
+                                            <option value="BPL">BPL</option>
+                                        </Form.Control>
+                                    </Col>
+                                    <Col md={3}>
+                                        <Form.Label>Marital Status</Form.Label>
+                                        <Form.Control as="select" disabled value={m_status||""} >
+                                        <option></option>
+                                        <option>Married</option>
+                                        <option>Single</option>
+                                        <option>Divorcee & Widower</option>
+                                        <option>Widower</option>
+                                        <option>Widow</option>
+                                        <option>Separated</option>
+                                        </Form.Control>
+                                    </Col>
+                                    <Col md={3}>
+                                        <Form.Label>School</Form.Label>
+                                        <Form.Control as="select"disabled value={School==='null'?null:School}>
+                                                <option></option>
+                                                <option value="Government">Government</option>
+                                                <option value="Aided">Aided</option>   
+                                                <option value="Private">Private</option>                           
+                                        </Form.Control>
+                                    </Col>
+                                    <Col md={3}>
+                                        <Form.Label>Religion</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder=" "
+                                            maxLength={20}
+                                           
+                                            autoFocus
+                                           disabled
+                                            value={religion==='null'?null:religion}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={6}>
+                                        <Form.Label>Father's Occupation</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder=" "
+                                            maxLength={25}
+                                           
+                                            autoFocus
+                                           disabled
+                                            value={f_occupation==='null'?null:f_occupation}
+                                        />
+                                    </Col> 
+                                    <Col md={6}>
+                                        <Form.Label>Father's Education</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder=" "
+                                            maxLength={25}
+                                            
+                                            autoFocus
+                                           disabled
+                                            value={f_education==='null'?null:f_education}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={6}>
+                                        <Form.Label>Mother's Occupation</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder=" "
+                                            maxLength={25}
+                                           
+                                            autoFocus
+                                           disabled
+                                            value={m_occupation==='null'?null:m_occupation}
+                                        />
+                                    </Col>
+                                    <Col md={6}>
+                                        <Form.Label>Mother's Education</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder=" "
+                                            maxLength={25}
+                                           
+                                            autoFocus
+                                           disabled
+                                            value={m_education==='null'?null:m_education}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={12}>
+                                        <Form.Label>Problem</Form.Label>
+                                        <Form.Control as={"textarea"}
+                                            className="col-12 rounded form-control" 
+                                            rows={3}  
+                                            maxLength={200} 
+                                            
+                                            required
+                                           disabled
+                                            value={problem||""}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={12}>
+                                        <Form.Label>History of Problem</Form.Label>
+                                        <Form.Control as={"textarea"} 
+                                            className="col-12 rounded form-control" 
+                                            rows={4}  
+                                            maxLength={500} 
+                                           disabled
+                                           
+                                            value={history==='null'?null:history}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>  
+                                    <Col md={12}>
+                                        <Form.Label>Intervention</Form.Label>
+                                        <Form.Control as={"textarea"}
+                                            className="col-12 rounded form-control"
+                                            rows={2}
+                                            maxLength={100}
+                                           disabled
+                                            
+                                            value={Intervention==='null'?null:Intervention}
+                                        />
+                                    </Col>
+                                    <Col md={12}>
+                                        <Form.Label>Challenges by Counsellor</Form.Label>
+                                        <Form.Control as={"textarea"}
+                                        className="col-12 rounded form-control" 
+                                        rows={2}
+                                        maxLength={200}
+                                       disabled
+                                        
+                                        value={challenge==='null'?null:challenge}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={12}>
+                                        <Form.Label>Referal Service</Form.Label>
+                                        <Form.Control as={"textarea"}
+                                            className="col-12 rounded form-control" 
+                                            rows={2}
+                                            maxLength={100}
+                                           disabled
+                                           
+                                            value={referral==='null'?null:referral}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={6}>  
+                                        <Form.Label>Outcome</Form.Label>
+                                        <Form.Control as={"textarea"}
+                                            className="col-12 rounded form-control" 
+                                            rows={3} 
+                                            maxLength={250}
+                                           disabled
+                                           
+                                            value={outcome==='null'?null:outcome}
+                                        />
+                                    </Col>
+                                    <Col md={6}>
+                                        <Form.Label>Remarks</Form.Label>
+                                        <Form.Control as={"textarea"}
+                                            className="col-12 rounded form-control" 
+                                            rows={3} 
+                                            maxLength={200}
+                                            
+                                           disabled
+                                            value={remarks==='null'?null:remarks}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={6}>  
+                                        <Form.Label>No. of follow up sessions</Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            placeholder=" "
+                                           
+                                           disabled
+                                            value={follow_ups||""}
+                                            autoFocus
+                                           
+                                            min={0}
+                                        />
+                                    </Col> 
+                                    <Col md={6}> 
+                                        <Form.Label>Status</Form.Label>
+                                        <Form.Control as="select"  value={status||""}disabled>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Completed">Completed</option>                           
+                                        </Form.Control>
+                                    </Col>
+                                </Row>
                                 <Modal.Footer>
                                 <Form.Group className="d-flex justify-content-end align-content-end">
                                 {/* <Button variant="btn btn-warning py-1 m-1 "  onClick={handleeditClick} disabled={disableButton} style={{color:'white'}}> Edit</Button> */}
                                 {/* <Button variant="btn btn-success py-1 m-1" onClick={()=>{handlesaveClick();update(id);}} disabled={true}>Save</Button> */}
                                 <Button variant="btn btn-danger py-1 m-1" onClick={handleClose}>Close</Button>
-                                <Button onClick={toggleShowA} className="py-1 m-1">Change Access</Button>
+                                <Button onClick={()=>{handlescroll();settoastdata(true)}} className="py-1 m-1">Change Access</Button>
                             
                             
                         </Form.Group>
                         </Modal.Footer>
+                        </Form>
                         </Modal.Body>
                         
                     </Modal> 
