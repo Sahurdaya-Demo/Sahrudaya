@@ -2,7 +2,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom"
+import portr from '../login/images/potr.png'
+import { FaLock } from 'react-icons/fa'
 function Userpassreset({id,token,secure}){
     const[password,setpassword]=useState('')
     const[crpassword,setcrpassword]=useState('')
@@ -43,24 +45,45 @@ function Userpassreset({id,token,secure}){
     }
     return(
         <>
-        <div className='container d-flex justify-content-center mt-5'>
-        <div className='w-75'>
-        <Form onSubmit={handlesubmit}>
+        <div className='login'>
+    <div className="limiter">
+		<div className="container-login100">
+			
+			<div className="card wrap-login100">
+	<div className="login100-pic position-relative">
+  <img  src={portr} alt='logo'/>
+				</div>
+
+        {/* <div className='container d-flex justify-content-center mt-5'>
+        <div className='w-75'> */}
+        <Form onSubmit={handlesubmit} className='p-3 mx-4'>
+        <div style={{textAlign:"center"}}>
+        <Form.Label className='mb-3 d-flex login100-form-title align-content-center justify-content-center'>Forgot password?</Form.Label>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Enter New Password" onChange={(e)=>setpassword(e.target.value)} value={password}/>
+          <div className="input-group"> 
+    <span className="input-group-text">
+    <FaLock /></span>
+          <Form.Control style={{ height: '50px' }}className="wrap-input" type="password" placeholder="Enter New Password" onChange={(e)=>setpassword(e.target.value)} value={password}/>
+        </div>
         </Form.Group>
   
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder=" Confirm New Password" onChange={(e)=>setcrpassword(e.target.value)} value={crpassword}/>
-        </Form.Group>
-        <Button variant="primary" type="submit" onClick={Reset}>
+  <div className="input-group">
+    <span className="input-group-text lock-icon"><FaLock /></span> {/* Applying lock-icon class */}
+    <Form.Control style={{ height: '50px' }} className="wrap-input" type="password" placeholder="Confirm New Password" onChange={(e) => setcrpassword(e.target.value)} value={crpassword}/>
+  </div>
+</Form.Group>
+        <Button  variant="primary" type="submit" onClick={Reset}>
           Submit
         </Button>
+        </div>
       </Form>
         </div>
       </div>
+      </div>
+      </div>
+      {/* </div>
+      </div> */}
       </>
     )
 
