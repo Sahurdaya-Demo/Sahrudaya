@@ -11346,16 +11346,22 @@ tfoot tr {
     display: none;
   }
 }
-/* @media (max-width: 1200px){
-smi-navbar {
+ @media (max-width: 1900px){
+/*smi-navbar {
     display:block
 } */
- 
+.button-group {
+    display: inline-flex;
+}
+ }
 @media (max-width: 1200px){
   /* .mobile-nav-toggle {
     display: block;
   } 
    */
+   .button-group {
+    display: inline-block;
+}
   .navbar .smi-navbar {
     display: block;
   }
@@ -11372,4 +11378,8 @@ smi-navbar {
   color: #000;
   box-shadow: 6px 6px  2px rgba(52, 52, 52, 0.1) ;
   transition: all 0.5s ease-out;
+}
+
+.button-group button {
+    margin-right: 1px; /* Adjust this value as needed to add spacing between buttons */
 }

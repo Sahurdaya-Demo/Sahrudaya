@@ -373,7 +373,12 @@ function Admindash()
                                         <td>{record.place_of_counselling}</td>
                                         <td>{record.problem}</td>
                                         <td>{record.status}</td>
-                                        <td><button className='btn btn-danger' onClick={()=>{delrecord(record.id)}}>Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();searchemail(record.email);getformdetails(record.id);}}>View</button></td>
+                                        <td>
+                                        <div className='button-group'>
+                                        <button className='btn btn-danger' onClick={()=>{delrecord(record.id)}}>Delete</button>
+                                        <button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();searchemail(record.email);getformdetails(record.id);}}>View</button>
+                                        </div>
+                                        </td>
                                         </tr>
                                         )}
                                     
