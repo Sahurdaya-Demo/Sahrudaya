@@ -1,6 +1,6 @@
 import LoadExternalScript from '../../LoadExternalScript';
 import PureCounter from "@srexi/purecounterjs";
-import { useEffect, useState} from 'react';
+import { useEffect, useState,useRef} from 'react';
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Bar, Line } from "react-chartjs-2";
 import Modal from 'react-bootstrap/Modal'
@@ -10,7 +10,9 @@ import axios from 'axios';
 import Toast from 'react-bootstrap/Toast';
 function Admindash()
 {
-    const [show, setShow] = useState(false);
+    const windowWidth = useRef(window.innerWidth);
+  const windowHeight = useRef(window.innerHeight);
+  const [show, setShow] = useState(false);
     const [showA, setShowA] = useState(false);
     const handleShow = () => setShow(true);
     const handleClose = () => {setShow(false);toggleCloseA()};
@@ -39,6 +41,7 @@ function Admindash()
     const[outcome,setoutcome]=useState("")
     const[remarks,setremarks]=useState("")
     const[status,setstatus]=useState("")
+    const[nameofcon,setnameofcon]=useState("")
     const[data,setdata]=useState([])
     const [pending,setpending]=useState([]);
     const [completed,setcompleted]=useState([]);
@@ -85,7 +88,7 @@ function Admindash()
       const getformdetails=async(id)=>{
         
         const result=await axios.get(`http://127.0.0.1:8000/formsubmit/${id}`)
-        // console.log(result.data)
+        console.log(result.data)
         setdate(result.data.date)
         setid(result.data.id)
         setname(result.data.name)
@@ -109,6 +112,7 @@ function Admindash()
         setremarks(result.data.remarks)
         setstatus(result.data.status);
         setplace(result.data.place_of_counselling)
+        setnameofcon(result.data.nameofcounsellor)
     }
     const delrecord=async(id)=>{
     if (window.confirm('Are you sure you wish to delete this item?')){
@@ -399,20 +403,28 @@ function Admindash()
                            </table>
                         
                            </div>
-                           
+                           {/* {console.log(screen.height)} */}
                         </div>
                         <Modal show={show} onHide={handleClose} centered>
-                        <Toast show={showA} onClose={toggleCloseA} className=' position-absolute  translate-middle-y' style={{zIndex:10000,top:'37%',right:'-75%'}}>
+                        <Toast show={showA} onClose={toggleCloseA} className=' position-absolute  translate-middle-y' style={{zIndex:10000,top:`${windowHeight.current*(3.5/100)}%`,right:`${windowWidth.current*(-5/100)}%`}}>
                         <Toast.Header>
                             <img
                             src="holder.js/20x20?text=%20"
                             className="rounded me-2"
                             alt=""
                             />
-                            <strong className="me-auto">Bootstrap</strong>
-                            <small>11 mins ago</small>
+                            <strong className="me-auto">Notify!!</strong>
+                            {/* <small>11 mins ago</small> */}
                         </Toast.Header>
-                        <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+                        <Toast.Body>It Seems Like Counselor <strong>{nameofcon}</strong> Has Been Deleted. Would Like To Change Access
+                        <Form.Control
+                            type="text"
+                            placeholder="Email Address"
+                            autoFocus
+                            className='mt-1'
+                        />
+                        <Button variant='success' className='mt-2'>Submit</Button>
+                        </Toast.Body>
                         </Toast> 
                         <Modal.Header closeButton onClick={handleClose} style={{backgroundColor:"#75E3B9",opacity:".7",border:'none'}}>
                             <Modal.Title>Edit Data</Modal.Title>
@@ -513,7 +525,7 @@ function Admindash()
                                 </Form.Group>
                                 <Form.Group>
                                 <Form.Label>School</Form.Label>
-                                <select className="form-select" onChange={(e) => {setschool(e.target.value);}} disabled={true} value={School==='null'?null:School}>
+                                <select className="form-select" onChange={(e) => {setschool(e.target.value);}} disabled={true} value={School==='null'?'':School}>
                                     <option></option>
                                     <option value="Government">Government</option>
                                     <option value="Aided">Aided</option>   
@@ -527,7 +539,7 @@ function Admindash()
                                     onChange={(e) => {setfoccupation(e.target.value);}}
                                     autoFocus
                                     disabled={true}
-                                    value={f_occupation==='null'?null:f_occupation}
+                                    value={f_occupation==='null'?'':f_occupation}
                                 />
                                 <Form.Label>Father's Education</Form.Label>
                                 <Form.Control
@@ -537,7 +549,7 @@ function Admindash()
                                     onChange={(e) => {setfeducation(e.target.value);}}
                                     autoFocus
                                     disabled={true}
-                                    value={f_education==='null'?null:f_education}
+                                    value={f_education==='null'?'':f_education}
                                 />
                                 <Form.Label>Mother's Occupation</Form.Label>
                                 <Form.Control
@@ -547,7 +559,7 @@ function Admindash()
                                     onChange={(e) => {setmoccupation(e.target.value);}}
                                     autoFocus
                                     disabled={true}
-                                    value={m_occupation==='null'?null:m_occupation}
+                                    value={m_occupation==='null'?'':m_occupation}
                                 />
                                 <Form.Label>Mother's Education</Form.Label>
                                 <Form.Control
@@ -557,7 +569,7 @@ function Admindash()
                                     onChange={(e) => {setmeducation(e.target.value);}}
                                     autoFocus
                                     disabled={true}
-                                    value={m_education==='null'?null:m_education}
+                                    value={m_education==='null'?'':m_education}
                                 />
                                 <Form.Label>Religion</Form.Label>
                                 <Form.Control
@@ -567,7 +579,7 @@ function Admindash()
                                     onChange={(e) => {setreligion(e.target.value);}}
                                     autoFocus
                                     disabled={true}
-                                    value={religion==='null'?null:religion}
+                                    value={religion==='null'?'':religion}
                                 />
                                 </Form.Group>
                                 <Form.Group>
@@ -588,7 +600,7 @@ function Admindash()
                                 maxLength={500} 
                                 disabled={true}
                                 onChange={(e)=>{sethistory(e.target.value);}}
-                                value={history==='null'?null:history}
+                                value={history==='null'?'':history}
                                 />
                                 <Form.Label>Intervention</Form.Label>
                                 <textarea 
@@ -597,7 +609,7 @@ function Admindash()
                                 maxLength={100}
                                 disabled={true}
                                 onChange={(e)=>{setintervention(e.target.value);}}
-                                value={Intervention==='null'?null:Intervention}
+                                value={Intervention==='null'?'':Intervention}
                                 />
                                 <Form.Label>Challenges by Counsellor</Form.Label>
                                 <textarea
@@ -606,7 +618,7 @@ function Admindash()
                                 maxLength={200}
                                 disabled={true}
                                 onChange={(e)=>{setchallenge(e.target.value);}}
-                                value={challenge==='null'?null:challenge}
+                                value={challenge==='null'?'':challenge}
                                 />
                                 <Form.Label>No. of follow up sessions</Form.Label>
                                 <Form.Control
@@ -624,7 +636,7 @@ function Admindash()
                                 maxLength={100}
                                 disabled={true}
                                 onChange={(e) => {setreferral(e.target.value);}}
-                                value={referral==='null'?null:referral}
+                                value={referral==='null'?'':referral}
                                 />
                                 <Form.Label>Outcome</Form.Label>
                                 <textarea 
@@ -633,7 +645,7 @@ function Admindash()
                                 maxLength={250}
                                 disabled={true}
                                 onChange={(e) => {setoutcome(e.target.value);}}
-                                value={outcome==='null'?null:outcome}
+                                value={outcome==='null'?'':outcome}
                                 />
                                 <Form.Label>Remarks</Form.Label>
                                 <textarea 
@@ -642,7 +654,7 @@ function Admindash()
                                 maxLength={200}
                                 onChange={(e) => {setremarks(e.target.value);}}
                                 disabled={true}
-                                value={remarks==='null'?null:remarks}
+                                value={remarks==='null'?'':remarks}
                                 />
                                 </Form.Group>
                                 <Form.Group>
