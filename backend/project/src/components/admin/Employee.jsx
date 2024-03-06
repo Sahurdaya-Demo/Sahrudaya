@@ -45,7 +45,7 @@ function Employee() {
     var yyyy = today.getFullYear();
      today = yyyy + '-' + mm + '-' + dd ;
      yesterday = yyy + '-' + mmy + '-' + ddy;
-     console.log(today,"",yesterday)
+    //  console.log(today,"",yesterday)
     for(let i=0;i<Object.keys(jsonData).length;i++)
     {
       yesterdayrecord=0
@@ -73,7 +73,7 @@ function Employee() {
       catch{}
     }
     
-    console.log(jsonData)
+    // console.log(jsonData)
     setRecords(jsonData)
    }
 

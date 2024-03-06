@@ -7,11 +7,14 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import Toast from 'react-bootstrap/Toast';
 function Admindash()
 {
     const [show, setShow] = useState(false);
+    const [showA, setShowA] = useState(false);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
+    const toggleShowA = () => setShowA(!showA);
     const[id,setid]=useState("")
     const[date,setdate]=useState("")
     const[place,setplace]=useState("")
@@ -65,11 +68,19 @@ function Admindash()
         
         }
     }
-
+    const searchemail=async(email)=>{
+        await axios({
+            method: 'post',
+            url: 'http://127.0.0.1:8000/emailsearch/',
+            data: {'email':email}
+        }).then(response=>{
+            // console.log(response.data.msg)
+        })
+    }
       const getformdetails=async(id)=>{
         
         const result=await axios.get(`http://127.0.0.1:8000/formsubmit/${id}`)
-        console.log(result.data)
+        // console.log(result.data)
         setdate(result.data.date)
         setid(result.data.id)
         setname(result.data.name)
@@ -136,17 +147,6 @@ function Admindash()
   ]
 };
 
-// const options = {
-//   scales: {
-//     yAxes: [
-//       {
-//         ticks: {
-//           beginAtZero: true
-//         }
-//       }
-//     ]
-//   }
-// };
     return(
         <>
         <div className="row mt-lg-4" style={{alignItems:'center',justifyContent:'center'}}>
@@ -353,12 +353,12 @@ function Admindash()
                             <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Name of Couneslor</th>
                                         <th>Gender</th>
                                         <th>Date</th>
                                         <th>Place Of Couneslling</th>
                                         <th>Problem</th>
                                         <th>Status</th>
-                                        
                                         <th>Action</th>
                                         
                                     </tr>
@@ -367,12 +367,13 @@ function Admindash()
                                 {data?.map(record => 
                                         <tr key={record.id}>
                                         <td>{record.name}</td>
+                                        <td>{record.nameofcounsellor}</td>
                                         <td>{record.gender}</td>
                                         <td>{record.date}</td>
                                         <td>{record.place_of_counselling}</td>
                                         <td>{record.problem}</td>
                                         <td>{record.status}</td>
-                                        <td><button className='btn btn-danger' onClick={()=>{delrecord(record.id)}}>Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();getformdetails(record.id)}}>View</button></td>
+                                        <td><button className='btn btn-danger' onClick={()=>{delrecord(record.id)}}>Delete</button><button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();searchemail(record.email);getformdetails(record.id);}}>View</button></td>
                                         </tr>
                                         )}
                                     
@@ -380,6 +381,7 @@ function Admindash()
                                 <tfoot>
                                     <tr>
                                     <th>Name</th>
+                                    <th>Name of Couneslor</th>
                                         <th>Gender</th>
                                         <th>Date</th>
                                         <th>Place Of Couneslling</th>
@@ -392,6 +394,7 @@ function Admindash()
                            </table>
                         
                            </div>
+                           
                         </div>
                         <Modal show={show} onHide={handleClose} centered>
                         <Modal.Header closeButton onClick={handleClose} style={{backgroundColor:"#75E3B9",opacity:".7",border:'none'}}>
@@ -637,11 +640,27 @@ function Admindash()
                                 {/* <Button variant="btn btn-warning py-1 m-1 "  onClick={handleeditClick} disabled={disableButton} style={{color:'white'}}> Edit</Button> */}
                                 {/* <Button variant="btn btn-success py-1 m-1" onClick={()=>{handlesaveClick();update(id);}} disabled={true}>Save</Button> */}
                                 <Button variant="btn btn-danger py-1 m-1" onClick={handleClose}>Close</Button>
+                                <Button onClick={toggleShowA} className="mb-2">
+                            Toggle Toast <strong>with</strong> Animation
+                            </Button>
                         </Form.Group>
                         </Modal.Footer>
                         </Modal.Body>
+                        
                     </Modal> 
-                       
+                    <Toast show={showA} onClose={toggleShowA} className='pos-absolute bottom-0 end-0' style={{zIndex:10000}}>
+                        <Toast.Header>
+                            <img
+                            src="holder.js/20x20?text=%20"
+                            className="rounded me-2"
+                            alt=""
+                            />
+                            <strong className="me-auto">Bootstrap</strong>
+                            <small>11 mins ago</small>
+                        </Toast.Header>
+                        <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+                    </Toast>  
+                   
 
         </>
     )

@@ -25,22 +25,14 @@ def get_tokens_for_user(user):
       'refresh': str(refresh),
       'access': str(refresh.access_token),
   }
-# class ContactMail(APIView):
-#   def post(self, request, format=None):
-#     user=request.data['email']
-#     print(user)
-#     subject=request.data['subject']
-#     body=request.data['body']
-    # secure_str = ''.join((secrets.choice(string.ascii_letters) for i in range(20)))
-    # link = f'http://localhost:3000/registration/{secure_str}'
-    # data = {
-    #     'subject':subject,
-    #     'body':body,
-    #     'from_email':user,
-    #     'to_email':'ashinpaul46@gmail.com'
-    # }
-    # Util.send_email(data)
-    # return Response({'msg':'Mail send successful. Please wait for the reasponse'}, status=status.HTTP_200_OK)
+
+class EmailSearch(APIView):
+  def post(self,request):
+    # print(request.data['email'])
+    if User.objects.filter(email=request.data['email']).exists():
+      return Response({'msg': 'email found'}, status=status.HTTP_200_OK)
+    else:
+      return Response({'errors': 'email not found'}, status=status.HTTP_200_OK)
   
 class UserRegistrationView(APIView):
   # renderer_classes = [UserRenderer]

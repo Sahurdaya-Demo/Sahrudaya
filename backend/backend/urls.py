@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from account.views import SendPasswordResetEmailView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView, UserPasswordResetView,UserLogout,SendRegisterEmail
+from account.views import SendPasswordResetEmailView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView, UserPasswordResetView,UserLogout,SendRegisterEmail,EmailSearch
 from django.conf import settings
 from Employee.views import EmpView,ValidPost,ValidGet
 from consellor.views import submitview
@@ -16,6 +16,7 @@ urlpatterns = [
     # path('send-mail/',ContactMail.as_view(),name='contact-mail'),
     path('send-resgister-email/', SendRegisterEmail.as_view(), name='send-reset-password-email'),
     path('register/', UserRegistrationView.as_view(), name='register'),
+    path('emailsearch/', EmailSearch.as_view(), name='register'),
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', UserLogout.as_view(), name='logout'),
     path('profile/', UserProfileView.as_view(), name='profile'),
