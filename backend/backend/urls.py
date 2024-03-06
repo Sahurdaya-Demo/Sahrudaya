@@ -3,7 +3,7 @@ from django.urls import path, include
 from account.views import SendPasswordResetEmailView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView, UserPasswordResetView,UserLogout,SendRegisterEmail,EmailSearch
 from django.conf import settings
 from Employee.views import EmpView,ValidPost,ValidGet
-from consellor.views import submitview
+from consellor.views import submitview,emailchange
 from django.conf.urls.static import static
 from rest_framework import routers
 route=routers.DefaultRouter()
@@ -25,5 +25,6 @@ urlpatterns = [
     path('reset-password/<uid>/<token>/', UserPasswordResetView.as_view(), name='reset-password'),
     path('validpost',ValidPost.as_view(),name='validpost'),
     path('validget',ValidGet.as_view(),name='validget'),
-    path('formsubmit/',include(route2.urls),name='formsubmit')
+    path('formsubmit/',include(route2.urls),name='formsubmit'),
+    path('emailchange/',emailchange.as_view(),name='emailchange')
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -19,6 +19,7 @@ function Admindash()
     const toggleShowA = () => {setShowA(true)};
     const toggleCloseA = () => {setShowA(false)};
     const[id,setid]=useState("")
+    const[caemail,setcaemail]=useState("")
     const[date,setdate]=useState("")
     const[place,setplace]=useState("")
     const[name,setname]=useState("")
@@ -42,36 +43,67 @@ function Admindash()
     const[remarks,setremarks]=useState("")
     const[status,setstatus]=useState("")
     const[nameofcon,setnameofcon]=useState("")
-    const[data,setdata]=useState([])
+    const[data,setData]=useState([])
     const [pending,setpending]=useState([]);
     const [completed,setcompleted]=useState([]);
     const [overall, setoverall] = useState([]);
-    const [males, setmales] = useState([]);
-    const [females, setfemales] = useState([]);
-    const [others, setothers] = useState([]);
-    
-    useEffect(()=>{
+    const [males, setMales] = useState([]);
+    const [females, setFemales] = useState([]);
+    const [others, setOthers] = useState([]);
+    const [dtoast,setdtoast]=useState([]);
+    const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+    useEffect(() => {
         LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','adminjs/tablescript.js']);
         new PureCounter();
-        retrieve()
-      },[])
-      const retrieve=async()=>{
-        const response= await fetch(`http://127.0.0.1:8000/formsubmit/`)
-        const jsonData = await response.json();
-        setdata(jsonData)
-        for(let i=0;i<12;i++){
-            males.push(jsonData.filter(record=>record.gender==='Male'&&new Date(record.date).getMonth()===i).length)
-            females.push(jsonData.filter(record=>record.gender==='Female'&&new Date(record.date).getMonth()===i).length)
-            others.push(jsonData.filter(record=>record.gender==='Others'&&new Date(record.date).getMonth()===i).length)
+        retrieveData();
+        }, [selectedYear]); 
+    
+        const retrieveData = async () => {
+            const response = await fetch('http://127.0.0.1:8000/formsubmit/');
+            const jsonData = await response.json();
+    
+            const maleCounts = Array(12).fill(0);
+            const femaleCounts = Array(12).fill(0);
+            const otherCounts = Array(12).fill(0);
+    
+            jsonData.forEach(record => {
+                const date = new Date(record.date);
+                if (date.getFullYear() === selectedYear) {
+                    const month = date.getMonth();
+                    if (record.gender === 'Male') maleCounts[month]++;
+                    else if (record.gender === 'Female') femaleCounts[month]++;
+                    else otherCounts[month]++;
+                }
+            });
+    
+            setMales(maleCounts);
+            setFemales(femaleCounts);
+            setOthers(otherCounts);
+            setData(jsonData)
+        };
+    // useEffect(()=>{
+    //     LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','adminjs/tablescript.js']);
+    //     new PureCounter();
+    //     retrieve()
+    //   },[])
+    //   const retrieve=async()=>{
+    //     const response= await fetch(`http://127.0.0.1:8000/formsubmit/`)
+    //     const jsonData = await response.json();
+    //     setdata(jsonData)
+    //     for(let i=0;i<12;i++){
+    //         males.push(jsonData.filter(record=>record.gender==='Male'&&new Date(record.date).getMonth()===i).length)
+    //         females.push(jsonData.filter(record=>record.gender==='Female'&&new Date(record.date).getMonth()===i).length)
+    //         others.push(jsonData.filter(record=>record.gender==='Others'&&new Date(record.date).getMonth()===i).length)
         
-        }
-        for(let i=0;i<12;i++){
-            pending.push(jsonData.filter(record=>record.status==='Pending'&&new Date(record.date).getMonth()===i).length)
-            completed.push(jsonData.filter(record=>record.status==='Completed'&&new Date(record.date).getMonth()===i).length)
-            overall.push(jsonData.filter(record=>new Date(record.date).getMonth()===i).length)
+    //     }
+    //     for(let i=0;i<12;i++){
+    //         pending.push(jsonData.filter(record=>record.status==='Pending'&&new Date(record.date).getMonth()===i).length)
+    //         completed.push(jsonData.filter(record=>record.status==='Completed'&&new Date(record.date).getMonth()===i).length)
+    //         overall.push(jsonData.filter(record=>new Date(record.date).getMonth()===i).length)
         
-        }
-    }
+    //     }
+    // }
+    
     const searchemail=async(email)=>{
         await axios({
             method: 'post',
@@ -88,7 +120,7 @@ function Admindash()
       const getformdetails=async(id)=>{
         
         const result=await axios.get(`http://127.0.0.1:8000/formsubmit/${id}`)
-        console.log(result.data)
+        // console.log(result.data)
         setdate(result.data.date)
         setid(result.data.id)
         setname(result.data.name)
@@ -155,6 +187,31 @@ function Admindash()
     },
   ]
 };
+const updatecaemail=async(id)=>{
+    await axios({
+        method: 'post',
+        url:`http://127.0.0.1:8000/emailchange/`,
+        data:{'email':caemail,'id':id},
+      }).then(response=>{
+        // console.log(response.data);
+        // setValidated(true)
+        // handleClose()
+      }
+      )
+}
+const fetchemail=async()=>{
+    const response= await fetch(`http://127.0.0.1:8000/api/`)
+    const jsonData = await response.json();
+    for(let i=0;i<Object.keys(jsonData).length;i++){
+        try{
+        if(jsonData[i].type==='admin')
+        delete jsonData[i]
+        }
+        catch{}
+    }
+    console.log(jsonData)
+    setdtoast(jsonData)
+}
 
     return(
         <>
@@ -311,9 +368,18 @@ function Admindash()
                                     <div className="card-header">
                                         <i className="fa fa-chart-area me-1"></i>
                                         Gender Based Sessions Chart
+                                        
+                                         <select value={selectedYear} onChange={e => setSelectedYear(parseInt(e.target.value))} className='float-end'>
+                                        {Array.from({ length: new Date().getFullYear() - 2000 }, (_, index) => (
+                                            <option key={index} value={2000 + index+1}>
+                                                {2000 + index+1}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    
                                     </div>
+                                    
                                     <div className="card-body" style={{position:'relative'}}>
-                                         
                                         <Bar
                                             data={{
                                                 labels:["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEPT","OCT","NOV","DEC"],
@@ -421,14 +487,18 @@ function Admindash()
                             <strong className="me-auto">Notify!!</strong>
                             {/* <small>11 mins ago</small> */}
                         </Toast.Header>
+                        
                         <Toast.Body>It Seems Like Counselor <strong>{nameofcon}</strong> Has Been Deleted. Would Like To Change Access
-                        <Form.Control
-                            type="text"
-                            placeholder="Email Address"
-                            autoFocus
-                            className='mt-1'
-                        />
-                        <Button variant='success' className='mt-2'>Submit</Button>
+                        <Form.Control as="select" onChange={(e)=>setcaemail(e.target.value)} required onClick={()=>fetchemail()}>
+                            <option></option>
+                            {
+                                dtoast?.map(record=>
+                                    <option key={record.id}>{record.email}</option>
+                                    )
+                            }
+                            
+                        </Form.Control>
+                        <Button variant='success' className='mt-2' onClick={()=>updatecaemail(id)}>Submit</Button>
                         </Toast.Body>
                         </Toast> 
                         <Modal.Header closeButton onClick={handleClose} style={{backgroundColor:"#75E3B9",opacity:".7",border:'none'}}>
@@ -440,13 +510,13 @@ function Admindash()
                                 <Form.Control
                                     type="date"
                                     placeholder=""
-                                    value={date||''}
+                                    value={date}
                                      onChange={(e) => setdate(e.target.value)}
                                     disabled={true}
                                     autoFocus
                                 />
                                 <Form.Label>Place of Counselling</Form.Label>
-                                <select className="form-select" onChange={(e) => {setplace(e.target.value);}} required disabled={true} value={place||""}>
+                                <select className="form-select" onChange={(e) => {setplace(e.target.value);}} required disabled={true} value={place}>
                                     <option></option>
                                     <option>Vypin-Rajagiri Sea Shore School</option>
 			                        <option>Kakkanad</option>
@@ -470,7 +540,7 @@ function Admindash()
                                     maxLength={100}
                                     onChange={(e) => {setname(e.target.value);}}
                                     required
-                                    value={name||""}
+                                    value={name}
                                     disabled={true}
                                     autoFocus
                                 />
@@ -484,7 +554,7 @@ function Admindash()
                                     type="number"
                                     placeholder=""
                                     onChange={(e) => {setage(e.target.value);}} 
-                                    value={Age||""}
+                                    value={Age}
                                     required
                                     autoFocus
                                     disabled={true}
@@ -492,7 +562,7 @@ function Admindash()
                                 </div>
 					            <div className="col-md-6">
                                 <Form.Label>Gender</Form.Label>
-                                <select className="form-select" onChange={(e) => {setgender(e.target.value);}} disabled={true} value={Gender||""}>
+                                <select className="form-select" onChange={(e) => {setgender(e.target.value);}} disabled={true} value={Gender}>
                                     <option></option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -505,7 +575,7 @@ function Admindash()
                                 <div className="row">
 					            <div className="col-md-6">
                                 <Form.Label>Financial Status</Form.Label>
-                                <select className="form-select" onChange={(e) => {setfinstatus(e.target.value);}} disabled={true} value={f_status||""}>
+                                <select className="form-select" onChange={(e) => {setfinstatus(e.target.value);}} disabled={true} value={f_status}>
                                     <option></option>
                                     <option value="APL">APL</option>
                                     <option value="BPL">BPL</option>
@@ -516,7 +586,7 @@ function Admindash()
                                 <div className="col-md-6">
                                 
                                 <Form.Label>Martial Status</Form.Label>
-                                <select className="form-select" onChange={(e) => {setmaritalstat(e.target.value);}} disabled={true} value={m_status||""}>
+                                <select className="form-select" onChange={(e) => {setmaritalstat(e.target.value);}} disabled={true} value={m_status}>
                                     <option></option>
                                 <option>Married</option>
                                 <option>Single</option>
@@ -596,7 +666,7 @@ function Admindash()
                                 onChange={(e)=>{setproblem(e.target.value);}}
                                 required
                                 disabled={true}
-                                value={problem||""}
+                                value={problem}
                                 />
                                 <Form.Label>History of Problem</Form.Label>
                                 <textarea 
@@ -631,7 +701,7 @@ function Admindash()
                                     placeholder=" "
                                     onChange={(e) => {setsession(e.target.value);}}
                                     disabled={true}
-                                    value={follow_ups||""}
+                                    value={follow_ups}
                                     autoFocus
                                 />
                                 <Form.Label>Referal Service</Form.Label>
@@ -664,7 +734,7 @@ function Admindash()
                                 </Form.Group>
                                 <Form.Group>
                                 <Form.Label>Status</Form.Label>
-                                <select className="form-select" onChange={(e) => {setstatus(e.target.value);}} required value={status||""} disabled={true}>
+                                <select className="form-select" onChange={(e) => {setstatus(e.target.value);}} required value={status} disabled={true}>
                                     <option value="Pending">Pending</option>
                                     <option value="Completed">Completed</option>                           
                                 </select>

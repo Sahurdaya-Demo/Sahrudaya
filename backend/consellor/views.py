@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from rest_framework import viewsets,status
 from .models import counsellor
+from Employee.models import employee
 from .serializers import CounsellorSerializer
 from rest_framework.response import Response
+from rest_framework.views import APIView
 # Creatclasse your views here.
 
 class submitview(viewsets.ModelViewSet):
@@ -22,3 +24,13 @@ class submitview(viewsets.ModelViewSet):
             return Response({"message": "Record deleted successfully"},status=status.HTTP_200_OK)
         except counsellor.DoesNotExist:
             return Response({"error": "Record not found"}, status=status.HTTP_404_NOT_FOUND)
+class emailchange(APIView):
+     def post(self, request, format=None):
+          email=counsellor.objects.get(id=request.data['id'])
+          name=employee.objects.get(email=request.data['email'])
+          print(name.name)
+          email.email=request.data['email']
+          email.nameofcounsellor=name.name
+          email.save()
+          return Response({"message": "Record deleted successfully"},status=status.HTTP_200_OK)
+     
