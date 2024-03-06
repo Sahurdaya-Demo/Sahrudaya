@@ -53,7 +53,8 @@ function Patients()
     
      const update=async(id)=>{
     let formField = new FormData()
-      formField.append("email",localStorage.getItem('email') )
+    formField.append("nameofcounsellor",sessionStorage.getItem('name') )
+    formField.append("email",sessionStorage.getItem('email') )
 		formField.append('date',date)
 		formField.append('place_of_counselling',place)
 		formField.append('name',name)
@@ -316,7 +317,7 @@ function Patients()
                                     </Col>
                                     <Col md={3}>
                                         <Form.Label>School</Form.Label>
-                                        <Form.Control as="select" onChange={(e) => {setschool(e.target.value);}} disabled={!disableButton} value={School=='null'?null:School}>
+                                        <Form.Control as="select" onChange={(e) => {setschool(e.target.value);}} disabled={!disableButton} value={School==='null'?null:School}>
                                                 <option></option>
                                                 <option value="Government">Government</option>
                                                 <option value="Aided">Aided</option>   
@@ -332,7 +333,7 @@ function Patients()
                                             onChange={(e) => {setreligion(e.target.value);}}
                                             autoFocus
                                             disabled={!disableButton}
-                                            value={religion=='null'?null:religion}
+                                            value={religion==='null'?null:religion}
                                         />
                                     </Col>
                                 </Row>
@@ -346,7 +347,7 @@ function Patients()
                                             onChange={(e) => {setfoccupation(e.target.value);}}
                                             autoFocus
                                             disabled={!disableButton}
-                                            value={f_occupation=='null'?null:f_occupation}
+                                            value={f_occupation==='null'?null:f_occupation}
                                         />
                                     </Col> 
                                     <Col md={6}>
@@ -358,7 +359,7 @@ function Patients()
                                             onChange={(e) => {setfeducation(e.target.value);}}
                                             autoFocus
                                             disabled={!disableButton}
-                                            value={f_education=='null'?null:f_education}
+                                            value={f_education==='null'?null:f_education}
                                         />
                                     </Col>
                                 </Row>
@@ -372,7 +373,7 @@ function Patients()
                                             onChange={(e) => {setmoccupation(e.target.value);}}
                                             autoFocus
                                             disabled={!disableButton}
-                                            value={m_occupation=='null'?null:m_occupation}
+                                            value={m_occupation==='null'?null:m_occupation}
                                         />
                                     </Col>
                                     <Col md={6}>
@@ -384,7 +385,7 @@ function Patients()
                                             onChange={(e) => {setmeducation(e.target.value);}}
                                             autoFocus
                                             disabled={!disableButton}
-                                            value={m_education=='null'?null:m_education}
+                                            value={m_education==='null'?null:m_education}
                                         />
                                     </Col>
                                 </Row>
@@ -411,7 +412,7 @@ function Patients()
                                             maxLength={500} 
                                             disabled={!disableButton}
                                             onChange={(e)=>{sethistory(e.target.value);}}
-                                            value={history=='null'?null:history}
+                                            value={history==='null'?null:history}
                                         />
                                     </Col>
                                 </Row>
@@ -424,7 +425,7 @@ function Patients()
                                             maxLength={100}
                                             disabled={!disableButton}
                                             onChange={(e)=>{setintervention(e.target.value);}}
-                                            value={Intervention=='null'?null:Intervention}
+                                            value={Intervention==='null'?null:Intervention}
                                         />
                                     </Col>
                                     <Col md={12}>
@@ -435,7 +436,7 @@ function Patients()
                                         maxLength={200}
                                         disabled={!disableButton}
                                         onChange={(e)=>{setchallenge(e.target.value);}}
-                                        value={challenge=='null'?null:challenge}
+                                        value={challenge==='null'?null:challenge}
                                         />
                                     </Col>
                                 </Row>
@@ -448,7 +449,7 @@ function Patients()
                                             maxLength={100}
                                             disabled={!disableButton}
                                             onChange={(e) => {setreferral(e.target.value);}}
-                                            value={referral=='null'?null:referral}
+                                            value={referral==='null'?null:referral}
                                         />
                                     </Col>
                                 </Row>
@@ -461,7 +462,7 @@ function Patients()
                                             maxLength={250}
                                             disabled={!disableButton}
                                             onChange={(e) => {setoutcome(e.target.value);}}
-                                            value={outcome=='null'?null:outcome}
+                                            value={outcome==='null'?null:outcome}
                                         />
                                     </Col>
                                     <Col md={6}>
@@ -472,7 +473,7 @@ function Patients()
                                             maxLength={200}
                                             onChange={(e) => {setremarks(e.target.value);}}
                                             disabled={!disableButton}
-                                            value={remarks=='null'?null:remarks}
+                                            value={remarks==='null'?null:remarks}
                                         />
                                     </Col>
                                 </Row>

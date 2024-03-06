@@ -2,7 +2,7 @@ import LoadExternalScript from '../../LoadExternalScript';
 import PureCounter from "@srexi/purecounterjs";
 import { useEffect, useState} from 'react';
 import { Chart as ChartJS, defaults } from "chart.js/auto";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -13,8 +13,9 @@ function Admindash()
     const [show, setShow] = useState(false);
     const [showA, setShowA] = useState(false);
     const handleShow = () => setShow(true);
-    const handleClose = () => setShow(false);
-    const toggleShowA = () => setShowA(!showA);
+    const handleClose = () => {setShow(false);toggleCloseA()};
+    const toggleShowA = () => {setShowA(true)};
+    const toggleCloseA = () => {setShowA(false)};
     const[id,setid]=useState("")
     const[date,setdate]=useState("")
     const[place,setplace]=useState("")
@@ -74,7 +75,11 @@ function Admindash()
             url: 'http://127.0.0.1:8000/emailsearch/',
             data: {'email':email}
         }).then(response=>{
-            // console.log(response.data.msg)
+            if(response.data.errors)
+            {
+                toggleShowA()
+                // console.log('not found')
+            }
         })
     }
       const getformdetails=async(id)=>{
@@ -397,6 +402,18 @@ function Admindash()
                            
                         </div>
                         <Modal show={show} onHide={handleClose} centered>
+                        <Toast show={showA} onClose={toggleCloseA} className=' position-absolute  translate-middle-y' style={{zIndex:10000,top:'37%',right:'-75%'}}>
+                        <Toast.Header>
+                            <img
+                            src="holder.js/20x20?text=%20"
+                            className="rounded me-2"
+                            alt=""
+                            />
+                            <strong className="me-auto">Bootstrap</strong>
+                            <small>11 mins ago</small>
+                        </Toast.Header>
+                        <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+                        </Toast> 
                         <Modal.Header closeButton onClick={handleClose} style={{backgroundColor:"#75E3B9",opacity:".7",border:'none'}}>
                             <Modal.Title>Edit Data</Modal.Title>
                         </Modal.Header>
@@ -496,7 +513,7 @@ function Admindash()
                                 </Form.Group>
                                 <Form.Group>
                                 <Form.Label>School</Form.Label>
-                                <select className="form-select" onChange={(e) => {setschool(e.target.value);}} disabled={true} value={School||""}>
+                                <select className="form-select" onChange={(e) => {setschool(e.target.value);}} disabled={true} value={School==='null'?null:School}>
                                     <option></option>
                                     <option value="Government">Government</option>
                                     <option value="Aided">Aided</option>   
@@ -510,7 +527,7 @@ function Admindash()
                                     onChange={(e) => {setfoccupation(e.target.value);}}
                                     autoFocus
                                     disabled={true}
-                                    value={f_occupation||""}
+                                    value={f_occupation==='null'?null:f_occupation}
                                 />
                                 <Form.Label>Father's Education</Form.Label>
                                 <Form.Control
@@ -520,7 +537,7 @@ function Admindash()
                                     onChange={(e) => {setfeducation(e.target.value);}}
                                     autoFocus
                                     disabled={true}
-                                    value={f_education||""}
+                                    value={f_education==='null'?null:f_education}
                                 />
                                 <Form.Label>Mother's Occupation</Form.Label>
                                 <Form.Control
@@ -530,7 +547,7 @@ function Admindash()
                                     onChange={(e) => {setmoccupation(e.target.value);}}
                                     autoFocus
                                     disabled={true}
-                                    value={m_occupation||""}
+                                    value={m_occupation==='null'?null:m_occupation}
                                 />
                                 <Form.Label>Mother's Education</Form.Label>
                                 <Form.Control
@@ -540,7 +557,7 @@ function Admindash()
                                     onChange={(e) => {setmeducation(e.target.value);}}
                                     autoFocus
                                     disabled={true}
-                                    value={m_education||""}
+                                    value={m_education==='null'?null:m_education}
                                 />
                                 <Form.Label>Religion</Form.Label>
                                 <Form.Control
@@ -550,7 +567,7 @@ function Admindash()
                                     onChange={(e) => {setreligion(e.target.value);}}
                                     autoFocus
                                     disabled={true}
-                                    value={religion||""}
+                                    value={religion==='null'?null:religion}
                                 />
                                 </Form.Group>
                                 <Form.Group>
@@ -571,7 +588,7 @@ function Admindash()
                                 maxLength={500} 
                                 disabled={true}
                                 onChange={(e)=>{sethistory(e.target.value);}}
-                                value={history||""}
+                                value={history==='null'?null:history}
                                 />
                                 <Form.Label>Intervention</Form.Label>
                                 <textarea 
@@ -580,7 +597,7 @@ function Admindash()
                                 maxLength={100}
                                 disabled={true}
                                 onChange={(e)=>{setintervention(e.target.value);}}
-                                value={Intervention||""}
+                                value={Intervention==='null'?null:Intervention}
                                 />
                                 <Form.Label>Challenges by Counsellor</Form.Label>
                                 <textarea
@@ -589,7 +606,7 @@ function Admindash()
                                 maxLength={200}
                                 disabled={true}
                                 onChange={(e)=>{setchallenge(e.target.value);}}
-                                value={challenge||""}
+                                value={challenge==='null'?null:challenge}
                                 />
                                 <Form.Label>No. of follow up sessions</Form.Label>
                                 <Form.Control
@@ -607,7 +624,7 @@ function Admindash()
                                 maxLength={100}
                                 disabled={true}
                                 onChange={(e) => {setreferral(e.target.value);}}
-                                value={referral||""}
+                                value={referral==='null'?null:referral}
                                 />
                                 <Form.Label>Outcome</Form.Label>
                                 <textarea 
@@ -616,7 +633,7 @@ function Admindash()
                                 maxLength={250}
                                 disabled={true}
                                 onChange={(e) => {setoutcome(e.target.value);}}
-                                value={outcome||""}
+                                value={outcome==='null'?null:outcome}
                                 />
                                 <Form.Label>Remarks</Form.Label>
                                 <textarea 
@@ -625,7 +642,7 @@ function Admindash()
                                 maxLength={200}
                                 onChange={(e) => {setremarks(e.target.value);}}
                                 disabled={true}
-                                value={remarks||""}
+                                value={remarks==='null'?null:remarks}
                                 />
                                 </Form.Group>
                                 <Form.Group>
@@ -640,28 +657,14 @@ function Admindash()
                                 {/* <Button variant="btn btn-warning py-1 m-1 "  onClick={handleeditClick} disabled={disableButton} style={{color:'white'}}> Edit</Button> */}
                                 {/* <Button variant="btn btn-success py-1 m-1" onClick={()=>{handlesaveClick();update(id);}} disabled={true}>Save</Button> */}
                                 <Button variant="btn btn-danger py-1 m-1" onClick={handleClose}>Close</Button>
-                                <Button onClick={toggleShowA} className="mb-2">
-                            Toggle Toast <strong>with</strong> Animation
-                            </Button>
+                                <Button onClick={toggleShowA} className="py-1 m-1">Change Access</Button>
+                            
+                            
                         </Form.Group>
                         </Modal.Footer>
                         </Modal.Body>
                         
                     </Modal> 
-                    <Toast show={showA} onClose={toggleShowA} className='pos-absolute bottom-0 end-0' style={{zIndex:10000}}>
-                        <Toast.Header>
-                            <img
-                            src="holder.js/20x20?text=%20"
-                            className="rounded me-2"
-                            alt=""
-                            />
-                            <strong className="me-auto">Bootstrap</strong>
-                            <small>11 mins ago</small>
-                        </Toast.Header>
-                        <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-                    </Toast>  
-                   
-
         </>
     )
 }
