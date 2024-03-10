@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 class submitview(viewsets.ModelViewSet):
  queryset= counsellor.objects.all()
  serializer_class = CounsellorSerializer
+ 
  def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
@@ -33,4 +34,7 @@ class emailchange(APIView):
           email.nameofcounsellor=name.name
           email.save()
           return Response({"message": "Record deleted successfully"},status=status.HTTP_200_OK)
-     
+class demo(APIView):
+    def post(self,request):
+        print(request.data)
+        return Response({"message": "Record deleted successfully"},status=status.HTTP_200_OK)
