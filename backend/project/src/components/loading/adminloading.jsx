@@ -29,10 +29,8 @@ const Adminloading=()=>
           <img src="../../../loading.gif" alt="Loading" />
         </div>
       ) : (
-      <>
-      <link rel='stylesheet'type='text/css' href='../../../admincss/styles.css'></link>
+        
       <Admin/>
-      </>
     )}
     </>
     )
