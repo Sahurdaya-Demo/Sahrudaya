@@ -388,12 +388,12 @@ const fetchemail=async()=>{
                         </div>
                         <div className="row">
                             <div className="col-xl-6">
-                                <div className="card mb-4">
+                                <div className="card cardey mb-4">
                                     <div className="card-header">
                                         <i className="fa fa-chart-area me-1"></i>
                                         Gender Based Sessions Chart
                                         
-                                         <select value={selectedYear} onChange={e => setSelectedYear(parseInt(e.target.value))} className='float-end'>
+                                         <select value={selectedYear} onChange={e => setSelectedYear(parseInt(e.target.value))} className='float-end border-black'>
                                         {Array.from({ length: new Date().getFullYear() - 2000 }, (_, index) => (
                                             <option key={index} value={2000 + index+1}>
                                                 {2000 + index+1}
@@ -430,12 +430,12 @@ const fetchemail=async()=>{
                             </div>
                             
                             <div className="col-xl-6">
-                                <div className="card mb-4">
+                                <div className="card cardey mb-4">
                                     <div className="card-header">
                                         <i className="fa fa-chart-area me-1"></i>
                                         Sessions Chart
                                         
-                                         <select value={selectYear} onChange={e => setSelectYear(parseInt(e.target.value))} className='float-end'>
+                                         <select value={selectYear} onChange={e => setSelectYear(parseInt(e.target.value))} className='float-end border-black'>
                                         {Array.from({ length: new Date().getFullYear() - 2000 }, (_, index) => (
                                             <option key={index} value={2000 + index+1}>
                                                 {2000 + index+1}
@@ -451,7 +451,7 @@ const fetchemail=async()=>{
                                     </div>
                                     
                         </div> 
-                        <div className="card mb-4">
+                        <div className="card cardey mb-4">
                             <div className="card-header">
                                 <i className="fa fa-table me-1"></i>
                                 DataTable Example
