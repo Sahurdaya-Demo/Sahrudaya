@@ -20,7 +20,11 @@ const Counsellorloading=()=>
           <img src="../../../loading.gif" alt="Loading" />
         </div>
       ) : (
-      <Counsellor/>
+        <>
+        <link rel='stylesheet'type='text/css' href='../../../counselcss/styles.css'></link>
+        <link rel='stylesheet'type='text/css' href='../../../formcss/styles.css'></link> 
+        <Counsellor/>
+      </>
     )}
     </>
     )
