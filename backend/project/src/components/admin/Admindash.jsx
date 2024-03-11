@@ -526,7 +526,7 @@ const fetchemail=async()=>{
                             <option></option>
                             {
                                 dtoast?.map(record=>
-                                    <option key={record.id}>{record.email}</option>
+                                    <option key={record.id}>{record.email}<span className=' ms-4'></span>{record.name}</option>
                                     )
                             }
                             

@@ -2,7 +2,7 @@ $(document).ready(function() {
   $('#example').DataTable({
     //disable sorting on last column
     "columnDefs": [
-      { "orderable": false, "targets": 6}
+      { "orderable": false, "targets": 7}
     ],
     dom: 'Bfrtip',
     buttons: [
