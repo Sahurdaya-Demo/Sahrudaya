@@ -1,5 +1,4 @@
 import LoadExternalScript from '../../LoadExternalScript';
-import PureCounter from "@srexi/purecounterjs";
 import { useEffect, useState,useRef} from 'react';
 import { Chart as ChartJS, defaults } from "chart.js/auto";
 import { Bar, Line } from "react-chartjs-2";
@@ -9,9 +8,9 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Toast from 'react-bootstrap/Toast';
 import { Row,Col} from "react-bootstrap";
+import CountUp from 'react-countup';
 function Admindash()
 {
-    new PureCounter();
     const windowWidth = useRef(window.innerWidth);
     const windowHeight = useRef(window.innerHeight);
     //  let Thevaracollege,Thevarahss,Thevaraup,Thevaraschool,Karukutty,Kanjoor,Eloor,Kottarapalli,Manappuram,Pothy,Kakkand;
@@ -284,7 +283,11 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Vypin-Rajagiri Sea Shore School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end={Vypin} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    
+                                    <CountUp        
+                                    className="display-6 "                     
+                                    end={Vypin}
+                                    style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                     </div>
                                     </div>
                                    </div>
@@ -296,7 +299,11 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Kakkanad</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end={Kakkand} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    
+                                    <CountUp        
+                                    className="display-6 "                     
+                                    end={Kakkand}
+                                    style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                     </div>
                                     </div>
                                    </div>
@@ -308,7 +315,11 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH College(East Campus)</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end={Thevaracollege} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    
+                                    <CountUp        
+                                    className="display-6 "                     
+                                    end={Thevaracollege}
+                                    style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                     </div>
                                     </div>
                                    </div>
@@ -320,7 +331,11 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-Higher Secondary School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end={Thevarahss} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    
+                                    <CountUp        
+                                    className="display-6 "                     
+                                    end={Thevarahss}
+                                    style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                     </div>
                                     </div>
                                    </div>
@@ -332,7 +347,11 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH UP</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end={Thevaraup} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    
+                                    <CountUp        
+                                    className="display-6 "                     
+                                    end={Thevaraup}
+                                    style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                     </div>
                                     </div>
                                    </div>
@@ -344,7 +363,11 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH High School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end={Thevaraschool} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    
+                                    <CountUp        
+                                    className="display-6 "                     
+                                    end={Thevaraschool}
+                                    style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                     </div>
                                     </div>
                                    </div>
@@ -356,7 +379,11 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Karukutty-Christ the King monastery Church </div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end={Karukutty} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    
+                                    <CountUp        
+                                    className="display-6 "                     
+                                    end={Karukutty}
+                                    style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                     </div>
                                     </div>
                                    </div>
@@ -368,7 +395,11 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Kanjoor</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end={Kanjoor} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    
+                                    <CountUp        
+                                    className="display-6 "                     
+                                    end={Kanjoor}
+                                    style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                     </div>
                                     </div>
                                    </div>
@@ -380,7 +411,11 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Eloor-SHJ UP School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end={Eloor} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    
+                                    <CountUp        
+                                    className="display-6 "                     
+                                    end={Eloor}
+                                    style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                     </div>
                                     </div>
                                      </div>
@@ -392,7 +427,11 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Kottarapalli Amala Public School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end={Kottarapalli} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    
+                                    <CountUp        
+                                    className="display-6 "                     
+                                    end={Kottarapalli}
+                                    style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                     </div>
                                     </div>
                                      </div>
@@ -404,7 +443,11 @@ const fetchemail=async()=>{
                                         <div className='d-flex flex-lg-row flex-column align-items-center'>
                                             <div className="col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{ fontWeight: 600, fontSize: '0.8rem' }}>Manappuram St.Theresa's high school</div>
                                             <div className='col-lg-4'>
-                                                <span data-pure-start="0" data-purecounter-end={Manappuram} data-pure-duration="1" className="purecounter display-6" style={{ fontFamily: 'Poppins-Regular, sans-serif', fontWeight: 600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span>
+                                                
+                                                <CountUp        
+                                                className="display-6 "                     
+                                                end={Manappuram}
+                                                style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                             </div>
                                         </div>
                                     </div>
@@ -416,7 +459,11 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className=" col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Pothy</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end={Pothy} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    
+                                    <CountUp        
+                                    className="display-6 "                     
+                                    end={Pothy}
+                                    style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}/>
                                     </div>
                                     </div>
                                      </div>
