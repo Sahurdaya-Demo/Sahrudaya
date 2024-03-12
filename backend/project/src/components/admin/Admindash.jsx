@@ -11,8 +11,22 @@ import Toast from 'react-bootstrap/Toast';
 import { Row,Col} from "react-bootstrap";
 function Admindash()
 {
+    new PureCounter();
     const windowWidth = useRef(window.innerWidth);
     const windowHeight = useRef(window.innerHeight);
+    //  let Thevaracollege,Thevarahss,Thevaraup,Thevaraschool,Karukutty,Kanjoor,Eloor,Kottarapalli,Manappuram,Pothy,Kakkand;
+    const[Vypin,setVypin]=useState(0);
+    const[Thevaracollege,setThevaracollege]=useState('');
+    const[Thevarahss,setThevarahss]=useState('');
+    const[Thevaraup,setThevaraup]=useState('');
+    const[Thevaraschool,setThevaraschool]=useState('');
+    const[Karukutty,setKarukutty]=useState('');
+    const[Kanjoor,setKanjoor]=useState('');
+    const[Eloor,setEloor]=useState('');
+    const[Kottarapalli,setKottarapalli]=useState('');
+    const[Manappuram,setManappuram]=useState('');
+    const[Pothy,setPothy]=useState('');
+    const[Kakkand,setKakkand]=useState('');
     const [show, setShow] = useState(false);
     const [showA, setShowA] = useState(false);
     const[toastdata,settoastdata]=useState(false)
@@ -56,9 +70,15 @@ function Admindash()
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [selectYear, setSelectYear] = useState(new Date().getFullYear());
     useEffect(() => {
+        
         LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','adminjs/tablescript.js']);
-        new PureCounter();
         }, []); 
+        useEffect(()=>{
+            table();
+         setInterval(()=>{
+            table();
+         },5000)   
+        },[])
         useEffect(() => {
             retrieveData();
             }, [selectedYear]);    
@@ -66,6 +86,7 @@ function Admindash()
         useEffect(() => {
             retrieveData();
             }, [selectYear]);
+            
         const handlescroll=()=>{
             document.getElementById('modal')?.scrollIntoView({behavior:'smooth'})
             toggleShowA()
@@ -97,15 +118,31 @@ function Admindash()
                     overallCounts[month]++;
                 }
             });
-    
+            setVypin(jsonData.filter(record=>record.place_of_counselling==='Vypin-Rajagiri Sea Shore School').length)
+            setKakkand(jsonData.filter(record=>record.place_of_counselling==='Kakkand').length)
+            setThevaracollege(jsonData.filter(record=>record.place_of_counselling==='Thevara-SH College(East Campus)').length)
+            setThevarahss(jsonData.filter(record=>record.place_of_counselling==='Thevara-Higher Secondary School').length)
+            setThevaraup(jsonData.filter(record=>record.place_of_counselling==='Thevara-SH UP').length)
+            setThevaraschool(jsonData.filter(record=>record.place_of_counselling==='Thevara-SH High School').length)
+            setKarukutty(jsonData.filter(record=>record.place_of_counselling==='Karukutty-Christ the King monsatery church').length)
+            setKanjoor(jsonData.filter(record=>record.place_of_counselling==='Kanjoor').length)
+            setEloor(jsonData.filter(record=>record.place_of_counselling==='Eloor-SHJ UP School').length)
+            setKottarapalli(jsonData.filter(record=>record.place_of_counselling==='Kottarapalli-Amala Public School').length)
+            setManappuram(jsonData.filter(record=>record.place_of_counselling===`Manappuram-St Teresa's High School`).length)
+            setPothy(jsonData.filter(record=>record.place_of_counselling===`Pothy`).length)
             setMales(maleCounts);
             setFemales(femaleCounts);
             setOthers(otherCounts);
             setcompleted(completedCounts);
             setpending(pendingCounts);
             setoverall(overallCounts);
-            setData(jsonData)
+            
         };
+        const table=async()=>{
+            const response = await fetch('http://127.0.0.1:8000/formsubmit/');
+            const jsontb = await response.json();
+            setData(jsontb)
+        }
     // useEffect(()=>{
     //     LoadExternalScript(['https://code.jquery.com/jquery-3.7.0.js','https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js','https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js','https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js','https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js','https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js','https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js','adminjs/tablescript.js']);
     //     new PureCounter();
@@ -190,7 +227,7 @@ function Admindash()
   defaults.responsive=true;
 
   const datasess = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
+  labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL','AUG','SEP','OCT','NOV','DEC'],
   datasets: [
     {
       label: 'Completed',
@@ -247,7 +284,7 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Vypin-Rajagiri Sea Shore School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end={Vypin} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -259,7 +296,7 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Kakkanad</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end={Kakkand} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -271,7 +308,7 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH College(East Campus)</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end={Thevaracollege} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -283,7 +320,7 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-Higher Secondary School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end={Thevarahss} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -295,7 +332,7 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH UP</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end={Thevaraup} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -307,7 +344,7 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Thevara-SH High School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end={Thevaraschool} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -319,7 +356,7 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Karukutty-Christ the King monastery Church </div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end={Karukutty} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -331,7 +368,7 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Kanjoor</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end={Kanjoor} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                    </div>
@@ -343,7 +380,7 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Eloor-SHJ UP School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end={Eloor} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                      </div>
@@ -355,7 +392,7 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className="col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Kottarapalli Amala Public School</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end={Kottarapalli} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                      </div>
@@ -367,7 +404,7 @@ const fetchemail=async()=>{
                                         <div className='d-flex flex-lg-row flex-column align-items-center'>
                                             <div className="col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{ fontWeight: 600, fontSize: '0.8rem' }}>Manappuram St.Theresa's high school</div>
                                             <div className='col-lg-4'>
-                                                <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6" style={{ fontFamily: 'Poppins-Regular, sans-serif', fontWeight: 600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span>
+                                                <span data-pure-start="0" data-purecounter-end={Manappuram} data-pure-duration="1" className="purecounter display-6" style={{ fontFamily: 'Poppins-Regular, sans-serif', fontWeight: 600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span>
                                             </div>
                                         </div>
                                     </div>
@@ -379,7 +416,7 @@ const fetchemail=async()=>{
                                     <div className='d-flex flex-lg-row flex-column align-items-center'>
                                     <div className=" col-lg-9 col-lg-9 mb-3 mb-lg-0" style={{fontWeight:600,fontSize:'0.8rem'}}>Pothy</div>
                                     <div className='col-lg-4'>
-                                    <span data-pure-start="0" data-purecounter-end="337" data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
+                                    <span data-pure-start="0" data-purecounter-end={Pothy} data-pure-duration="1" className="purecounter display-6 " style={{fontFamily:'Poppins-Regular, sans-serif',fontWeight:600,textShadow: "2px 2px 3px rgba(0, 0, 0, 0.5)"}}></span> 
                                     </div>
                                     </div>
                                      </div>
@@ -526,7 +563,7 @@ const fetchemail=async()=>{
                             <option></option>
                             {
                                 dtoast?.map(record=>
-                                    <option key={record.id}>{record.email}</option>
+                                    <option key={record.id}>{record.email}<span className=' ms-4'></span>{record.name}</option>
                                     )
                             }
                             

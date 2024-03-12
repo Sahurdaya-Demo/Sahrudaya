@@ -47,6 +47,11 @@ section {
   background: #fff;
   padding: 60px 0;
 }
+@media (min-width: 1024px) {
+  .counsellors {
+    padding: 60px 60px;
+  }
+}
 
 .counsellors .member {
   overflow: hidden;

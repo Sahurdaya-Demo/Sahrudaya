@@ -20,6 +20,7 @@ const Counsellorloading=()=>
           <img src="../../../loading.gif" alt="Loading" />
         </div>
       ) : (
+        
       <Counsellor/>
     )}
     </>
