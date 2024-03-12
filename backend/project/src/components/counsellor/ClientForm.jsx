@@ -157,7 +157,7 @@ function Details() {
 		try{
 	   await axios({
 		   method: 'post',
-		   url: 'http://127.0.0.1:8000/demo/',
+		   url: 'http://127.0.0.1:8000/formsubmit/',
 		   data: formField
 	   }).then(response=>{
 		  
