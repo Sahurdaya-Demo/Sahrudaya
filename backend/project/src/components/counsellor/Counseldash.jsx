@@ -71,7 +71,7 @@ function Counseldash(){
                 </div>
                     
                     <div className="col-lg-4">
-                        <div className=" card mb-3">
+                        <div className=" card cardey mb-3">
                             <div className='card-body mb-3 card-he'>
                             <p className='font-lexend ' style={{fontSize:'25px'}}>
                             Pending Sessions
@@ -84,7 +84,7 @@ function Counseldash(){
                         </div>
                     </div>
                     <div className="col-lg-4">
-                        <div className=" card mb-3">
+                        <div className=" card cardey mb-3">
                             <div className='card-body mb-3 card-he'>
                             <p className='font-lexend ' style={{fontSize:'25px'}}>
                             Completed Sessions
@@ -98,7 +98,7 @@ function Counseldash(){
                         </div>
                     </div>
                     <div className="col-lg-4">
-                        <div className=" card mb-3">
+                        <div className=" card cardey mb-3">
                             <div className='card-body mb-3 card-he'>
                             <p className='font-lexend ' style={{fontSize:'25px'}}>
                                 Today's Sessions

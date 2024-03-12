@@ -3,7 +3,7 @@ $(document).ready(function() {
     //disable sorting on last column
     "columnDefs": [
       { "orderable": false, "targets": 7},
-      { "targets": [4,5], "visible": false }
+      { "targets": [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22], "visible": false }
     ],
     dom: 'C<"clear">Bfrtip',
     buttons: [

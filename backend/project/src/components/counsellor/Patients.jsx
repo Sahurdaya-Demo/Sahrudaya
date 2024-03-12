@@ -165,7 +165,7 @@ function Patients()
     
     return(
         <>
-        <div className="card mb-4 mt-2">
+        <div className="card cardey mb-4 mt-2">
                             <div className="card-header">
                                 <i className="fa fa-table me-1"></i>
                                 DataTable Example
@@ -175,29 +175,62 @@ function Patients()
                                 <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Name of Couneslor</th>
                                         <th>Gender</th>
                                         <th>Date</th>
                                         <th>Place Of Couneslling</th>
                                         <th>Problem</th>
                                         <th>Status</th>
                                         
+                                        <th>Age</th>
+                                        <th>finacial_status</th>
+                                        <th>marital_status</th>
+                                        <th>school</th>
+                                        <th>religion</th>
+                                        <th>fathers_occupation</th>
+                                        <th>mothers_occupation</th>
+                                        <th>fathers_education</th>
+                                        <th>mothers_education</th>
+                                        <th>history_of_problem</th>
+                                        <th>intervention</th>
+                                        <th>challenges_by_counsellor</th>
+                                        <th>number_of_followup_sections</th>
+                                        <th>referral_service</th>
+                                        <th>outcome</th>
+                                        <th>remarks</th>
                                         <th>Action</th>
-                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                 {profile[1]?.map(record => 
                                         <tr key={record.id}>
                                         <td>{record.name}</td>
+                                        <td>{record.nameofcounsellor}</td>
                                         <td>{record.gender}</td>
                                         <td>{record.date}</td>
                                         <td>{record.place_of_counselling}</td>
                                         <td>{record.problem}</td>
                                         <td>{record.status}</td>
+                                        <td>{record.age}</td>
+                                        <td>{record.finacial_status}</td>
+                                        <td>{record.marital_status}</td>
+                                        <td>{record.school}</td>
+                                        <td>{record.religion}</td>
+                                        <td>{record.fathers_occupation}</td>
+                                        <td>{record.mothers_occupation}</td>
+                                        <td>{record.fathers_education}</td>
+                                        <td>{record.mothers_education}</td>
+                                        <td>{record.history_of_problem}</td>
+                                        <td>{record.intervention}</td>
+                                        <td>{record.challenges_by_counsellor}</td>
+                                        <td>{record.number_of_followup_sections}</td>
+                                        <td>{record.referral_service}</td>
+                                        <td>{record.outcome}</td>
+                                        <td>{record.remarks}</td>
                                         <td>
                                         <div className="button-group">
                                         <button className='btn btn-danger' onClick={()=>{delrecord(record.id)}}>Delete</button>
-                                        <button className='btn btn-warning ms-2' style={{color:'white'}} onClick={()=>{handleShow();getformdetails(record.id)}}>View</button>
+                                        <button className='btn btn-warning ms-1' style={{color:'white'}} onClick={()=>{handleShow();getformdetails(record.id)}}>View</button>
                                         </div>
                                         </td>
                                         </tr>
@@ -207,14 +240,32 @@ function Patients()
                                 <tfoot>
                                     <tr>
                                     <th>Name</th>
+                                        <th>Name of Couneslor</th>
                                         <th>Gender</th>
                                         <th>Date</th>
                                         <th>Place Of Couneslling</th>
                                         <th>Problem</th>
                                         <th>Status</th>
-                                        <th>Action</th>
                                         
+                                        <th>Age</th>
+                                        <th>finacial_status</th>
+                                        <th>marital_status</th>
+                                        <th>school</th>
+                                        <th>religion</th>
+                                        <th>fathers_occupation</th>
+                                        <th>mothers_occupation</th>
+                                        <th>fathers_education</th>
+                                        <th>mothers_education</th>
+                                        <th>history_of_problem</th>
+                                        <th>intervention</th>
+                                        <th>challenges_by_counsellor</th>
+                                        <th>number_of_followup_sections</th>
+                                        <th>referral_service</th>
+                                        <th>outcome</th>
+                                        <th>remarks</th>
+                                        <th>Action</th>
                                     </tr>
+                                    
                                 </tfoot>
                            </table>
                         
