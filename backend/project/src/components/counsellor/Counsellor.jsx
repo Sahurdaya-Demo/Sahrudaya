@@ -111,6 +111,7 @@ const handlesaveClick = () => {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('type');
     sessionStorage.removeItem('email');
+    sessionStorage.removeItem('name');
     navigate('/',{replace:true})
   }
   try{
