@@ -16,14 +16,24 @@ import { UnloadExternalScript } from "../../UnloadExternalScript";
 import emailjs from '@emailjs/browser';
 import { Form, Button, Row, Col ,ProgressBar} from 'react-bootstrap';
 function Home(){
+  // let jsonDatacon;
+  const [count,setcount]=useState('')
+ 
   const navigate=useNavigate();
      useEffect(() => {
     LoadExternalScript(['js/main.js']);
     AOS.init();
     AOS.refresh();
     new PureCounter();
+    retrieve();
     
   }, []);
+    const retrieve=async()=>{
+      const response= await fetch(`http://127.0.0.1:8000/formsubmit/`)
+      const jsonDatacon = await response.json();
+      setcount(jsonDatacon.length)
+      // console.log(jsonDatacon.length)
+    }
 
   // const[email,setemail]=useState('')
   // const[subject,setsubject]=useState('')
@@ -385,10 +395,10 @@ return(
               <i className="bi bi-journal-richtext" style={{color: "ee6c20"}}></i>
               <div>    
               <div className="d-flex">
-                <span data-pure-start="0" data-purecounter-end="30" data-purecounter-duration="1" className="purecounter"></span>              
-                <span>+</span>
+                <span data-pure-start="0" data-purecounter-end={count} data-purecounter-duration="1" className="purecounter"></span>              
+                {/* <span>+</span> */}
                 </div>
-                <p>Experienced</p>             
+                <p>Counselling Sessions</p>             
               </div>
             </div>
           </div>
