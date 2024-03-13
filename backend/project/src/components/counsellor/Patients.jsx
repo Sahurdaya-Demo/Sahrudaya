@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 import view from "./Data";
 import axios from "axios";
 import { Row,Col} from "react-bootstrap";
+import { LinkApi } from "../Utils/Resource";
+import { Link } from "react-router-dom";
 function Patients()
 {
     const[profile,setprofile]=useState([])
@@ -80,7 +82,8 @@ function Patients()
         try{
     await axios({
       method: 'PUT',
-      url:`http://127.0.0.1:8000/formsubmit/${id}/`,
+    //   url:`http://127.0.0.1:8000/formsubmit/${id}/`,
+    url:`${LinkApi}formsubmit/${id}/`,
       data:formField,
     }).then(response=>{
       // console.log(response.data);
@@ -97,7 +100,8 @@ function Patients()
     try{
     await axios({
         method: 'delete',
-        url:`http://127.0.0.1:8000/formsubmit/${id}/`,
+        // url:`http://127.0.0.1:8000/formsubmit/${id}/`,
+        url:`${LinkApi}formsubmit/${id}/`,
       }).then(response=>{
         console.log(response.data);
         alert('Record Deleted Successfully!!')
@@ -118,7 +122,8 @@ function Patients()
     };
     const getformdetails=async(id)=>{
         setValidated(false)
-        const result=await axios.get(`http://127.0.0.1:8000/formsubmit/${id}`)
+        // const result=await axios.get(`http://127.0.0.1:8000/formsubmit/${id}`)
+        const result=await axios.get(`${LinkApi}formsubmit/${id}`)
         console.log(result.data)
         setdate(result.data.date)
         setid(result.data.id)

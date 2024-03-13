@@ -7,6 +7,7 @@ import LoadExternalScript from '../../LoadExternalScript';
 import axios from 'axios';
 import Counseldash from './Counseldash';
 import view from './Data';
+import { LinkApi } from '../Utils/Resource';
 function Counsellor() {
   let profilejson=[]
     const navigate=useNavigate();
@@ -50,7 +51,8 @@ function Counsellor() {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`, // Include the access token in the Authorization header
        },
-    url:'http://127.0.0.1:8000/changepassword/',
+    // url:'http://127.0.0.1:8000/changepassword/',
+    url:`${LinkApi}changepassword/`,
     data: formField,   
     }).then(response=>{
         alert(response.data.msg)
@@ -70,7 +72,8 @@ function Counsellor() {
       formField.append('phone',phone)
     await axios({
       method: 'PUT',
-      url:`http://127.0.0.1:8000/api/${id}/`,
+      // url:`http://127.0.0.1:8000/api/${id}/`,
+      url:`${LinkApi}api/${id}/`,
       data:formField,
     }).then(response=>{
       // console.log(response.data);

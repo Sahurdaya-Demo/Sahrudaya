@@ -1,4 +1,5 @@
 import axios from "axios"
+import { LinkApi } from "../Utils/Resource"
 const view=async(setprofile)=>{
     try{
     await axios({
@@ -7,7 +8,8 @@ const view=async(setprofile)=>{
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`, // Include the access token in the Authorization header
       },
-      url:'http://127.0.0.1:8000/profile/',
+      // url:'http://127.0.0.1:8000/profile/',
+      url:`${LinkApi}profile/`,
     }).then(response=>{
         // console.log(response.data[0][0])
         sessionStorage.setItem('name',response.data[0][0].name)

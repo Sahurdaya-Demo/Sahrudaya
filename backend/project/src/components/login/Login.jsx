@@ -15,6 +15,7 @@ import Form from 'react-bootstrap/Form';
 import CbLogin from '../Utils/CbLogin';
 // // import useLogin from '../../useLogin';
 // import { UnloadExternalScript } from '../../UnloadExternalScript';
+import { LinkApi } from '../Utils/Resource';
 
 function Login(){
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +43,8 @@ function Login(){
     formField.append('email',emailchange)
     await axios({
       method: 'post',
-      url:'http://127.0.0.1:8000/send-reset-password-email/',
+      // url:'http://127.0.0.1:8000/send-reset-password-email/',
+      url:`${LinkApi}send-reset-password-email/`,
       data: formField
     }).then(response=>{
       setIsLoading(false)

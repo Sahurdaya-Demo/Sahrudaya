@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { UnloadExternalScript } from "../../UnloadExternalScript";
 import emailjs from '@emailjs/browser';
 import { Form, Button, Row, Col ,ProgressBar} from 'react-bootstrap';
+import { LinkApi } from "../Utils/Resource";
 function Home(){
   // let jsonDatacon;
   const [count,setcount]=useState('')
@@ -29,7 +30,8 @@ function Home(){
     
   }, []);
     const retrieve=async()=>{
-      const response= await fetch(`http://127.0.0.1:8000/formsubmit/`)
+      // const response= await fetch(`http://127.0.0.1:8000/formsubmit/`)
+      const response= await fetch(`${LinkApi}formsubmit/`)
       const jsonDatacon = await response.json();
       setcount(jsonDatacon.length)
       // console.log(jsonDatacon.length)

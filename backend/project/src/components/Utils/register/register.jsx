@@ -5,6 +5,7 @@ import portr from '../../login/images/potr.png'
 import { useState,useEffect } from 'react';
 import LoadExternalScript from '../../../LoadExternalScript';
 import axios from 'axios';
+import { LinkApi } from '../Resource';
 
 
 function Register({secure})
@@ -64,7 +65,8 @@ function Register({secure})
 			formField.append('password2',crpassword)
 			await axios({
 				method:'post',
-				url: `http://127.0.0.1:8000/validpost`,
+				// url: `http://127.0.0.1:8000/validpost`,
+				url: `${LinkApi}validpost`,
 				data:{'secure_str':secure},
 				headers: {
 				  'Content-type': 'application/json',
@@ -73,7 +75,8 @@ function Register({secure})
 			try{
 			  await axios({
 				method: 'post',
-				url:'http://127.0.0.1:8000/register/',
+				// url:'http://127.0.0.1:8000/register/',
+				url:`${LinkApi}register/`,
 				data: formField,
 				headers: {
 					'Content-type': 'multipart/form-data',
@@ -183,7 +186,7 @@ return (
 						</span>
 						
 					</div>
-					<p >Required <span style={{color:"red"}}>width :379px </span>, <span style={{color:"red"}}>height :508px</span> , <span style={{color:"red"}}>size :less than 100kb</span> </p>
+					<p >Required <span style={{color:"red"}}>width :378px </span>, <span style={{color:"red"}}>height :508px</span> , <span style={{color:"red"}}>size :less than 100kb</span> </p>
 					<a href="https://www.resizepixel.com/reduce-image-in-kb/">Click to resize</a>
 					<div className="container-login100-form-btn">
                         <button className="btn btn-primary" onClick={()=>Registration()} >

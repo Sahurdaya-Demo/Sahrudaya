@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 import { Image } from 'react-bootstrap';
 import { Card, CardBody } from "reactstrap";
 import { Link } from 'react-router-dom';
+import { LinkApi } from '../Utils/Resource';
 import LoadExternalScript from '../../LoadExternalScript';
 function Admin() {
     const navigate=useNavigate();
@@ -46,7 +47,8 @@ function Admin() {
       formField.append('phone',phone)
     await axios({
       method: 'PUT',
-      url:`http://127.0.0.1:8000/api/${id}/`,
+      // url:`http://127.0.0.1:8000/api/${id}/`,
+      url:`${LinkApi}api/${id}/`,
       data:formField,
     }).then(response=>{
       console.log(response.data);
@@ -65,6 +67,7 @@ function Admin() {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`, // Include the access token in the Authorization header
        },
+    // url:'http://127.0.0.1:8000/changepassword/',
     url:'http://127.0.0.1:8000/changepassword/',
     data: formField,   
     }).then(response=>{
@@ -98,7 +101,7 @@ function Admin() {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`, // Include the access token in the Authorization header
       },
-      url:'http://127.0.0.1:8000/profile/',
+      url:`${LinkApi}profile/`,
     }).then(response=>{
       // console.log(location.state)
       

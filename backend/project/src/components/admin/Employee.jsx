@@ -7,7 +7,7 @@ import axios from 'axios';
 import {Spinner } from 'react-bootstrap';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
-
+import { LinkApi } from '../Utils/Resource';
 function Employee() {
   // const [items, setItems] = useState([]);
   // let empdetails
@@ -30,9 +30,11 @@ function Employee() {
     let todayrecord;
     let yesterdayrecord;
     let overall;
-    const response= await fetch(`http://127.0.0.1:8000/api/`)
+    // const response= await fetch(`http://127.0.0.1:8000/api/`)
+    const response= await fetch(`${LinkApi}api/`)
     const jsonData = await response.json();
-    const responsecon= await fetch(`http://127.0.0.1:8000/formsubmit/`)
+    // const responsecon= await fetch(`http://127.0.0.1:8000/formsubmit/`)
+    const responsecon= await fetch(`${LinkApi}formsubmit/`)
     const jsonDatacon = await responsecon.json();
     let yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
@@ -85,7 +87,8 @@ function Employee() {
   formField.append('email',email)
   await axios({
     method: 'post',
-    url:'http://127.0.0.1:8000/send-resgister-email/',
+    // url:'http://127.0.0.1:8000/send-resgister-email/',
+    url:`${LinkApi}send-resgister-email/`,
     data: formField
   }).then(response=>{
     setaltmsg('Email Send!!')
@@ -104,7 +107,8 @@ const delemp=async(idi)=>{
   try{
     await axios({
       method: 'delete',
-      url:`http://127.0.0.1:8000/api/${idi}/`,
+      // url:`http://127.0.0.1:8000/api/${idi}/`,
+      url:`${LinkApi}api/${idi}/`,
       // data:formField,
       
     }).then(response=>{
@@ -129,7 +133,7 @@ const delemp=async(idi)=>{
            <div className="row-12 p-0 d-flex flex-wrap justify-content-center flex-sm-row flex-column">
 
             {Records.map(record=>
-            <div className="card mb-3 m-3 " style={{maxWidth: "580px"}} key={record.id}>
+            <div className="card mb-3 m-3 " style={{maxWidth: "500px"}} key={record.id}>
               <div className="row g-0">
                 <div className="col-md-4">
                   <img src={record.image} className="rounded-start object-fit-cover" alt="..." style={{height:'100%',width:'100%'}}/>
