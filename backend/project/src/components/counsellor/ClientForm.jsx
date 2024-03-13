@@ -4,7 +4,7 @@ import axios from "axios";
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios"
 import { Form, Button, Row, Col } from 'react-bootstrap';
-
+import { LinkApi } from "../Utils/Resource";
 function Details() { 
 
 	// const navigate=useNavigate();
@@ -157,7 +157,8 @@ function Details() {
 		try{
 	   await axios({
 		   method: 'post',
-		   url: 'http://127.0.0.1:8000/formsubmit/',
+		  //  url: 'http://127.0.0.1:8000/formsubmit/',
+      url: `${LinkApi}formsubmit/`,
 		   data: formField
 	   }).then(response=>{
 		  

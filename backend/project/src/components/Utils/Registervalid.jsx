@@ -1,8 +1,9 @@
 import axios from "axios"
 import { useState,useEffect } from "react"
 import Register from "./register/register"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Error from "./error"
+import { LinkApi } from "./Resource"
 function Registervalid(){
     const [Valid,setValid]=useState(false)
     const {secure}=useParams()
@@ -11,7 +12,8 @@ function Registervalid(){
     const retrieve=async()=>{
         await axios({
             method:'post',
-            url: `http://127.0.0.1:8000/validget`,
+            // url: `http://127.0.0.1:8000/validget`,
+            url: `${LinkApi}validget`,
             data:{'secure_str':secure},
             headers: {
               'Content-type': 'application/json',

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useParams } from "react-router-dom"
 import portr from '../login/images/potr.png'
 import { FaLock } from 'react-icons/fa'
+import { LinkApi } from './Resource';
 function Userpassreset({id,token,secure}){
     const[password,setpassword]=useState('')
     const[crpassword,setcrpassword]=useState('')
@@ -15,7 +16,8 @@ function Userpassreset({id,token,secure}){
     formField.append('password2',crpassword)
     await axios({
       method:'post',
-      url: `http://127.0.0.1:8000/validpost`,
+      // url: `http://127.0.0.1:8000/validpost`,
+      url: `${LinkApi}validpost`,
       data:{'secure_str':secure},
       headers: {
         'Content-type': 'application/json',
@@ -24,7 +26,8 @@ function Userpassreset({id,token,secure}){
    
     await axios({
       method: 'post',
-      url: `http://127.0.0.1:8000/reset-password/${id}/${token}/`,
+      // url: `http://127.0.0.1:8000/reset-password/${id}/${token}/`,
+      url: `${LinkApi}reset-password/${id}/${token}/`,
       data: formField,
       headers: {
         'Content-type': 'application/json',

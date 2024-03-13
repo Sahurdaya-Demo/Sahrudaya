@@ -9,6 +9,7 @@ import axios from 'axios';
 import Toast from 'react-bootstrap/Toast';
 import { Row,Col} from "react-bootstrap";
 import CountUp from 'react-countup';
+import { LinkApi } from '../Utils/Resource';
 function Admindash()
 {
     const windowWidth = useRef(window.innerWidth);
@@ -92,7 +93,7 @@ function Admindash()
         }
     
         const retrieveData = async () => {
-            const response = await fetch('http://127.0.0.1:8000/formsubmit/');
+            const response = await fetch(`${LinkApi}formsubmit/`);
             const jsonData = await response.json();
     
             const maleCounts = Array(12).fill(0);
@@ -138,7 +139,8 @@ function Admindash()
             
         };
         const table=async()=>{
-            const response = await fetch('http://127.0.0.1:8000/formsubmit/');
+            // const response = await fetch('http://127.0.0.1:8000/formsubmit/');
+            const response = await fetch(`${LinkApi}formsubmit/`);
             const jsontb = await response.json();
             setData(jsontb)
         }
@@ -168,7 +170,8 @@ function Admindash()
     const searchemail=async(email)=>{
         await axios({
             method: 'post',
-            url: 'http://127.0.0.1:8000/emailsearch/',
+            // url: 'http://127.0.0.1:8000/emailsearch/',
+            url: `${LinkApi}emailsearch/`,
             data: {'email':email}
         }).then(response=>{
             if(response.data.errors)
@@ -180,7 +183,8 @@ function Admindash()
     }
       const getformdetails=async(id)=>{
         
-        const result=await axios.get(`http://127.0.0.1:8000/formsubmit/${id}`)
+        // const result=await axios.get(`http://127.0.0.1:8000/formsubmit/${id}`)
+        const result=await axios.get(`${LinkApi}formsubmit/${id}`)
         // console.log(result.data)
         setdate(result.data.date)
         setid(result.data.id)
@@ -212,7 +216,8 @@ function Admindash()
     try{
     await axios({
         method: 'delete',
-        url:`http://127.0.0.1:8000/formsubmit/${id}/`,
+        // url:`http://127.0.0.1:8000/formsubmit/${id}/`,
+        url:`${LinkApi}formsubmit/${id}/`,
       }).then(response=>{
         console.log(response.data);
         alert('Record Deleted Successfully!!')
@@ -249,9 +254,11 @@ function Admindash()
   ]
 };
 const updatecaemail=async(id)=>{
+    console.log(caemail)
     await axios({
         method: 'post',
-        url:`http://127.0.0.1:8000/emailchange/`,
+        // url:`http://127.0.0.1:8000/emailchange/`,
+        url:`${LinkApi}emailchange/`,
         data:{'email':caemail,'id':id},
       }).then(response=>{
         // console.log(response.data);
@@ -261,7 +268,8 @@ const updatecaemail=async(id)=>{
       )
 }
 const fetchemail=async()=>{
-    const response= await fetch(`http://127.0.0.1:8000/api/`)
+    // const response= await fetch(`http://127.0.0.1:8000/api/`)
+    const response= await fetch(`${LinkApi}api/`)
     const jsonData = await response.json();
     for(let i=0;i<Object.keys(jsonData).length;i++){
         try{
@@ -658,7 +666,7 @@ const fetchemail=async()=>{
                             <option></option>
                             {
                                 dtoast?.map(record=>
-                                    <option key={record.id}>{record.email}<span className=' ms-4'></span>{record.name}</option>
+                                    <option key={record.id}>{record.email}</option>
                                     )
                             }
                             

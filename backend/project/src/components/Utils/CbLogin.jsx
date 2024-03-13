@@ -1,6 +1,7 @@
 // import { useEffect } from "react";
 // import { useNavigate } from "react-router-dom"
 import axios from "axios";
+import { LinkApi } from "./Resource";
 const CbLogin=async(navigate,email,password)=>{
     let token;
     let token1;
@@ -14,7 +15,8 @@ const CbLogin=async(navigate,email,password)=>{
       try{
         await axios({
           method: 'post',
-          url:'http://127.0.0.1:8000/login/',
+          // url:'http://127.0.0.1:8000/login/',
+          url:`${LinkApi}login/`,
           data: formField
         }).then(response=>{
           // token=response.data.token.access;
