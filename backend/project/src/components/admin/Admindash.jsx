@@ -249,6 +249,7 @@ function Admindash()
   ]
 };
 const updatecaemail=async(id)=>{
+    console.log(caemail)
     await axios({
         method: 'post',
         url:`http://127.0.0.1:8000/emailchange/`,
@@ -658,7 +659,7 @@ const fetchemail=async()=>{
                             <option></option>
                             {
                                 dtoast?.map(record=>
-                                    <option key={record.id}>{record.email}<span className=' ms-4'></span>{record.name}</option>
+                                    <option key={record.id}>{record.email}</option>
                                     )
                             }
                             
