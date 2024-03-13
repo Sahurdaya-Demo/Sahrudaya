@@ -280,7 +280,7 @@ section {
   display: block;
   position: absolute;
   background: var(--bg-color);
-  background-image: url('../assets/emp.PNG');
+  background-image: url('../../../assets/emp.png');
   background-size: cover; 
   background-position: center; 
   border-radius: 50%;
