@@ -4,14 +4,14 @@ from rest_framework.views import APIView
 from account.serializers import SendPasswordResetEmailSerializer, UserChangePasswordSerializer, UserLoginSerializer, UserPasswordResetSerializer, UserProfileSerializer, UserRegistrationSerializer
 from django.contrib.auth import authenticate,logout
 # from account.renderers import UserRenderer
-from Employee.models import employee
+from employee.models import employee
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from .models import User
 # from rest_framework_simplejwt.authentication import JWTAuthentication
 # from rest_framework_simplejwt.token_blacklist.models import \
 # OutstandingToken, BlacklistedToken
-from Employee.serializers import EmpSerializer
+from employee.serializers import EmpSerializer
 from consellor.models import counsellor
 from consellor.serializers import CounsellorSerializer
 import secrets

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from account.views import SendPasswordResetEmailView, UserChangePasswordView, UserLoginView, UserProfileView, UserRegistrationView, UserPasswordResetView,UserLogout,SendRegisterEmail,EmailSearch
 from django.conf import settings
-from Employee.views import EmpView,ValidPost,ValidGet
+from employee.views import EmpView,ValidPost,ValidGet
 from consellor.views import submitview,emailchange,demo
 from django.conf.urls.static import static
 from rest_framework import routers
