@@ -85,11 +85,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sahrudya',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': 'Sayooj3901$sahrudaya',
+        'USER': 'Sayooj3901',
+        'PASSWORD': 'Sahrudaya',
+        'HOST': 'Sayooj3901.mysql.pythonanywhere-services.com',
+        # 'PORT': '3306',
     }
 }
 
