@@ -28,17 +28,17 @@ function Admin() {
     const[name,setname]=useState('')
     const[profile,setprofile]=useState([])
     
-    // useEffect(()=>{
-    //   let token;
-    //   token=sessionStorage.getItem('token')
-    //   // console.log(location.state.token)
-    //   if(token===null)
-    //   navigate('/',{ replace: true })
-    //   else{
-    //       view()
-    //   }
+    useEffect(()=>{
+      let token;
+      token=sessionStorage.getItem('token')
+      // console.log(location.state.token)
+      if(token===null)
+      navigate('/',{ replace: true })
+      else{
+          view()
+      }
         
-    // },[])
+    },[])
     const update=async(id)=>{
     let formField = new FormData()
       formField.append('name',name)
